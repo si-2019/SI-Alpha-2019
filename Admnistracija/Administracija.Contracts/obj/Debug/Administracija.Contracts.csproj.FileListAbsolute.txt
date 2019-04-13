@@ -1,0 +1,6 @@
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Contracts\bin\Debug\Administracija.Contracts.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Contracts\bin\Debug\Administracija.Contracts.pdb
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Contracts\obj\Debug\Administracija.Contracts.csprojAssemblyReference.cache
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Contracts\obj\Debug\Administracija.Contracts.csproj.CoreCompileInputs.cache
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Contracts\obj\Debug\Administracija.Contracts.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Contracts\obj\Debug\Administracija.Contracts.pdb

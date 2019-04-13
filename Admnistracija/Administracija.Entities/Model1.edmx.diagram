@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="66830d6482ac4e25a57c9bfa1c5d6573" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Anketa" Width="1.5" PointX="7.5" PointY="50" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Category" Width="1.5" PointX="6" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ClanGrupe" Width="1.5" PointX="5.25" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ClanoviGrupe" Width="1.5" PointX="8.25" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Comment" Width="1.5" PointX="5.25" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Datoteke" Width="1.5" PointX="9.75" PointY="66.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.File" Width="1.5" PointX="12" PointY="84.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaChat" Width="1.5" PointX="6" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaProjekta" Width="1.5" PointX="9.75" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.grupaTermin_student" Width="1.5" PointX="5.25" PointY="41.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaTermina" Width="1.5" PointX="10.5" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Ispit" Width="1.5" PointX="10.5" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Issue" Width="1.5" PointX="8.25" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.IzmjenaPodatakaStudenta" Width="1.5" PointX="5.25" PointY="59.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Kabinet" Width="1.5" PointX="13.5" PointY="55.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Korisnik" Width="1.5" PointX="3" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Materijal" Width="1.5" PointX="7.5" PointY="65.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Odgovor" Width="1.5" PointX="14.25" PointY="61.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Odsjek" Width="1.5" PointX="0.75" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.odsjek_predmet" Width="1.5" PointX="7.5" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Pitanje" Width="1.5" PointX="9.75" PointY="59.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.PonudjeniOdgovor" Width="1.5" PointX="12" PointY="63.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.PopunjenaAnketa" Width="1.5" PointX="12.75" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Poruka" Width="1.5" PointX="5.25" PointY="61.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Predmet" Width="1.5" PointX="5.25" PointY="65" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Privilegija" Width="1.5" PointX="0.75" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Projekat" Width="1.5" PointX="7.5" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ProjektniFile" Width="1.5" PointX="13" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ProjektniZadatak" Width="1.5" PointX="10.75" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Raspored" Width="1.5" PointX="15.75" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Reply" Width="1.5" PointX="10.5" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Sticky" Width="1.5" PointX="16.75" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.SvrhaPotvrde" Width="1.5" PointX="6" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Termin" Width="1.5" PointX="10.5" PointY="55.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.TerminZabiljeska" Width="1.5" PointX="14.75" PointY="64.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Theme" Width="1.5" PointX="13.5" PointY="51.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.TipFile" Width="1.5" PointX="14.25" PointY="84.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.TipoviMaterijala" Width="1.5" PointX="5.25" PointY="73.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Uloga" Width="1.5" PointX="0.75" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Zabiljeska" Width="1.5" PointX="5.25" PointY="70.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Zadaca" Width="1.5" PointX="7.5" PointY="84.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Zadatak" Width="1.5" PointX="9.75" PointY="84.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ZahtjevZaPotvrdu" Width="1.5" PointX="8.25" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ZeljeniTermin" Width="1.5" PointX="5.25" PointY="76.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ispiti_rezultati" Width="1.5" PointX="13.75" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.uloga_privilegija" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
+        <AssociationConnector Association="TYQcLL35gVModel.idAnketa" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idAnketa3" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idNapravio" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmet1" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idClanFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idGrupaFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idAdministratorFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idGrupaChatFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idKorisnikChatFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idCommentFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idThemeFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idUserFK3" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idMaterijal" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idFile1" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idZadatak1" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idProjekatFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idGrupaTermina" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idStudentTermin" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idGrupaTerminFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredavacFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmetFK8" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idIspitFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmetFK6" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idProfesorFK5" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idStudentFK4" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idStudentFK6" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idKabinetFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idKabinetFK3" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idAsistentFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idKorisnikFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idOdsjekFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPopunjena" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPosiljaocFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredavacFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredavacFK3" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPrimaocFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idProfesorFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idStudenta" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idStudentFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idStudentFK7" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idUloga1" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idUserFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idUserFK4" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idUserTheme" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmetFK9" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idTipoviMaterijala" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPitanjeFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPonudjeniOdgovorFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPopunjenaAnketaFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idOdsjekFK3" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmetFK3" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPitanje" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmet" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmetFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmetFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPredmetTheme" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPrivilegija" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idProjekatFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idPZFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idThemeFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idSvrhe" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idTerminFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idZabiljeskaFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idUloga" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.idZadaca1" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.issue_category" ManuallyRouted="false" />
+        <AssociationConnector Association="TYQcLL35gVModel.projektniZadatak_clanGrupe" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Pozicija" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

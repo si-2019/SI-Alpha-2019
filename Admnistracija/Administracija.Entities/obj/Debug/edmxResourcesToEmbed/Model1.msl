@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TYQcLL35gVModelStoreContainer" CdmEntityContainer="TYQcLL35gVEntities">
+    <EntitySetMapping Name="Anketas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Anketa">
+        <MappingFragment StoreEntitySet="Anketa">
+          <ScalarProperty Name="idAnketa" ColumnName="idAnketa" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="idNapravio" ColumnName="idNapravio" />
+          <ScalarProperty Name="napravioIme" ColumnName="napravioIme" />
+          <ScalarProperty Name="datumKreiranja" ColumnName="datumKreiranja" />
+          <ScalarProperty Name="tipAnkete" ColumnName="tipAnkete" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="opisAnkete" ColumnName="opisAnkete" />
+          <ScalarProperty Name="datumIstekaAnkete" ColumnName="datumIstekaAnkete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
+          <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+          <ScalarProperty Name="DispleyName" ColumnName="DispleyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClanGrupes">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.ClanGrupe">
+        <MappingFragment StoreEntitySet="ClanGrupe">
+          <ScalarProperty Name="idClanGrupe" ColumnName="idClanGrupe" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="idGrupaProjekta" ColumnName="idGrupaProjekta" />
+          <ScalarProperty Name="kreator" ColumnName="kreator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClanoviGrupes">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.ClanoviGrupe">
+        <MappingFragment StoreEntitySet="ClanoviGrupe">
+          <ScalarProperty Name="idVeza" ColumnName="idVeza" />
+          <ScalarProperty Name="idAdministrator" ColumnName="idAdministrator" />
+          <ScalarProperty Name="idGrupa" ColumnName="idGrupa" />
+          <ScalarProperty Name="idKorisnik" ColumnName="idKorisnik" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="idComment" ColumnName="idComment" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idTheme" ColumnName="idTheme" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="timeCreated" ColumnName="timeCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Datotekes">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Datoteke">
+        <MappingFragment StoreEntitySet="Datoteke">
+          <ScalarProperty Name="idDatoteke" ColumnName="idDatoteke" />
+          <ScalarProperty Name="idMaterijal" ColumnName="idMaterijal" />
+          <ScalarProperty Name="datoteka" ColumnName="datoteka" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Files">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.File">
+        <MappingFragment StoreEntitySet="File">
+          <ScalarProperty Name="idFile" ColumnName="idFile" />
+          <ScalarProperty Name="idZadatak" ColumnName="idZadatak" />
+          <ScalarProperty Name="sadrzaj" ColumnName="sadrzaj" />
+          <ScalarProperty Name="velicina" ColumnName="velicina" />
+          <ScalarProperty Name="idTipFile" ColumnName="idTipFile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupaChats">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.GrupaChat">
+        <MappingFragment StoreEntitySet="GrupaChat">
+          <ScalarProperty Name="idGrupa" ColumnName="idGrupa" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupaProjektas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.GrupaProjekta">
+        <MappingFragment StoreEntitySet="GrupaProjekta">
+          <ScalarProperty Name="idGrupaProjekta" ColumnName="idGrupaProjekta" />
+          <ScalarProperty Name="idProjekat" ColumnName="idProjekat" />
+          <ScalarProperty Name="nazivGrupe" ColumnName="nazivGrupe" />
+          <ScalarProperty Name="ostvareniBodovi" ColumnName="ostvareniBodovi" />
+          <ScalarProperty Name="komentarAsistenta" ColumnName="komentarAsistenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grupaTermin_student">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.grupaTermin_student">
+        <MappingFragment StoreEntitySet="grupaTermin_student">
+          <ScalarProperty Name="idGrupaTerminaStudent" ColumnName="idGrupaTerminaStudent" />
+          <ScalarProperty Name="idGrupaTermina" ColumnName="idGrupaTermina" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupaTerminas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.GrupaTermina">
+        <MappingFragment StoreEntitySet="GrupaTermina">
+          <ScalarProperty Name="idGrupaTermina" ColumnName="idGrupaTermina" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="idPredavac" ColumnName="idPredavac" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ispits">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Ispit">
+        <MappingFragment StoreEntitySet="Ispit">
+          <ScalarProperty Name="idIspit" ColumnName="idIspit" />
+          <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="brojStudenata" ColumnName="brojStudenata" />
+          <ScalarProperty Name="tipIspita" ColumnName="tipIspita" />
+          <ScalarProperty Name="rokPrijave" ColumnName="rokPrijave" />
+          <ScalarProperty Name="sala" ColumnName="sala" />
+          <ScalarProperty Name="termin" ColumnName="termin" />
+          <ScalarProperty Name="vrijemeTrajanja" ColumnName="vrijemeTrajanja" />
+          <ScalarProperty Name="kapacitet" ColumnName="kapacitet" />
+          <ScalarProperty Name="napomena" ColumnName="napomena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Issues">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Issue">
+        <MappingFragment StoreEntitySet="Issue">
+          <ScalarProperty Name="idIssue" ColumnName="idIssue" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="idIssueType" ColumnName="idIssueType" />
+          <ScalarProperty Name="idIssueCategory" ColumnName="idIssueCategory" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IzmjenaPodatakaStudentas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.IzmjenaPodatakaStudenta">
+        <MappingFragment StoreEntitySet="IzmjenaPodatakaStudenta">
+          <ScalarProperty Name="idIzmjenaPodatakaStudenata" ColumnName="idIzmjenaPodatakaStudenata" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="datumVrijemeIzmjene" ColumnName="datumVrijemeIzmjene" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kabinets">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Kabinet">
+        <MappingFragment StoreEntitySet="Kabinet">
+          <ScalarProperty Name="idKabinet" ColumnName="idKabinet" />
+          <ScalarProperty Name="kapacitet" ColumnName="kapacitet" />
+          <ScalarProperty Name="namjena" ColumnName="namjena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Korisniks">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Korisnik">
+        <MappingFragment StoreEntitySet="Korisnik">
+          <ScalarProperty Name="idKorisnik" ColumnName="idKorisnik" />
+          <ScalarProperty Name="idOdsjek" ColumnName="idOdsjek" />
+          <ScalarProperty Name="idUloga" ColumnName="idUloga" />
+          <ScalarProperty Name="ime" ColumnName="ime" />
+          <ScalarProperty Name="prezime" ColumnName="prezime" />
+          <ScalarProperty Name="datumRodjenja" ColumnName="datumRodjenja" />
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="mjestoRodjenja" ColumnName="mjestoRodjenja" />
+          <ScalarProperty Name="kanton" ColumnName="kanton" />
+          <ScalarProperty Name="drzavljanstvo" ColumnName="drzavljanstvo" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="spol" ColumnName="spol" />
+          <ScalarProperty Name="imePrezimeMajke" ColumnName="imePrezimeMajke" />
+          <ScalarProperty Name="imePrezimeOca" ColumnName="imePrezimeOca" />
+          <ScalarProperty Name="adresa" ColumnName="adresa" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="linkedin" ColumnName="linkedin" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="fotografija" ColumnName="fotografija" />
+          <ScalarProperty Name="indeks" ColumnName="indeks" />
+          <ScalarProperty Name="ciklus" ColumnName="ciklus" />
+          <ScalarProperty Name="semestar" ColumnName="semestar" />
+          <ScalarProperty Name="titula" ColumnName="titula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materijals">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Materijal">
+        <MappingFragment StoreEntitySet="Materijal">
+          <ScalarProperty Name="idMaterijal" ColumnName="idMaterijal" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="idTipMaterijala" ColumnName="idTipMaterijala" />
+          <ScalarProperty Name="datumObjave" ColumnName="datumObjave" />
+          <ScalarProperty Name="datumIzmjene" ColumnName="datumIzmjene" />
+          <ScalarProperty Name="napomena" ColumnName="napomena" />
+          <ScalarProperty Name="objavljeno" ColumnName="objavljeno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Odgovors">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Odgovor">
+        <MappingFragment StoreEntitySet="Odgovor">
+          <ScalarProperty Name="idOdgovor" ColumnName="idOdgovor" />
+          <ScalarProperty Name="idPopunjenaAnketa" ColumnName="idPopunjenaAnketa" />
+          <ScalarProperty Name="idPitanje" ColumnName="idPitanje" />
+          <ScalarProperty Name="idPonudjeniOdgovor" ColumnName="idPonudjeniOdgovor" />
+          <ScalarProperty Name="tekstOdgovora" ColumnName="tekstOdgovora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Odsjeks">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Odsjek">
+        <MappingFragment StoreEntitySet="Odsjek">
+          <ScalarProperty Name="idOdsjek" ColumnName="idOdsjek" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="odsjek_predmet">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.odsjek_predmet">
+        <MappingFragment StoreEntitySet="odsjek_predmet">
+          <ScalarProperty Name="idOdsjek" ColumnName="idOdsjek" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="semestar" ColumnName="semestar" />
+          <ScalarProperty Name="ciklus" ColumnName="ciklus" />
+          <ScalarProperty Name="tip" ColumnName="tip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pitanjes">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Pitanje">
+        <MappingFragment StoreEntitySet="Pitanje">
+          <ScalarProperty Name="idPitanja" ColumnName="idPitanja" />
+          <ScalarProperty Name="idAnketa" ColumnName="idAnketa" />
+          <ScalarProperty Name="vrstaPitanja" ColumnName="vrstaPitanja" />
+          <ScalarProperty Name="tekstPitanja" ColumnName="tekstPitanja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PonudjeniOdgovors">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.PonudjeniOdgovor">
+        <MappingFragment StoreEntitySet="PonudjeniOdgovor">
+          <ScalarProperty Name="idPonudjeniOdgovor" ColumnName="idPonudjeniOdgovor" />
+          <ScalarProperty Name="idPitanja" ColumnName="idPitanja" />
+          <ScalarProperty Name="tekstOdgovora" ColumnName="tekstOdgovora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PopunjenaAnketas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.PopunjenaAnketa">
+        <MappingFragment StoreEntitySet="PopunjenaAnketa">
+          <ScalarProperty Name="idPopunjenaAnketa" ColumnName="idPopunjenaAnketa" />
+          <ScalarProperty Name="idAnketa" ColumnName="idAnketa" />
+          <ScalarProperty Name="idPopunio" ColumnName="idPopunio" />
+          <ScalarProperty Name="vrijemePopunjavanja" ColumnName="vrijemePopunjavanja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Porukas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Poruka">
+        <MappingFragment StoreEntitySet="Poruka">
+          <ScalarProperty Name="idPoruka" ColumnName="idPoruka" />
+          <ScalarProperty Name="idPosiljaoc" ColumnName="idPosiljaoc" />
+          <ScalarProperty Name="idPrimaoc" ColumnName="idPrimaoc" />
+          <ScalarProperty Name="idGrupa" ColumnName="idGrupa" />
+          <ScalarProperty Name="sadrzajPoruke" ColumnName="sadrzajPoruke" />
+          <ScalarProperty Name="file" ColumnName="file" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Predmets">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Predmet">
+        <MappingFragment StoreEntitySet="Predmet">
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="idAsistent" ColumnName="idAsistent" />
+          <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="ects" ColumnName="ects" />
+          <ScalarProperty Name="brojPredavanja" ColumnName="brojPredavanja" />
+          <ScalarProperty Name="brojVjezbi" ColumnName="brojVjezbi" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Privilegijas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Privilegija">
+        <MappingFragment StoreEntitySet="Privilegija">
+          <ScalarProperty Name="idPrivilegija" ColumnName="idPrivilegija" />
+          <ScalarProperty Name="privilegija1" ColumnName="privilegija" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekats">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Projekat">
+        <MappingFragment StoreEntitySet="Projekat">
+          <ScalarProperty Name="idProjekat" ColumnName="idProjekat" />
+          <ScalarProperty Name="idKorisnik" ColumnName="idKorisnik" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="progress" ColumnName="progress" />
+          <ScalarProperty Name="opisProjekta" ColumnName="opisProjekta" />
+          <ScalarProperty Name="moguciBodovi" ColumnName="moguciBodovi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjektniFiles">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.ProjektniFile">
+        <MappingFragment StoreEntitySet="ProjektniFile">
+          <ScalarProperty Name="idProjektniFile" ColumnName="idProjektniFile" />
+          <ScalarProperty Name="idProjektniZadatak" ColumnName="idProjektniZadatak" />
+          <ScalarProperty Name="file" ColumnName="file" />
+          <ScalarProperty Name="nazivFile" ColumnName="nazivFile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjektniZadataks">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.ProjektniZadatak">
+        <MappingFragment StoreEntitySet="ProjektniZadatak">
+          <ScalarProperty Name="idProjektnogZadatka" ColumnName="idProjektnogZadatka" />
+          <ScalarProperty Name="idProjekta" ColumnName="idProjekta" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="otkad" ColumnName="otkad" />
+          <ScalarProperty Name="dokad" ColumnName="dokad" />
+          <ScalarProperty Name="zavrsen" ColumnName="zavrsen" />
+          <ScalarProperty Name="komentarAsistenta" ColumnName="komentarAsistenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rasporeds">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Raspored">
+        <MappingFragment StoreEntitySet="Raspored">
+          <ScalarProperty Name="idTermin" ColumnName="idTermin" />
+          <ScalarProperty Name="idKabinet" ColumnName="idKabinet" />
+          <ScalarProperty Name="idGrupaTermin" ColumnName="idGrupaTermin" />
+          <ScalarProperty Name="danUsedmici" ColumnName="danUsedmici" />
+          <ScalarProperty Name="vrijeme" ColumnName="vrijeme" />
+          <ScalarProperty Name="tipNastave" ColumnName="tipNastave" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Replies">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Reply">
+        <MappingFragment StoreEntitySet="Reply">
+          <ScalarProperty Name="idReply" ColumnName="idReply" />
+          <ScalarProperty Name="idComment" ColumnName="idComment" />
+          <ScalarProperty Name="idUserCreator" ColumnName="idUserCreator" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="timeCreated" ColumnName="timeCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stickies">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Sticky">
+        <MappingFragment StoreEntitySet="Sticky">
+          <ScalarProperty Name="idSticky" ColumnName="idSticky" />
+          <ScalarProperty Name="idTheme" ColumnName="idTheme" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="set" ColumnName="set" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SvrhaPotvrdes">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.SvrhaPotvrde">
+        <MappingFragment StoreEntitySet="SvrhaPotvrde">
+          <ScalarProperty Name="idSvrhe" ColumnName="idSvrhe" />
+          <ScalarProperty Name="nazivSvrhe" ColumnName="nazivSvrhe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Termins">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Termin">
+        <MappingFragment StoreEntitySet="Termin">
+          <ScalarProperty Name="idTermin" ColumnName="idTermin" />
+          <ScalarProperty Name="idPredavac" ColumnName="idPredavac" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="idKabinet" ColumnName="idKabinet" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="danUSedmici" ColumnName="danUSedmici" />
+          <ScalarProperty Name="datum" ColumnName="datum" />
+          <ScalarProperty Name="trajanje" ColumnName="trajanje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TerminZabiljeskas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.TerminZabiljeska">
+        <MappingFragment StoreEntitySet="TerminZabiljeska">
+          <ScalarProperty Name="idTerminZabiljeska" ColumnName="idTerminZabiljeska" />
+          <ScalarProperty Name="idTermin" ColumnName="idTermin" />
+          <ScalarProperty Name="idZabiljeska" ColumnName="idZabiljeska" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Themes">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Theme">
+        <MappingFragment StoreEntitySet="Theme">
+          <ScalarProperty Name="idTheme" ColumnName="idTheme" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="closed" ColumnName="closed" />
+          <ScalarProperty Name="timeCreated" ColumnName="timeCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipFiles">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.TipFile">
+        <MappingFragment StoreEntitySet="TipFile">
+          <ScalarProperty Name="idTipFile" ColumnName="idTipFile" />
+          <ScalarProperty Name="tipFile1" ColumnName="tipFile" />
+          <ScalarProperty Name="idFile" ColumnName="idFile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoviMaterijalas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.TipoviMaterijala">
+        <MappingFragment StoreEntitySet="TipoviMaterijala">
+          <ScalarProperty Name="idTipoviMaterijala" ColumnName="idTipoviMaterijala" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ulogas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Uloga">
+        <MappingFragment StoreEntitySet="Uloga">
+          <ScalarProperty Name="idUloga" ColumnName="idUloga" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zabiljeskas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Zabiljeska">
+        <MappingFragment StoreEntitySet="Zabiljeska">
+          <ScalarProperty Name="idZabiljeska" ColumnName="idZabiljeska" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="datum" ColumnName="datum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zadacas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Zadaca">
+        <MappingFragment StoreEntitySet="Zadaca">
+          <ScalarProperty Name="idZadaca" ColumnName="idZadaca" />
+          <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
+          <ScalarProperty Name="nazivZadace" ColumnName="nazivZadace" />
+          <ScalarProperty Name="brojZadataka" ColumnName="brojZadataka" />
+          <ScalarProperty Name="rokZaPredaju" ColumnName="rokZaPredaju" />
+          <ScalarProperty Name="maxBrojBodova" ColumnName="maxBrojBodova" />
+          <ScalarProperty Name="ukupniOstvareniBodovi" ColumnName="ukupniOstvareniBodovi" />
+          <ScalarProperty Name="postavkaZadace" ColumnName="postavkaZadace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zadataks">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Zadatak">
+        <MappingFragment StoreEntitySet="Zadatak">
+          <ScalarProperty Name="idZadatak" ColumnName="idZadatak" />
+          <ScalarProperty Name="idZadaca" ColumnName="idZadaca" />
+          <ScalarProperty Name="nazivZadatka" ColumnName="nazivZadatka" />
+          <ScalarProperty Name="maxBrojBodova" ColumnName="maxBrojBodova" />
+          <ScalarProperty Name="brojOstvarenihBodova" ColumnName="brojOstvarenihBodova" />
+          <ScalarProperty Name="profesorovKomentar" ColumnName="profesorovKomentar" />
+          <ScalarProperty Name="datumPredaje" ColumnName="datumPredaje" />
+          <ScalarProperty Name="statusZadatka" ColumnName="statusZadatka" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZahtjevZaPotvrdus">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.ZahtjevZaPotvrdu">
+        <MappingFragment StoreEntitySet="ZahtjevZaPotvrdu">
+          <ScalarProperty Name="idZahtjev" ColumnName="idZahtjev" />
+          <ScalarProperty Name="idStudenta" ColumnName="idStudenta" />
+          <ScalarProperty Name="idSvrhe" ColumnName="idSvrhe" />
+          <ScalarProperty Name="obradjen" ColumnName="obradjen" />
+          <ScalarProperty Name="datumZahtjeva" ColumnName="datumZahtjeva" />
+          <ScalarProperty Name="datumObrade" ColumnName="datumObrade" />
+          <ScalarProperty Name="besplatna" ColumnName="besplatna" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZeljeniTermins">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.ZeljeniTermin">
+        <MappingFragment StoreEntitySet="ZeljeniTermin">
+          <ScalarProperty Name="idZeljeniTermin" ColumnName="idZeljeniTermin" />
+          <ScalarProperty Name="idPredavac" ColumnName="idPredavac" />
+          <ScalarProperty Name="idKabinet" ColumnName="idKabinet" />
+          <ScalarProperty Name="danUSedmici" ColumnName="danUSedmici" />
+          <ScalarProperty Name="vrijeme" ColumnName="vrijeme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ispiti_rezultati">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.ispiti_rezultati">
+        <MappingFragment StoreEntitySet="ispiti_rezultati">
+          <ScalarProperty Name="idIspit" ColumnName="idIspit" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="bodovi" ColumnName="bodovi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uloga_privilegija">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.uloga_privilegija">
+        <MappingFragment StoreEntitySet="uloga_privilegija">
+          <ScalarProperty Name="idUloga" ColumnName="idUloga" />
+          <ScalarProperty Name="idPrivilegija" ColumnName="idPrivilegija" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="issue_category" TypeName="TYQcLL35gVModel.issue_category" StoreEntitySet="issue_category">
+      <EndProperty Name="Category">
+        <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+      </EndProperty>
+      <EndProperty Name="Issue">
+        <ScalarProperty Name="idIssue" ColumnName="idIssue" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="projektniZadatak_clanGrupe" TypeName="TYQcLL35gVModel.projektniZadatak_clanGrupe" StoreEntitySet="projektniZadatak_clanGrupe">
+      <EndProperty Name="ClanGrupe">
+        <ScalarProperty Name="idClanGrupe" ColumnName="idClanGrupe" />
+      </EndProperty>
+      <EndProperty Name="ProjektniZadatak">
+        <ScalarProperty Name="idProjektnogZadatka" ColumnName="idProjektniZadatak" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Pozicijas">
+      <EntityTypeMapping TypeName="TYQcLL35gVModel.Pozicija">
+        <MappingFragment StoreEntitySet="Pozicija">
+          <ScalarProperty Name="y2" ColumnName="y2" />
+          <ScalarProperty Name="y1" ColumnName="y1" />
+          <ScalarProperty Name="x2" ColumnName="x2" />
+          <ScalarProperty Name="x1" ColumnName="x1" />
+          <ScalarProperty Name="idPozicija" ColumnName="idPozicija" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

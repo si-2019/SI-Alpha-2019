@@ -1,0 +1,14 @@
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\Administracija.Entities.dll.config
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\Administracija.Entities.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\Administracija.Entities.pdb
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\EntityFramework.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\EntityFramework.SqlServer.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\MySql.Data.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\EntityFramework.xml
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\bin\Debug\EntityFramework.SqlServer.xml
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\obj\Debug\Administracija.Entities.csprojAssemblyReference.cache
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\obj\Debug\Administracija.Entities.csproj.CoreCompileInputs.cache
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\obj\Debug\Administracija.Entities.csproj.CopyComplete
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\obj\Debug\Administracija.Entities.dll
+D:\Fakultet\6. semestar\SI\Repository\SI-Alpha-2019\Admnistracija\Administracija.Entities\obj\Debug\Administracija.Entities.pdb
