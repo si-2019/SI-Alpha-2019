@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="66830d6482ac4e25a57c9bfa1c5d6573" Name="Diagram1" ZoomLevel="66">
+      <Diagram DiagramId="66830d6482ac4e25a57c9bfa1c5d6573" Name="Diagram1" ZoomLevel="13">
         <EntityTypeShape EntityType="TYQcLL35gVModel.Anketa" Width="1.5" PointX="7.5" PointY="50" IsExpanded="true" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Category" Width="1.5" PointX="6" PointY="30.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.ClanGrupe" Width="1.5" PointX="5.25" PointY="38.125" IsExpanded="true" />
