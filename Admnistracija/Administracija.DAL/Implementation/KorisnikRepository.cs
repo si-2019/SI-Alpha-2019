@@ -18,15 +18,18 @@ namespace Administracija.DAL.Implementation {
 
         public LoginDataDto GenerateLoginDataForProfessor(string ime, string prezime) {
             var userName = ime + prezime;
-            userName.ToLower();
+            userName = userName.ToLower();
 
+            
             var listOfUsers = _korisnikRepository.GetAll();
             if (listOfUsers != null) {
-                listOfUsers = listOfUsers.Where(user => user.ime == ime && user.prezime == prezime && user.Uloga.naziv == "Profesor");
+                listOfUsers = listOfUsers.Where(user => user.username.StartsWith(userName));
+             
             }
-            var brojDuplikata = listOfUsers.ToList().Count;
+          //  var brojDuplikatak = listOfUsers.ToList();
+            int brojDuplikata = 0;
             if (brojDuplikata == 0)
-                userName += userName + "1";
+                userName += "1";
             else
                 userName += userName + ++brojDuplikata;
 

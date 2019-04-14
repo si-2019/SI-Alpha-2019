@@ -9,6 +9,5 @@ namespace Administracija.Contracts
    public class LoginDataDto {
         public string Username;
         public string Password;
-        public string Mail;
     }
 }
