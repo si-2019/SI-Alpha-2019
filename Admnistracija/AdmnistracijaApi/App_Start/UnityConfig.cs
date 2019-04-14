@@ -20,7 +20,7 @@ namespace AdmnistracijaApi
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            container.RegisterType<IStudentRepository, StudentRepository>();
+            container.RegisterType<IKorisnikRepository, KorisnikRepository>();
             container.RegisterType(typeof(IRepository<>), typeof(Repository<>));
             container.RegisterType<DbContext,TYQcLL35gVEntities>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

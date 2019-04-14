@@ -43,7 +43,7 @@ namespace Administracija.Entities
             this.Themes = new HashSet<Theme>();
         }
     
-        public int idKorisnik { get; set; }
+        public int id { get; set; }
         public int idOdsjek { get; set; }
         public int idUloga { get; set; }
         public string ime { get; set; }

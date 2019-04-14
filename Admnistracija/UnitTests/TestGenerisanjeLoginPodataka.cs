@@ -16,7 +16,7 @@ namespace UnitTests {
     [TestClass]
     public class TestGenerisanjeLoginPodataka {
 
-        private  IStudentRepository _studentRepository;
+        private  IKorisnikRepository _studentRepository;
 
         void Setup() {
             IQueryable<Korisnik> korisnici = (new List<Korisnik> {
@@ -29,13 +29,13 @@ namespace UnitTests {
             Mock<IRepository<Korisnik>> mockKorisnik = new Mock<IRepository<Korisnik>>();
             mockKorisnik.Setup(x => x.GetAll()).Returns(korisnici);
 
-            _studentRepository = new StudentRepository(mockKorisnik.Object);
+            _studentRepository = new KorisnikRepository(mockKorisnik.Object);
         }
 
         [TestMethod]
         public void GetLoginData_BasicCase() {
             Setup();
-            StudentController controller = new StudentController(_studentRepository);
+            KorisnikController controller = new KorisnikController(_studentRepository);
 
             IHttpActionResult actionResult = controller.GetLoginData("Neki", "Test");
             var contentResult = actionResult as OkNegotiatedContentResult<LoginDataDto>;
@@ -51,7 +51,7 @@ namespace UnitTests {
         [TestMethod]
         public void GetLoginData_NonUniqueUsername() {
             Setup();
-            StudentController controller = new StudentController(_studentRepository);
+            KorisnikController controller = new KorisnikController(_studentRepository);
             IHttpActionResult actionResult = controller.GetLoginData("Emir", "Sehovic");
             var contentResult = actionResult as OkNegotiatedContentResult<LoginDataDto>;
 

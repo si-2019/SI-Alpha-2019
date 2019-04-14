@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\Repository.cs" />
-    <Compile Include="Implementation\StudentRepository.cs" />
+    <Compile Include="Implementation\KorisnikRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IStudentRepository.cs" />
+    <Compile Include="Interfaces\IKorisnikRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

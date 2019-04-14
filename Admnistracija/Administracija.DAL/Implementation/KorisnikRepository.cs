@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Administracija.DAL.Implementation {
-    public class StudentRepository : IStudentRepository {
+    public class KorisnikRepository : IKorisnikRepository {
         private readonly IRepository<Korisnik> _studentRepository;
 
-        public StudentRepository(IRepository<Korisnik> studentRepository) {
+        public KorisnikRepository(IRepository<Korisnik> studentRepository) {
             _studentRepository = studentRepository;
         }
         public LoginDataDto GenerateLoginData(string ime, string prezime) {

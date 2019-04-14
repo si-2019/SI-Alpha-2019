@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Administracija.Contracts;
 namespace Administracija.DAL.Interfaces {
-    public interface IStudentRepository {
+    public interface IKorisnikRepository {
         LoginDataDto GenerateLoginData(string ime, string prezime);
     }
 }

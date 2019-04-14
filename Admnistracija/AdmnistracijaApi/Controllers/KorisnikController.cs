@@ -10,19 +10,19 @@ using System.Web.Http;
 
 namespace AdmnistracijaApi.Controllers
 {
-    public class StudentController : ApiController
+    public class KorisnikController : ApiController
     {
-        private readonly IStudentRepository _studentRepository;
+        private readonly IKorisnikRepository _korisnikRepository;
 
-        public StudentController(IStudentRepository studentRepository) {
-            _studentRepository = studentRepository;
+        public KorisnikController(IKorisnikRepository korisnikRepository) {
+            _korisnikRepository = korisnikRepository;
         }
 
         [HttpGet]
         [HttpOptions]
         [ActionName("GetLoginData")]
         public IHttpActionResult GetLoginData(string ime, string prezime) {
-            return Ok(_studentRepository.GenerateLoginData(ime, prezime));           
+            return Ok(_korisnikRepository.GenerateLoginData(ime, prezime));           
         }
     }
 }
