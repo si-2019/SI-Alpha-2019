@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace Administracija.DAL.Implementation {
     public class StudentRepository : IStudentRepository {
         private readonly IRepository<Korisnik> _studentRepository;
-        // treba dodati unity resolver
 
         public StudentRepository(IRepository<Korisnik> studentRepository) {
             _studentRepository = studentRepository;
@@ -19,19 +18,15 @@ namespace Administracija.DAL.Implementation {
 
                 
             var studenti = _studentRepository.GetAll();
-
-            _studentRepository.GetAll();
-
-            if(studenti != null) {
-                studenti = studenti.Where(k => k.ime == ime && k.prezime == prezime
-                && (k.Uloga.naziv == "Student" || k.Uloga.naziv == "Asistent"));
+            string username = (ime[0] + prezime).ToLower();
+            if (studenti != null) {
+                studenti = studenti.Where(k => k.username.StartsWith(username));
             }
 
+           
             int brojPostojecih = studenti.ToList().Count;
-            string username = ime[0] + prezime;
-            if(brojPostojecih > 0) {
-                username += brojPostojecih.ToString();
-            }
+            username += (1+brojPostojecih).ToString();
+            
 
             const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             StringBuilder pwBuilder = new StringBuilder();
