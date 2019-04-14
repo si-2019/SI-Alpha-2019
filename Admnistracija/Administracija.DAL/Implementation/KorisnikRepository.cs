@@ -69,9 +69,7 @@ namespace Administracija.DAL.Implementation {
                 fotografija = student.Fotografija,
                 indeks = student.Indeks,
                 ciklus = student.Ciklus,
-                semestar = student.Semestar,
-                titula = student.Titula
-
+                semestar = student.Semestar
             });
             _korisnikRepository.SaveChanges();
         }
