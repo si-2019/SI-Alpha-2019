@@ -18,8 +18,10 @@ namespace Administracija.DAL.Implementation {
 
                 
             var studenti = _studentRepository.GetAll();
+            string indeks = "";
             string username = (ime[0] + prezime).ToLower();
             if (studenti != null) {
+                indeks = studenti.Select(x => x.indeks).Max();
                 studenti = studenti.Where(k => k.username.StartsWith(username));
             }
 
@@ -36,11 +38,10 @@ namespace Administracija.DAL.Implementation {
                 pwBuilder.Append(valid[rnd.Next(valid.Length)]);
             }
             string password = pwBuilder.ToString();
-
-
+            
             return new LoginDataDto {
                 Username = username,
-                Mail = username + "@etf.unsa.ba",
+                Indeks = (int.Parse(indeks) + 1).ToString(),
                 Password = password                
             };
         }
