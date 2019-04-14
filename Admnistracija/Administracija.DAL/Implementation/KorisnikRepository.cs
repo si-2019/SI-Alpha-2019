@@ -45,33 +45,28 @@ namespace Administracija.DAL.Implementation {
                 Password = password                
             };
         }
-        public void AddNewStudent(KorisnikDto student) {
+        public void AddNewAssistent(KorisnikDto asistent) {
             _korisnikRepository.Insert(new Korisnik {
-                idOdsjek = student.IdOdsjek,
-                idUloga = student.IdUloga,
-                ime = student.Ime,
-                prezime = student.Prezime,
-                datumRodjenja = student.DatumRodjenja,
-                JMBG = student.Jmbg,
-                email = student.Email,
-                mjestoRodjenja = student.MjestoRodjenja,
-                kanton = student.Kanton,
-                drzavljanstvo = student.Drzavljanstvo,
-                telefon = student.Telefon,
-                spol = student.Spol,
-                imePrezimeMajke = student.ImePrezimeMajke,
-                imePrezimeOca = student.ImePrezimeOca,
-                adresa = student.ImePrezimeOca,
-                username = student.Username,
-                password = student.Password,
-                linkedin = student.Linkedin,
-                website = student.Website,
-                fotografija = student.Fotografija,
-                indeks = student.Indeks,
-                ciklus = student.Ciklus,
-                semestar = student.Semestar,
-                titula = student.Titula
-
+                idOdsjek = asistent.IdOdsjek,
+                idUloga = asistent.IdUloga,
+                ime = asistent.Ime,
+                prezime = asistent.Prezime,
+                datumRodjenja = asistent.DatumRodjenja,
+                JMBG = asistent.Jmbg,
+                email = asistent.Email,
+                mjestoRodjenja = asistent.MjestoRodjenja,
+                kanton = asistent.Kanton,
+                drzavljanstvo = asistent.Drzavljanstvo,
+                telefon = asistent.Telefon,
+                spol = asistent.Spol,
+                imePrezimeMajke = asistent.ImePrezimeMajke,
+                imePrezimeOca = asistent.ImePrezimeOca,
+                adresa = asistent.ImePrezimeOca,
+                username = asistent.Username,
+                password = asistent.Password,
+                linkedin = asistent.Linkedin,
+                website = asistent.Website,
+                fotografija = asistent.Fotografija
             });
             _korisnikRepository.SaveChanges();
         }
