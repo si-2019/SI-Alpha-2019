@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Administracija.DAL.Implementation {
     public class KorisnikRepository : IKorisnikRepository {
-        private readonly IRepository<Korisnik> _studentRepository;
+        private readonly IRepository<Korisnik> _korisnikRepository;
 
-        public KorisnikRepository(IRepository<Korisnik> studentRepository) {
-            _studentRepository = studentRepository;
+        public KorisnikRepository(IRepository<Korisnik> korisnikRepository) {
+            _korisnikRepository = korisnikRepository;
         }
         public LoginDataDto GenerateLoginData(string ime, string prezime) {
 
                 
-            var studenti = _studentRepository.GetAll();
+            var studenti = _korisnikRepository.GetAll();
             string indeks = "";
             string username = (ime[0] + prezime).ToLower();
             if (studenti != null) {
@@ -44,6 +44,36 @@ namespace Administracija.DAL.Implementation {
                 Indeks = (int.Parse(indeks) + 1).ToString(),
                 Password = password                
             };
+        }
+        public void AddNewStudent(KorisnikDto student) {
+            _korisnikRepository.Insert(new Korisnik {
+                idOdsjek = student.IdOdsjek,
+                idUloga = student.IdUloga,
+                ime = student.Ime,
+                prezime = student.Prezime,
+                datumRodjenja = student.DatumRodjenja,
+                JMBG = student.Jmbg,
+                email = student.Email,
+                mjestoRodjenja = student.MjestoRodjenja,
+                kanton = student.Kanton,
+                drzavljanstvo = student.Drzavljanstvo,
+                telefon = student.Telefon,
+                spol = student.Spol,
+                imePrezimeMajke = student.ImePrezimeMajke,
+                imePrezimeOca = student.ImePrezimeOca,
+                adresa = student.ImePrezimeOca,
+                username = student.Username,
+                password = student.Password,
+                linkedin = student.Linkedin,
+                website = student.Website,
+                fotografija = student.Fotografija,
+                indeks = student.Indeks,
+                ciklus = student.Ciklus,
+                semestar = student.Semestar,
+                titula = student.Titula
+
+            });
+            _korisnikRepository.SaveChanges();
         }
     }
 }
