@@ -48,11 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\KorisnikRepository.cs" />
+    <Compile Include="Implementation\Repository.cs" />
+    <Compile Include="Interfaces\IKorisnikRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Implementation\" />
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\Administracija.Contracts\Administracija.Contracts.csproj">
+      <Project>{55c81f41-43ca-44e8-96e4-d2055178fe87}</Project>
+      <Name>Administracija.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Administracija.Entities\Administracija.Entities.csproj">
+      <Project>{eb0b7aea-1973-4ce1-b4c2-a732d4653939}</Project>
+      <Name>Administracija.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
