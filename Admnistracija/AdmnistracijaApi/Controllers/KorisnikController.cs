@@ -25,5 +25,21 @@ namespace AdmnistracijaApi.Controllers
         public IHttpActionResult GetLoginDataForProfessor(string ime, string prezime) {
             return Ok(_korisnikRepository.GenerateLoginDataForProfessor(ime, prezime));
         }
+
+        [HttpPost]
+        [HttpOptions]
+        [ActionName("AddProfessor")]
+        public IHttpActionResult AddProfessor([FromBody]KorisnikDto profesor) {
+            LoginDataProf loginData = _korisnikRepository.GenerateLoginDataForProfessor(profesor.Ime, profesor.Prezime);
+            profesor.Username = loginData.Username;
+            profesor.Password = loginData.Password;
+            profesor.IdUloga = 3;
+
+            _korisnikRepository.AddNewProfessor(profesor);
+
+            return Ok("Profesor uspješno registrovan!");
+        }
     }
+
+
 }
