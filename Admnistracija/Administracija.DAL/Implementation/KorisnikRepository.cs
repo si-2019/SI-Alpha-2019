@@ -33,7 +33,7 @@ namespace Administracija.DAL.Implementation {
             if (brojDuplikata == 0)
                 userName += "1";
             else
-                userName += userName + ++brojDuplikata;
+                userName += ++brojDuplikata;
 
             var password = GeneratePassword(3, 3, 3);
 
