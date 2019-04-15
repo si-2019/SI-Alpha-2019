@@ -1,22 +1,24 @@
-﻿using System;
+﻿using Administracija.Contracts;
+using Administracija.DAL.Implementation;
+using Administracija.DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Administracija.DAL.Interfaces;
 
 namespace AdmnistracijaApi.Controllers
 {
     public class KorisnikController : ApiController
     {
-        private  IKorisnikRepository _korisnikRepository;
+        private readonly IKorisnikRepository _korisnikRepository;
 
-       // public KorisnikController() { }
         public KorisnikController(IKorisnikRepository korisnikRepository) {
             _korisnikRepository = korisnikRepository;
         }
 
+       
         [HttpGet]
         [HttpOptions]
         [ActionName("GetLoginDataForProfessor")]
@@ -25,4 +27,3 @@ namespace AdmnistracijaApi.Controllers
         }
     }
 }
-

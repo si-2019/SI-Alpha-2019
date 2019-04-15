@@ -4,6 +4,7 @@ using Administracija.Entities;
 using System.Data.Entity;
 using System.Web.Http;
 using Unity;
+using Unity.Lifetime;
 using Unity.WebApi;
 
 namespace AdmnistracijaApi
@@ -18,12 +19,10 @@ namespace AdmnistracijaApi
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
-          
 
-                container.RegisterType<IKorisnikRepository, KorisnikRepository>();
-                container.RegisterType(typeof(IRepository<>), typeof(Repository<>));
-                container.RegisterType<DbContext, TYQcLL35gVEntities>();
-               
+            container.RegisterType<IKorisnikRepository, KorisnikRepository>();
+            container.RegisterType(typeof(IRepository<>), typeof(Repository<>));
+            container.RegisterType<DbContext,TYQcLL35gVEntities>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

@@ -1,17 +1,14 @@
-﻿
+﻿using Administracija.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Linq.Expressions;
-using Administracija.DAL.Interfaces;
 
-namespace Administracija.DAL.Implementation
-{
-    public class Repository<T> : IRepository<T> where T : class
-    {
+namespace Administracija.DAL.Implementation {
+    public class Repository<T> : IRepository<T> where T : class {
         protected readonly DbSet<T> _dbSet;
         private readonly DbContext _context;
 
@@ -28,7 +25,7 @@ namespace Administracija.DAL.Implementation
             _dbSet.Remove(entity);
         }
 
-        public IQueryable<T> SearchFor(Expression<Func<T,bool>> predicate) {
+        public IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate) {
             return _dbSet.Where(predicate);
         }
 
@@ -39,7 +36,5 @@ namespace Administracija.DAL.Implementation
         public T GetById(int id) {
             return _dbSet.Find(id);
         }
-
     }
-   
 }

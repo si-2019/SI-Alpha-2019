@@ -20,7 +20,7 @@ namespace Administracija.Entities
             this.ZahtjevZaPotvrdus = new HashSet<ZahtjevZaPotvrdu>();
         }
     
-        public int idSvrhe { get; set; }
+        public int id { get; set; }
         public string nazivSvrhe { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

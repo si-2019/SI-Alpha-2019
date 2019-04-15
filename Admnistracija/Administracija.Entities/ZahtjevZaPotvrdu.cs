@@ -14,7 +14,7 @@ namespace Administracija.Entities
     
     public partial class ZahtjevZaPotvrdu
     {
-        public int idZahtjev { get; set; }
+        public int id { get; set; }
         public Nullable<int> idStudenta { get; set; }
         public Nullable<int> idSvrhe { get; set; }
         public Nullable<bool> obradjen { get; set; }

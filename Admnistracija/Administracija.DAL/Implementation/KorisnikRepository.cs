@@ -1,33 +1,35 @@
-﻿using System;
+﻿using Administracija.Contracts;
+using Administracija.DAL.Interfaces;
+using Administracija.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Administracija.Entities;
-using Administracija.Contracts;
-using Administracija.DAL.Interfaces;
+using System.Diagnostics;
 
 namespace Administracija.DAL.Implementation {
-
-
     public class KorisnikRepository : IKorisnikRepository {
-        private readonly IRepository<Korisnik> _korisnikRepository;
-        public KorisnikRepository(IRepository<Korisnik> korisnikRepository) {
-            _korisnikRepository = korisnikRepository;
-        }
+        private readonly IRepository<Korisnik> _studentRepository;
 
-        public LoginDataDto GenerateLoginDataForProfessor(string ime, string prezime) {
-            var userName = ime + prezime;
+        public KorisnikRepository(IRepository<Korisnik> studentRepository) {
+            _studentRepository = studentRepository;
+        }
+      
+
+        public LoginDataProf GenerateLoginDataForProfessor(string ime, string prezime) {
+            var userName = ime + "."+ prezime;
             userName = userName.ToLower();
 
-            
-            var listOfUsers = _korisnikRepository.GetAll();
+
+            var listOfUsers = _studentRepository.GetAll();
             if (listOfUsers != null) {
                 listOfUsers = listOfUsers.Where(user => user.username.StartsWith(userName));
-             
             }
-          //  var brojDuplikatak = listOfUsers.ToList();
-            int brojDuplikata = 0;
+            var brojDuplikata = listOfUsers.ToList().Count;
+            Debug.WriteLine(brojDuplikata);
+            
+           // int brojDuplikata = 0;
             if (brojDuplikata == 0)
                 userName += "1";
             else
@@ -35,7 +37,8 @@ namespace Administracija.DAL.Implementation {
 
             var password = GeneratePassword(3, 3, 3);
 
-            return new LoginDataDto {
+            return new LoginDataProf
+            {
                 Username = userName,
                 Password = password
             };

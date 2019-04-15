@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Administracija.DAL.Interfaces {
     public interface IRepository<T> {
+
         void Insert(T entity);
         void Delete(T entity);
         IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate);

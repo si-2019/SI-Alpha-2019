@@ -18,6 +18,7 @@ namespace Administracija.Entities
         public Odsjek()
         {
             this.Korisniks = new HashSet<Korisnik>();
+            this.odsjek_predmet = new HashSet<odsjek_predmet>();
         }
     
         public int idOdsjek { get; set; }
@@ -25,6 +26,7 @@ namespace Administracija.Entities
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Korisnik> Korisniks { get; set; }
-        public virtual odsjek_predmet odsjek_predmet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<odsjek_predmet> odsjek_predmet { get; set; }
     }
 }

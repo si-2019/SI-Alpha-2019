@@ -48,11 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\KorisnikRepository.cs" />
     <Compile Include="Implementation\Repository.cs" />
-    <Compile Include="Interfaces\IKorisnikRepository.cs" />
+    <Compile Include="Implementation\KorisnikRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IKorisnikRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Administracija.Contracts\Administracija.Contracts.csproj">
@@ -63,10 +68,6 @@
       <Project>{eb0b7aea-1973-4ce1-b4c2-a732d4653939}</Project>
       <Name>Administracija.Entities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
