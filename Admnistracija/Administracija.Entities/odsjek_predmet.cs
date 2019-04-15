@@ -15,9 +15,9 @@ namespace Administracija.Entities
     public partial class odsjek_predmet
     {
         public int idOdsjek { get; set; }
-        public Nullable<int> idPredmet { get; set; }
+        public int idPredmet { get; set; }
         public string semestar { get; set; }
-        public Nullable<bool> ciklus { get; set; }
+        public Nullable<int> ciklus { get; set; }
         public Nullable<bool> tip { get; set; }
     
         public virtual Odsjek Odsjek { get; set; }
