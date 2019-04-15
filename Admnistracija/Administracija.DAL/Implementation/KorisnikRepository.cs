@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace Administracija.DAL.Implementation {
     public class KorisnikRepository : IKorisnikRepository {
@@ -111,6 +112,38 @@ namespace Administracija.DAL.Implementation {
             var broj = listOfUsers.ToList().Count;
             if (broj == 0) return false;
             return true;
+        }
+
+        public string validacijaPodataka(KorisnikDto profesor) {
+            var regexJMBG = "(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}";
+            var match = Regex.Match(profesor.Jmbg, regexJMBG, RegexOptions.IgnoreCase);
+            if (!match.Success) return "Jmbg nije validan";
+            else if (profesor.Ime == null) return "Niste unijeli ime";
+            else if (profesor.Prezime == null) return "Niste unijeli prezime";
+            else if (!validacijaDatumaRodjenja(profesor.DatumRodjenja)) return "Neispravan datum rodjenja";
+            else if (!provjeraDatumaJmbg(profesor.DatumRodjenja, profesor.Jmbg)) return "Jmbg i datum rodjenja se ne poklapaju";
+            else if (profesor.Email == null || profesor.MjestoRodjenja == null || profesor.Drzavljanstvo == null || profesor.Telefon == null || profesor.ImePrezimeMajke == null || profesor.ImePrezimeOca == null || profesor.Adresa == null || profesor.Titula == null) return "Popunite sva polja";
+            return "Sve ok";
+        }
+
+         bool validacijaDatumaRodjenja(DateTime datum) {
+            if (datum.Year > DateTime.Now.Year) return false;
+            else if (datum.Month > DateTime.Now.Month && datum.Year == DateTime.Now.Year) return false;
+            else if (datum.Day > DateTime.Now.Day && datum.Month == DateTime.Now.Month && datum.Year == DateTime.Now.Year) return false;
+            return true;
+        }
+
+        bool provjeraDatumaJmbg(DateTime datum, string jmbg) {
+            var day = jmbg.Substring(0, 2);
+            var month = jmbg.Substring(2, 2);
+            var year = jmbg.Substring(4, 3);
+            if (year.Substring(0, 1) != "0") year = "1" + year;
+            else year = "2" + year;
+            if (day.Substring(0, 1) == "0") day = day.Substring(1, 1);          
+
+            if (Convert.ToInt32(day) == datum.Day && Convert.ToInt32(month) == datum.Month && Convert.ToInt32(year) == datum.Year) return true;
+            return false;
+
         }
     }
 }

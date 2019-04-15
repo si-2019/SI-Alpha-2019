@@ -31,6 +31,8 @@ namespace AdmnistracijaApi.Controllers
         [HttpOptions]
         [ActionName("AddProfessor")]
         public IHttpActionResult AddProfessor([FromBody]KorisnikDto profesor) {
+            var validacija = _korisnikRepository.validacijaPodataka(profesor);
+            if (validacija != "Sve ok") return Ok(validacija);
             if(_korisnikRepository.provjeraDaLiPostojiJmbg(profesor.Jmbg)) {
                  return Ok("Postoji korisnik sa istim jmbg!");                
             }
