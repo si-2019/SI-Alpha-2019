@@ -60,17 +60,20 @@ namespace UnitTests {
             Assert.IsTrue(contentResult.Content.Username == "emerald.nekovic1");
 
         }
-
-      /*  [TestMethod]
-        public void GetLoginData_ViseIstihUsernamea() {
+/*
+        [TestMethod]
+        public void GetLoginData_ProvjeriDodavanje() {
             Setup();
             KorisnikController controller = new KorisnikController(_studentRepository);
-            IHttpActionResult actionResult = controller.GetLoginDataForProfessor("Zlata", "Karic");
-            var contentResult = actionResult as OkNegotiatedContentResult<LoginDataProf>;
 
+            KorisnikDto k = new KorisnikDto { IdOdsjek = 2, IdUloga = 2, Ime = "Zumra", Prezime = "Mahov", DatumRodjenja = new DateTime(1998, 4, 27), Jmbg = "2704998175073", Email = "zum @hot.ba", MjestoRodjenja = "Gorazde", Kanton = "gfdg", Drzavljanstvo = "f", Telefon = "f", Spol = true, ImePrezimeMajke = "3re", ImePrezimeOca = "ffe", Titula = "prof" };
+            IHttpActionResult actionResult = controller.AddProfessor(k);
+            
+
+            var contentResult = actionResult as JsonResult<string>;
             Assert.IsNotNull(contentResult);
             Assert.IsNotNull(contentResult.Content);
-            Assert.IsTrue(contentResult.Content.Username == "zlata.karic3");
+            Assert.IsTrue(contentResult.Content.StartsWith("Ok"));
 
         }*/
     }

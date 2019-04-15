@@ -139,7 +139,9 @@ namespace Administracija.DAL.Implementation {
             var year = jmbg.Substring(4, 3);
             if (year.Substring(0, 1) != "0") year = "1" + year;
             else year = "2" + year;
-            if (day.Substring(0, 1) == "0") day = day.Substring(1, 1);          
+            if (day.Substring(0, 1) == "0") day = day.Substring(1, 1);
+            if (month.Substring(0, 1) == "0") month = month.Substring(1, 1);
+
 
             if (Convert.ToInt32(day) == datum.Day && Convert.ToInt32(month) == datum.Month && Convert.ToInt32(year) == datum.Year) return true;
             return false;
