@@ -33,7 +33,7 @@ namespace Administracija.DAL.Implementation {
             if (brojDuplikata == 0)
                 userName += "1";
             else
-                userName += userName + ++brojDuplikata;
+                userName += ++brojDuplikata;
 
             var password = GeneratePassword(3, 3, 3);
 
@@ -97,9 +97,20 @@ namespace Administracija.DAL.Implementation {
                 fotografija = profesor.Fotografija,
                 indeks = null,
                 ciklus = null,
-                semestar = null
+                semestar = null,
+                titula = profesor.Titula
             });
             _korisnikRepository.Save();
+        }
+
+        public bool provjeraDaLiPostojiJmbg(string profesor_jmbg) {
+            var listOfUsers = _korisnikRepository.GetAll();
+            if(listOfUsers != null) {
+                listOfUsers = listOfUsers.Where(user => user.JMBG.Equals(profesor_jmbg));
+            }
+            var broj = listOfUsers.ToList().Count;
+            if (broj == 0) return false;
+            return true;
         }
     }
 }

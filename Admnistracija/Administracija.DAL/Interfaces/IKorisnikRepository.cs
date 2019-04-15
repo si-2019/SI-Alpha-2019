@@ -9,5 +9,6 @@ namespace Administracija.DAL.Interfaces {
        
         LoginDataProf GenerateLoginDataForProfessor(string ime, string prezime);
         void AddNewProfessor(KorisnikDto profesor);
+        bool provjeraDaLiPostojiJmbg(string profesor);
     }
 }

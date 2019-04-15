@@ -38,7 +38,8 @@ namespace Administracija.DAL.Implementation {
         }
 
         public void Save() {
-            _context.SaveChanges();
+           _context.SaveChanges();
+           
         }
     }
 }

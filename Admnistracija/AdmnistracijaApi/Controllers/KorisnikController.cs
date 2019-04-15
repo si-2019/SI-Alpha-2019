@@ -26,19 +26,25 @@ namespace AdmnistracijaApi.Controllers
             return Ok(_korisnikRepository.GenerateLoginDataForProfessor(ime, prezime));
         }
 
+        //prima json
         [HttpPost]
         [HttpOptions]
         [ActionName("AddProfessor")]
         public IHttpActionResult AddProfessor([FromBody]KorisnikDto profesor) {
+            if(_korisnikRepository.provjeraDaLiPostojiJmbg(profesor.Jmbg)) {
+                 return Ok("Postoji korisnik sa istim jmbg!");                
+            }
             LoginDataProf loginData = _korisnikRepository.GenerateLoginDataForProfessor(profesor.Ime, profesor.Prezime);
             profesor.Username = loginData.Username;
             profesor.Password = loginData.Password;
             profesor.IdUloga = 3;
-            //da li slat sifru i username kao alert
+
             _korisnikRepository.AddNewProfessor(profesor);
 
-            return Ok("Profesor uspješno registrovan!");
+            return Ok("Profesor uspješno registrovan! Username: "+profesor.Username+" Password: " +profesor.Password);
         }
+
+       
     }
 
 
