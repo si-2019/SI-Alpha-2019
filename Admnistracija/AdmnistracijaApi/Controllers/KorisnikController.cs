@@ -34,7 +34,7 @@ namespace AdmnistracijaApi.Controllers
             profesor.Username = loginData.Username;
             profesor.Password = loginData.Password;
             profesor.IdUloga = 3;
-
+            //da li slat sifru i username kao alert
             _korisnikRepository.AddNewProfessor(profesor);
 
             return Ok("Profesor uspješno registrovan!");
