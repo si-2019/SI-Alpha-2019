@@ -17,8 +17,6 @@ namespace Administracija.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Predmet()
         {
-            this.odsjek_predmet = new HashSet<odsjek_predmet>();
-
             this.Anketas = new HashSet<Anketa>();
             this.GrupaTerminas = new HashSet<GrupaTermina>();
             this.GrupaTerminas1 = new HashSet<GrupaTermina>();
@@ -39,11 +37,6 @@ namespace Administracija.Entities
         public int brojVjezbi { get; set; }
         public string opis { get; set; }
     
-        public virtual Korisnik Korisnik { get; set; }
-        public virtual Korisnik Korisnik1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<odsjek_predmet> odsjek_predmet { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anketa> Anketas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

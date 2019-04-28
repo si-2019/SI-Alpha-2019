@@ -12,18 +12,22 @@ namespace Administracija.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Privilegija
+    public partial class File
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Privilegija()
+        public File()
         {
-            this.uloga_privilegija = new HashSet<uloga_privilegija>();
+            this.TipFiles = new HashSet<TipFile>();
         }
     
-        public int idPrivilegija { get; set; }
-        public string privilegija1 { get; set; }
+        public int idFile { get; set; }
+        public int idZadatak { get; set; }
+        public byte[] sadrzaj { get; set; }
+        public int velicina { get; set; }
+        public int idTipFile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<uloga_privilegija> uloga_privilegija { get; set; }
+        public virtual ICollection<TipFile> TipFiles { get; set; }
+        public virtual Zadatak Zadatak { get; set; }
     }
 }

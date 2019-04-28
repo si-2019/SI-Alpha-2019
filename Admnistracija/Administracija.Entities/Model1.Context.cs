@@ -25,9 +25,6 @@ namespace Administracija.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-
-        public virtual DbSet<Korisnik> Korisniks { get; set; }
-
         public virtual DbSet<Anketa> Anketas { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ClanGrupe> ClanGrupes { get; set; }
@@ -48,13 +45,15 @@ namespace Administracija.Entities
         public virtual DbSet<Materijal> Materijals { get; set; }
         public virtual DbSet<MimeTip> MimeTips { get; set; }
         public virtual DbSet<Odgovor> Odgovors { get; set; }
-
         public virtual DbSet<Odsjek> Odsjeks { get; set; }
+        public virtual DbSet<Pitanje> Pitanjes { get; set; }
+        public virtual DbSet<PonudjeniOdgovor> PonudjeniOdgovors { get; set; }
+        public virtual DbSet<PopunjenaAnketa> PopunjenaAnketas { get; set; }
+        public virtual DbSet<Poruka> Porukas { get; set; }
+        public virtual DbSet<Pozicija> Pozicijas { get; set; }
         public virtual DbSet<Predmet> Predmets { get; set; }
         public virtual DbSet<predmet_student> predmet_student { get; set; }
         public virtual DbSet<Privilegija> Privilegijas { get; set; }
-        public virtual DbSet<Uloga> Ulogas { get; set; }
-
         public virtual DbSet<Projekat> Projekats { get; set; }
         public virtual DbSet<ProjektniFile> ProjektniFiles { get; set; }
         public virtual DbSet<ProjektniZadatak> ProjektniZadataks { get; set; }
@@ -65,7 +64,6 @@ namespace Administracija.Entities
         public virtual DbSet<Theme> Themes { get; set; }
         public virtual DbSet<TipoviMaterijala> TipoviMaterijalas { get; set; }
         public virtual DbSet<Uloga> Ulogas { get; set; }
-        public virtual DbSet<uloga_v2> uloga_v2 { get; set; }
         public virtual DbSet<Zabiljeska> Zabiljeskas { get; set; }
         public virtual DbSet<Zadaca> Zadacas { get; set; }
         public virtual DbSet<Zadatak> Zadataks { get; set; }
@@ -73,5 +71,6 @@ namespace Administracija.Entities
         public virtual DbSet<ZeljeniTermin> ZeljeniTermins { get; set; }
         public virtual DbSet<ispiti_rezultati> ispiti_rezultati { get; set; }
         public virtual DbSet<odsjek_predmet> odsjek_predmet { get; set; }
+        public virtual DbSet<uloga_privilegija> uloga_privilegija { get; set; }
     }
 }

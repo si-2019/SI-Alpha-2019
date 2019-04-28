@@ -12,18 +12,27 @@ namespace Administracija.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Privilegija
+    public partial class Termin
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Privilegija()
+        public Termin()
         {
-            this.uloga_privilegija = new HashSet<uloga_privilegija>();
+            this.TerminZabiljeskas = new HashSet<TerminZabiljeska>();
         }
     
-        public int idPrivilegija { get; set; }
-        public string privilegija1 { get; set; }
+        public int idTermin { get; set; }
+        public int idPredavac { get; set; }
+        public int idPredmet { get; set; }
+        public int idKabinet { get; set; }
+        public string naziv { get; set; }
+        public Nullable<int> danUSedmici { get; set; }
+        public Nullable<System.DateTime> datum { get; set; }
+        public Nullable<int> trajanje { get; set; }
     
+        public virtual Kabinet Kabinet { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
+        public virtual Predmet Predmet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<uloga_privilegija> uloga_privilegija { get; set; }
+        public virtual ICollection<TerminZabiljeska> TerminZabiljeskas { get; set; }
     }
 }
