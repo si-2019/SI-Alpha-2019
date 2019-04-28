@@ -64,7 +64,6 @@ namespace Administracija.Entities
         public virtual DbSet<Theme> Themes { get; set; }
         public virtual DbSet<TipoviMaterijala> TipoviMaterijalas { get; set; }
         public virtual DbSet<Uloga> Ulogas { get; set; }
-        public virtual DbSet<uloga_v2> uloga_v2 { get; set; }
         public virtual DbSet<Zabiljeska> Zabiljeskas { get; set; }
         public virtual DbSet<Zadaca> Zadacas { get; set; }
         public virtual DbSet<Zadatak> Zadataks { get; set; }

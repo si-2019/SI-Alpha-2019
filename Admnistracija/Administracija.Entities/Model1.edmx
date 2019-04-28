@@ -470,13 +470,6 @@ warning 6002: The table/view 'def.TYQcLL35gV.uloga_privilegija' does not have a 
           <Property Name="id_uloga" Type="bigint" Nullable="false" />
           <Property Name="id_privilegija" Type="bigint" Nullable="false" />
         </EntityType>
-        <EntityType Name="uloga_v2">
-          <Key>
-            <PropertyRef Name="id_uloga" />
-          </Key>
-          <Property Name="id_uloga" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Zabiljeska">
           <Key>
             <PropertyRef Name="idZabiljeska" />
@@ -1583,7 +1576,6 @@ error 6004: The table 'def.TYQcLL35gV.predmet_kabinet' is referenced by a relati
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="TYQcLL35gV" store:Type="Tables" />
           <EntitySet Name="TipoviMaterijala" EntityType="Self.TipoviMaterijala" Schema="TYQcLL35gV" store:Type="Tables" />
           <EntitySet Name="Uloga" EntityType="Self.Uloga" Schema="TYQcLL35gV" store:Type="Tables" />
-          <EntitySet Name="uloga_v2" EntityType="Self.uloga_v2" Schema="TYQcLL35gV" store:Type="Tables" />
           <EntitySet Name="Zabiljeska" EntityType="Self.Zabiljeska" Schema="TYQcLL35gV" store:Type="Tables" />
           <EntitySet Name="Zadaca" EntityType="Self.Zadaca" Schema="TYQcLL35gV" store:Type="Tables" />
           <EntitySet Name="Zadatak" EntityType="Self.Zadatak" Schema="TYQcLL35gV" store:Type="Tables" />
@@ -1958,7 +1950,6 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <EntitySet Name="Themes" EntityType="TYQcLL35gVModel.Theme" />
           <EntitySet Name="TipoviMaterijalas" EntityType="TYQcLL35gVModel.TipoviMaterijala" />
           <EntitySet Name="Ulogas" EntityType="TYQcLL35gVModel.Uloga" />
-          <EntitySet Name="uloga_v2" EntityType="TYQcLL35gVModel.uloga_v2" />
           <EntitySet Name="Zabiljeskas" EntityType="TYQcLL35gVModel.Zabiljeska" />
           <EntitySet Name="Zadacas" EntityType="TYQcLL35gVModel.Zadaca" />
           <EntitySet Name="Zadataks" EntityType="TYQcLL35gVModel.Zadatak" />
@@ -2775,13 +2766,6 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <NavigationProperty Name="Korisniks" Relationship="TYQcLL35gVModel.FK2yfvolihodnqf57g9oksumrs0" FromRole="Uloga" ToRole="Korisnik" />
           <NavigationProperty Name="Korisniks1" Relationship="TYQcLL35gVModel.idUloga1" FromRole="Uloga" ToRole="Korisnik" />
           <NavigationProperty Name="uloga_privilegija" Relationship="TYQcLL35gVModel.idUloga" FromRole="Uloga" ToRole="uloga_privilegija" />
-        </EntityType>
-        <EntityType Name="uloga_v2">
-          <Key>
-            <PropertyRef Name="id_uloga" />
-          </Key>
-          <Property Name="id_uloga" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Zabiljeska">
           <Key>
@@ -4278,14 +4262,6 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               <MappingFragment StoreEntitySet="Uloga">
                 <ScalarProperty Name="naziv" ColumnName="naziv" />
                 <ScalarProperty Name="idUloga" ColumnName="idUloga" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="uloga_v2">
-            <EntityTypeMapping TypeName="TYQcLL35gVModel.uloga_v2">
-              <MappingFragment StoreEntitySet="uloga_v2">
-                <ScalarProperty Name="naziv" ColumnName="naziv" />
-                <ScalarProperty Name="id_uloga" ColumnName="id_uloga" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

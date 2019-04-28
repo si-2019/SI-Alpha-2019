@@ -134,6 +134,9 @@
     <Compile Include="Odgovor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Odgovor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Odsjek.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -196,9 +199,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="uloga_privilegija.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="uloga_v2.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Zabiljeska.cs">

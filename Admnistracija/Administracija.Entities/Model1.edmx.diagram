@@ -4,54 +4,55 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="66830d6482ac4e25a57c9bfa1c5d6573" Name="Diagram1" ZoomLevel="13">
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Anketa" Width="1.5" PointX="7.5" PointY="54.125" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Category" Width="1.5" PointX="6" PointY="32.625" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.ClanGrupe" Width="1.5" PointX="8.25" PointY="38.5" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.ClanoviGrupe" Width="1.5" PointX="5.25" PointY="41.5" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Comment" Width="1.5" PointX="11.25" PointY="38.375" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Datoteke" Width="1.5" PointX="12.75" PointY="74.5" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaChat" Width="1.5" PointX="3" PointY="46.875" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaProjekta" Width="1.5" PointX="9.75" PointY="46.625" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.grupaTermin_student" Width="1.5" PointX="5.25" PointY="35.625" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaTermina" Width="1.5" PointX="10.5" PointY="49.875" />
+
+      <Diagram DiagramId="05fec8a60a064dd498c4942ba14194d0" Name="Diagram1" ZoomLevel="33">
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Anketa" Width="1.5" PointX="10.5" PointY="56.75" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Category" Width="1.5" PointX="3" PointY="30.625" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ClanGrupe" Width="1.5" PointX="8.25" PointY="34.5" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ClanoviGrupe" Width="1.5" PointX="8.25" PointY="42.5" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Comment" Width="1.5" PointX="8.25" PointY="38.375" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Datoteke" Width="1.5" PointX="12.75" PointY="77.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaChat" Width="1.5" PointX="6" PointY="30.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaProjekta" Width="1.5" PointX="9.75" PointY="48.375" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.grupaTermin_student" Width="1.5" PointX="11.25" PointY="38.625" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaTermina" Width="1.5" PointX="10.5" PointY="51.5" />
+
         <EntityTypeShape EntityType="TYQcLL35gVModel.GrupaZabiljeska" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Ispit" Width="1.5" PointX="10.5" PointY="55" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Ispit" Width="1.5" PointX="7.5" PointY="55.625" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.IspitZabiljeska" Width="1.5" PointX="2.75" PointY="5.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Issue" Width="1.5" PointX="8.25" PointY="34.25" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.IzmjenaPodatakaStudenta" Width="1.5" PointX="5.25" PointY="59.875" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Kabinet" Width="1.5" PointX="8.25" PointY="68.75" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Issue" Width="1.5" PointX="5.25" PointY="34.25" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.IzmjenaPodatakaStudenta" Width="1.5" PointX="5.25" PointY="73.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Kabinet" Width="1.5" PointX="8.25" PointY="65.375" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Korisnik" Width="1.5" PointX="3" PointY="34" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Materijal" Width="1.5" PointX="10.5" PointY="73.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Materijal" Width="1.5" PointX="10.5" PointY="77.125" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.MimeTip" Width="1.5" PointX="5.25" PointY="1.875" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Odgovor" Width="1.5" PointX="15" PointY="55.125" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Odgovor" Width="1.5" PointX="17.25" PointY="53.125" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Odsjek" Width="1.5" PointX="0.75" PointY="35.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Pitanje" Width="1.5" PointX="9.75" PointY="64.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.PonudjeniOdgovor" Width="1.5" PointX="12" PointY="65" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.PopunjenaAnketa" Width="1.5" PointX="12.75" PointY="45.625" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Poruka" Width="1.5" PointX="5.25" PointY="78.5" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Pitanje" Width="1.5" PointX="12.75" PointY="60.5" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.PonudjeniOdgovor" Width="1.5" PointX="15" PointY="64" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.PopunjenaAnketa" Width="1.5" PointX="12.75" PointY="43" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Poruka" Width="1.5" PointX="5.25" PointY="42.5" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Pozicija" Width="1.5" PointX="5.75" PointY="4.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Predmet" Width="1.5" PointX="5.25" PointY="73.125" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.predmet_student" Width="1.5" PointX="7.5" PointY="58.625" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Privilegija" Width="1.5" PointX="3.75" PointY="30.875" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Projekat" Width="1.5" PointX="7.5" PointY="49.25" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.ProjektniFile" Width="1.5" PointX="12.75" PointY="34.375" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.ProjektniZadatak" Width="1.5" PointX="10.5" PointY="42" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Raspored" Width="1.5" PointX="12.75" PointY="50.375" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Predmet" Width="1.5" PointX="5.25" PointY="76.375" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.predmet_student" Width="1.5" PointX="10.5" PointY="61.375" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Privilegija" Width="1.5" PointX="3.75" PointY="27.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Projekat" Width="1.5" PointX="7.5" PointY="50.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ProjektniFile" Width="1.5" PointX="12.75" PointY="31.125" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ProjektniZadatak" Width="1.5" PointX="10.5" PointY="42.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Raspored" Width="1.5" PointX="12.75" PointY="52" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Reply" Width="1.5" PointX="13.5" PointY="38.5" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Sticky" Width="1.5" PointX="15.75" PointY="48.625" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.SvrhaPotvrde" Width="1.5" PointX="6" PointY="44.875" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Theme" Width="1.5" PointX="10.5" PointY="60.25" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.TipoviMaterijala" Width="1.5" PointX="8.25" PointY="77.625" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Sticky" Width="1.5" PointX="15.75" PointY="49" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.SvrhaPotvrde" Width="1.5" PointX="9" PointY="31.875" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Theme" Width="1.5" PointX="7.5" PointY="61" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.TipoviMaterijala" Width="1.5" PointX="8.25" PointY="75" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Uloga" Width="1.5" PointX="0.75" PointY="38.625" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.uloga_v2" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Zabiljeska" Width="1.5" PointX="5.25" PointY="67.25" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.Zabiljeska" Width="1.5" PointX="5.25" PointY="48" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Zadaca" Width="1.5" PointX="0.75" PointY="1.375" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Zadatak" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.ZahtjevZaPotvrdu" Width="1.5" PointX="8.25" PointY="42.25" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.ZeljeniTermin" Width="1.5" PointX="5.25" PointY="69.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.ispiti_rezultati" Width="1.5" PointX="12.75" PointY="42.375" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.odsjek_predmet" Width="1.5" PointX="7.5" PointY="74.25" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ZahtjevZaPotvrdu" Width="1.5" PointX="11.25" PointY="34.25" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ZeljeniTermin" Width="1.5" PointX="5.25" PointY="57" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.ispiti_rezultati" Width="1.5" PointX="12.75" PointY="46.625" />
+        <EntityTypeShape EntityType="TYQcLL35gVModel.odsjek_predmet" Width="1.5" PointX="7.5" PointY="77.5" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.uloga_privilegija" Width="1.5" PointX="6" PointY="38.625" />
         <AssociationConnector Association="TYQcLL35gVModel.idAnketa" />
         <AssociationConnector Association="TYQcLL35gVModel.idAnketa3" />
