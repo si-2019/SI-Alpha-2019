@@ -14,7 +14,16 @@ namespace Administracija.Entities
     
     public partial class Privilegija
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Privilegija()
+        {
+            this.uloga_privilegija = new HashSet<uloga_privilegija>();
+        }
+    
         public int idPrivilegija { get; set; }
         public string privilegija1 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<uloga_privilegija> uloga_privilegija { get; set; }
     }
 }
