@@ -17,6 +17,7 @@ namespace Administracija.Entities
         public int idGrupaTerminaStudent { get; set; }
         public int idGrupaTermina { get; set; }
         public int idStudent { get; set; }
+        public Nullable<System.DateTime> datumPrijave { get; set; }
     
         public virtual GrupaTermina GrupaTermina { get; set; }
         public virtual Korisnik Korisnik { get; set; }

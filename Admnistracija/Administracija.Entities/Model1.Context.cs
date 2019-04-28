@@ -31,17 +31,19 @@ namespace Administracija.Entities
         public virtual DbSet<ClanoviGrupe> ClanoviGrupes { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Datoteke> Datotekes { get; set; }
-        public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<GrupaChat> GrupaChats { get; set; }
         public virtual DbSet<GrupaProjekta> GrupaProjektas { get; set; }
         public virtual DbSet<grupaTermin_student> grupaTermin_student { get; set; }
         public virtual DbSet<GrupaTermina> GrupaTerminas { get; set; }
+        public virtual DbSet<GrupaZabiljeska> GrupaZabiljeskas { get; set; }
         public virtual DbSet<Ispit> Ispits { get; set; }
+        public virtual DbSet<IspitZabiljeska> IspitZabiljeskas { get; set; }
         public virtual DbSet<Issue> Issues { get; set; }
         public virtual DbSet<IzmjenaPodatakaStudenta> IzmjenaPodatakaStudentas { get; set; }
         public virtual DbSet<Kabinet> Kabinets { get; set; }
         public virtual DbSet<Korisnik> Korisniks { get; set; }
         public virtual DbSet<Materijal> Materijals { get; set; }
+        public virtual DbSet<MimeTip> MimeTips { get; set; }
         public virtual DbSet<Odgovor> Odgovors { get; set; }
         public virtual DbSet<Odsjek> Odsjeks { get; set; }
         public virtual DbSet<Pitanje> Pitanjes { get; set; }
@@ -50,6 +52,7 @@ namespace Administracija.Entities
         public virtual DbSet<Poruka> Porukas { get; set; }
         public virtual DbSet<Pozicija> Pozicijas { get; set; }
         public virtual DbSet<Predmet> Predmets { get; set; }
+        public virtual DbSet<predmet_student> predmet_student { get; set; }
         public virtual DbSet<Privilegija> Privilegijas { get; set; }
         public virtual DbSet<Projekat> Projekats { get; set; }
         public virtual DbSet<ProjektniFile> ProjektniFiles { get; set; }
@@ -58,12 +61,10 @@ namespace Administracija.Entities
         public virtual DbSet<Reply> Replies { get; set; }
         public virtual DbSet<Sticky> Stickies { get; set; }
         public virtual DbSet<SvrhaPotvrde> SvrhaPotvrdes { get; set; }
-        public virtual DbSet<Termin> Termins { get; set; }
-        public virtual DbSet<TerminZabiljeska> TerminZabiljeskas { get; set; }
         public virtual DbSet<Theme> Themes { get; set; }
-        public virtual DbSet<TipFile> TipFiles { get; set; }
         public virtual DbSet<TipoviMaterijala> TipoviMaterijalas { get; set; }
         public virtual DbSet<Uloga> Ulogas { get; set; }
+        public virtual DbSet<uloga_v2> uloga_v2 { get; set; }
         public virtual DbSet<Zabiljeska> Zabiljeskas { get; set; }
         public virtual DbSet<Zadaca> Zadacas { get; set; }
         public virtual DbSet<Zadatak> Zadataks { get; set; }

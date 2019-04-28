@@ -12,13 +12,10 @@ namespace Administracija.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TerminZabiljeska
+    public partial class GrupaZabiljeska
     {
-        public int idTerminZabiljeska { get; set; }
-        public Nullable<int> idTermin { get; set; }
+        public int idGrupaZabiljeska { get; set; }
+        public Nullable<int> idGrupaTermina { get; set; }
         public Nullable<int> idZabiljeska { get; set; }
-    
-        public virtual Termin Termin { get; set; }
-        public virtual Zabiljeska Zabiljeska { get; set; }
     }
 }

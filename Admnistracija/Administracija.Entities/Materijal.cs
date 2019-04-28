@@ -27,6 +27,7 @@ namespace Administracija.Entities
         public Nullable<System.DateTime> datumIzmjene { get; set; }
         public string napomena { get; set; }
         public Nullable<bool> objavljeno { get; set; }
+        public Nullable<int> sedmica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Datoteke> Datotekes { get; set; }

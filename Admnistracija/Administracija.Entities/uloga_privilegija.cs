@@ -16,6 +16,8 @@ namespace Administracija.Entities
     {
         public int idUloga { get; set; }
         public Nullable<int> idPrivilegija { get; set; }
+        public long id_uloga { get; set; }
+        public long id_privilegija { get; set; }
     
         public virtual Privilegija Privilegija { get; set; }
         public virtual Uloga Uloga { get; set; }
