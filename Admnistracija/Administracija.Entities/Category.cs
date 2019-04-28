@@ -18,14 +18,17 @@ namespace Administracija.Entities
         public Category()
         {
             this.Issues = new HashSet<Issue>();
+            this.Issues1 = new HashSet<Issue>();
         }
     
-        public int idCategory { get; set; }
+        public int id { get; set; }
         public string CategoryType { get; set; }
         public string KeyName { get; set; }
-        public string DispleyName { get; set; }
+        public string DisplayName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Issue> Issues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Issue> Issues1 { get; set; }
     }
 }

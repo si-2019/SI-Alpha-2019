@@ -17,20 +17,23 @@ namespace Administracija.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Zadatak()
         {
-            this.Files = new HashSet<File>();
+            this.MimeTips = new HashSet<MimeTip>();
         }
     
         public int idZadatak { get; set; }
-        public int idZadaca { get; set; }
-        public string nazivZadatka { get; set; }
-        public int maxBrojBodova { get; set; }
-        public int brojOstvarenihBodova { get; set; }
+        public Nullable<int> idZadaca { get; set; }
+        public Nullable<int> redniBrojZadatkaUZadaci { get; set; }
+        public Nullable<int> maxBrojBodova { get; set; }
+        public Nullable<int> brojOstvarenihBodova { get; set; }
         public string profesorovKomentar { get; set; }
-        public System.DateTime datumPredaje { get; set; }
+        public Nullable<System.DateTime> datumPredaje { get; set; }
         public string statusZadatka { get; set; }
+        public byte[] sadrzajFile { get; set; }
+        public Nullable<int> velicinaFile { get; set; }
+        public string mimeTipUpdateZadatka { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<MimeTip> MimeTips { get; set; }
         public virtual Zadaca Zadaca { get; set; }
     }
 }

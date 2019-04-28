@@ -17,6 +17,8 @@ namespace Administracija.Entities
         public int idProjektniFile { get; set; }
         public int idProjektniZadatak { get; set; }
         public byte[] file { get; set; }
+        public Nullable<int> file_size { get; set; }
+        public string file_type { get; set; }
         public string nazivFile { get; set; }
     
         public virtual ProjektniZadatak ProjektniZadatak { get; set; }

@@ -12,12 +12,15 @@ namespace Administracija.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TipFile
+    public partial class predmet_student
     {
-        public int idTipFile { get; set; }
-        public string tipFile1 { get; set; }
-        public Nullable<int> idFile { get; set; }
+        public int id { get; set; }
+        public int idStudent { get; set; }
+        public int idPredmet { get; set; }
+        public Nullable<int> ocjena { get; set; }
+        public Nullable<System.DateTime> datum_upisa { get; set; }
     
-        public virtual File File { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
+        public virtual Predmet Predmet { get; set; }
     }
 }

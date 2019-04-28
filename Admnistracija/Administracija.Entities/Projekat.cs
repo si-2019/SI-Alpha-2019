@@ -24,9 +24,11 @@ namespace Administracija.Entities
         public int idProjekat { get; set; }
         public Nullable<int> idKorisnik { get; set; }
         public Nullable<int> idPredmet { get; set; }
+        public string nazivProjekta { get; set; }
         public Nullable<double> progress { get; set; }
         public string opisProjekta { get; set; }
         public Nullable<double> moguciBodovi { get; set; }
+        public string rokProjekta { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrupaProjekta> GrupaProjektas { get; set; }
