@@ -29,15 +29,16 @@ namespace AdmnistracijaApi.Controllers
         [HttpOptions]
         [ActionName("AddNewStudent")]
         public IHttpActionResult AddNewStudent([FromBody]KorisnikDto korisnik) {
-            LoginDataDto loginData = _korisnikRepository.GenerateLoginData(korisnik.Ime, korisnik.Prezime);
-            korisnik.Username = loginData.Username;
-            korisnik.Password = loginData.Password;
-            korisnik.Indeks = loginData.Indeks;
-            korisnik.IdUloga = 1;
+            if (korisnik != null) {
+                LoginDataDto loginData = _korisnikRepository.GenerateLoginData(korisnik.Ime, korisnik.Prezime);
+                korisnik.Username = loginData.Username;
+                korisnik.Password = loginData.Password;
+                korisnik.Indeks = loginData.Indeks;
+                korisnik.IdUloga = 1;
 
-            _korisnikRepository.AddNewStudent(korisnik);
-
-            return Ok("Student uspješno dodan!");
+                _korisnikRepository.AddNewStudent(korisnik);
+            }
+            return Ok("Uspješno je dodan korisnik " + korisnik.Username);
         }
     }
 }

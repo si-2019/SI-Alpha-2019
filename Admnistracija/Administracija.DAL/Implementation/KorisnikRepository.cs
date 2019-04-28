@@ -61,7 +61,7 @@ namespace Administracija.DAL.Implementation {
                 spol = student.Spol,
                 imePrezimeMajke = student.ImePrezimeMajke,
                 imePrezimeOca = student.ImePrezimeOca,
-                adresa = student.ImePrezimeOca,
+                adresa = student.Adresa,
                 username = student.Username,
                 password = student.Password,
                 linkedin = student.Linkedin,

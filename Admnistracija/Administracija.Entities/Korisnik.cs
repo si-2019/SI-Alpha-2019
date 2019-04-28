@@ -17,35 +17,13 @@ namespace Administracija.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Korisnik()
         {
-            this.Anketas = new HashSet<Anketa>();
-            this.ClanGrupes = new HashSet<ClanGrupe>();
-            this.ClanoviGrupes = new HashSet<ClanoviGrupe>();
-            this.ClanoviGrupes1 = new HashSet<ClanoviGrupe>();
-            this.Comments = new HashSet<Comment>();
-            this.grupaTermin_student = new HashSet<grupaTermin_student>();
-            this.GrupaTerminas = new HashSet<GrupaTermina>();
-            this.Ispits = new HashSet<Ispit>();
-            this.Issues = new HashSet<Issue>();
-            this.IzmjenaPodatakaStudentas = new HashSet<IzmjenaPodatakaStudenta>();
             this.Predmets = new HashSet<Predmet>();
-            this.Projekats = new HashSet<Projekat>();
-            this.PopunjenaAnketas = new HashSet<PopunjenaAnketa>();
-            this.Porukas = new HashSet<Poruka>();
-            this.Termins = new HashSet<Termin>();
-            this.ZeljeniTermins = new HashSet<ZeljeniTermin>();
-            this.Porukas1 = new HashSet<Poruka>();
             this.Predmets1 = new HashSet<Predmet>();
-            this.ZahtjevZaPotvrdus = new HashSet<ZahtjevZaPotvrdu>();
-            this.Zabiljeskas = new HashSet<Zabiljeska>();
-            this.ispiti_rezultati = new HashSet<ispiti_rezultati>();
-            this.Stickies = new HashSet<Sticky>();
-            this.Replies = new HashSet<Reply>();
-            this.Themes = new HashSet<Theme>();
         }
     
         public int id { get; set; }
-        public int idOdsjek { get; set; }
-        public int idUloga { get; set; }
+        public Nullable<int> idOdsjek { get; set; }
+        public Nullable<int> idUloga { get; set; }
         public string ime { get; set; }
         public string prezime { get; set; }
         public Nullable<System.DateTime> datumRodjenja { get; set; }
@@ -69,55 +47,12 @@ namespace Administracija.Entities
         public string semestar { get; set; }
         public string titula { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Anketa> Anketas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClanGrupe> ClanGrupes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClanoviGrupe> ClanoviGrupes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClanoviGrupe> ClanoviGrupes1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<grupaTermin_student> grupaTermin_student { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GrupaTermina> GrupaTerminas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ispit> Ispits { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Issue> Issues { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IzmjenaPodatakaStudenta> IzmjenaPodatakaStudentas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Predmet> Predmets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projekat> Projekats { get; set; }
-        public virtual Odsjek Odsjek { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PopunjenaAnketa> PopunjenaAnketas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Poruka> Porukas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Termin> Termins { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZeljeniTermin> ZeljeniTermins { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Poruka> Porukas1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Predmet> Predmets1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZahtjevZaPotvrdu> ZahtjevZaPotvrdus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Zabiljeska> Zabiljeskas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ispiti_rezultati> ispiti_rezultati { get; set; }
         public virtual Uloga Uloga { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sticky> Stickies { get; set; }
+        public virtual ICollection<Predmet> Predmets { get; set; }
+        public virtual Odsjek Odsjek { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reply> Replies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Theme> Themes { get; set; }
+        public virtual ICollection<Predmet> Predmets1 { get; set; }
+        public virtual Uloga Uloga1 { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Administracija.Entities
         public Uloga()
         {
             this.Korisniks = new HashSet<Korisnik>();
+            this.Korisniks1 = new HashSet<Korisnik>();
         }
     
         public int idUloga { get; set; }
@@ -25,6 +26,7 @@ namespace Administracija.Entities
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Korisnik> Korisniks { get; set; }
-        public virtual uloga_privilegija uloga_privilegija { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Korisnik> Korisniks1 { get; set; }
     }
 }

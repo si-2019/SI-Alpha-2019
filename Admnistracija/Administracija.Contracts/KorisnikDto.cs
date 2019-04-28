@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Administracija.Contracts {
     public class KorisnikDto {
-        public int IdOdsjek;
+        public int? IdOdsjek;
         public int IdUloga;
         public string Ime;
         public string Prezime;
