@@ -30,6 +30,7 @@ namespace Administracija.Entities
         public Nullable<int> danUSedmici { get; set; }
         public string vrijeme { get; set; }
         public Nullable<int> trajanje { get; set; }
+        public Nullable<System.DateTime> rok { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<grupaTermin_student> grupaTermin_student { get; set; }
