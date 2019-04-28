@@ -21,15 +21,14 @@ namespace Administracija.Entities
         }
     
         public int idZadaca { get; set; }
-        public int idPredmet { get; set; }
-        public string nazivZadace { get; set; }
-        public int brojZadataka { get; set; }
-        public System.DateTime rokZaPredaju { get; set; }
-        public int maxBrojBodova { get; set; }
-        public int ukupniOstvareniBodovi { get; set; }
-        public byte[] postavkaZadace { get; set; }
+        public Nullable<int> idPredmet { get; set; }
+        public string naziv { get; set; }
+        public Nullable<int> brojZadataka { get; set; }
+        public Nullable<System.DateTime> rokZaPredaju { get; set; }
+        public Nullable<int> ukupnoBodova { get; set; }
+        public Nullable<int> ukupniOstvareniBodovi { get; set; }
+        public byte[] postavka { get; set; }
     
-        public virtual Predmet Predmet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zadatak> Zadataks { get; set; }
     }

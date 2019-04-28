@@ -21,14 +21,14 @@ namespace Administracija.Entities
         }
     
         public int idIssue { get; set; }
-        public int idStudent { get; set; }
-        public int idIssueType { get; set; }
-        public Nullable<int> idIssueCategory { get; set; }
-        public string title { get; set; }
+        public Nullable<int> idStudent { get; set; }
+        public Nullable<int> idCategory { get; set; }
+        public string issueStatus { get; set; }
         public string message { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }
     
+        public virtual Category Category { get; set; }
         public virtual Korisnik Korisnik { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category> Categories { get; set; }

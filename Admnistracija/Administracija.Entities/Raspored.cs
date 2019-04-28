@@ -22,6 +22,8 @@ namespace Administracija.Entities
         public string tipNastave { get; set; }
     
         public virtual GrupaTermina GrupaTermina { get; set; }
+        public virtual GrupaTermina GrupaTermina1 { get; set; }
         public virtual Kabinet Kabinet { get; set; }
+        public virtual Kabinet Kabinet1 { get; set; }
     }
 }

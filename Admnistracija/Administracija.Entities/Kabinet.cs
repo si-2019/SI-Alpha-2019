@@ -17,8 +17,9 @@ namespace Administracija.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Kabinet()
         {
-            this.Termins = new HashSet<Termin>();
+            this.GrupaTerminas = new HashSet<GrupaTermina>();
             this.Rasporeds = new HashSet<Raspored>();
+            this.Rasporeds1 = new HashSet<Raspored>();
         }
     
         public int idKabinet { get; set; }
@@ -26,8 +27,10 @@ namespace Administracija.Entities
         public string namjena { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Termin> Termins { get; set; }
+        public virtual ICollection<GrupaTermina> GrupaTerminas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Raspored> Rasporeds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Raspored> Rasporeds1 { get; set; }
     }
 }

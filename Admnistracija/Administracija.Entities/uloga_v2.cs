@@ -12,16 +12,9 @@ namespace Administracija.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class ZeljeniTermin
+    public partial class uloga_v2
     {
-        public int idZeljeniTermin { get; set; }
-        public Nullable<int> idPredavac { get; set; }
-        public Nullable<int> idKabinet { get; set; }
-        public string danUSedmici { get; set; }
-        public Nullable<int> brCasova { get; set; }
-        public string vrijeme { get; set; }
-    
-        public virtual Korisnik Korisnik { get; set; }
-        public virtual Korisnik Korisnik1 { get; set; }
+        public long id_uloga { get; set; }
+        public string naziv { get; set; }
     }
 }
