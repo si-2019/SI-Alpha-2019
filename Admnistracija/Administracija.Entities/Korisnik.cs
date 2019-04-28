@@ -17,9 +17,6 @@ namespace Administracija.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Korisnik()
         {
-            this.Predmets = new HashSet<Predmet>();
-
-
             this.Anketas = new HashSet<Anketa>();
             this.ClanGrupes = new HashSet<ClanGrupe>();
             this.ClanoviGrupes = new HashSet<ClanoviGrupe>();
@@ -74,8 +71,6 @@ namespace Administracija.Entities
         public string semestar { get; set; }
         public string titula { get; set; }
     
-        public virtual Uloga Uloga { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anketa> Anketas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -101,12 +96,12 @@ namespace Administracija.Entities
         public virtual Uloga Uloga { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ZeljeniTermin> ZeljeniTermins { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Predmet> Predmets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Projekat> Projekats { get; set; }
         public virtual Odsjek Odsjek { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
         public virtual ICollection<PopunjenaAnketa> PopunjenaAnketas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Poruka> Porukas { get; set; }

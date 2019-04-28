@@ -4,14 +4,6 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="05fec8a60a064dd498c4942ba14194d0" Name="Diagram1">
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Korisnik" Width="1.5" PointX="3" PointY="1.25" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Odsjek" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Predmet" Width="1.5" PointX="5.25" PointY="3.125" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Privilegija" Width="1.5" PointX="5.75" PointY="0.875" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.Uloga" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="TYQcLL35gVModel.odsjek_predmet" Width="1.5" PointX="7.5" PointY="3.5" />
-        <AssociationConnector Association="TYQcLL35gVModel.FK2yfvolihodnqf57g9oksumrs0" />
       <Diagram DiagramId="66830d6482ac4e25a57c9bfa1c5d6573" Name="Diagram1" ZoomLevel="13">
         <EntityTypeShape EntityType="TYQcLL35gVModel.Anketa" Width="1.5" PointX="7.5" PointY="54.125" />
         <EntityTypeShape EntityType="TYQcLL35gVModel.Category" Width="1.5" PointX="6" PointY="32.625" />
@@ -95,12 +87,8 @@
         <AssociationConnector Association="TYQcLL35gVModel.FK2yfvolihodnqf57g9oksumrs0" />
         <AssociationConnector Association="TYQcLL35gVModel.FK4sfal4qpi5xwvcqy47aioi6pt" />
         <AssociationConnector Association="TYQcLL35gVModel.idAsistentFK" />
+        <AssociationConnector Association="TYQcLL35gVModel.idKorisnikFK" />
         <AssociationConnector Association="TYQcLL35gVModel.idOdsjekFK" />
-        <AssociationConnector Association="TYQcLL35gVModel.idProfesorFK" />
-        <AssociationConnector Association="TYQcLL35gVModel.idUloga1" />
-        <AssociationConnector Association="TYQcLL35gVModel.idOdsjekFK3" />
-        <AssociationConnector Association="TYQcLL35gVModel.idPredmetFK3" />
-
         <AssociationConnector Association="TYQcLL35gVModel.idPopunjena" />
         <AssociationConnector Association="TYQcLL35gVModel.idPosiljaocFK" />
         <AssociationConnector Association="TYQcLL35gVModel.idPredavacFK3" />

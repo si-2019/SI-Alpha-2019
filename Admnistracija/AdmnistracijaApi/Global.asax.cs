@@ -20,12 +20,5 @@ namespace AdmnistracijaApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             UnityConfig.RegisterComponents();
         }
-
-        protected void Application_BeginRequest() {
-            if (Request.Headers.AllKeys.Contains("Origin") && Request.HttpMethod == "OPTIONS") {
-                Response.End();
-                Response.Flush();
-            }
-        }
     }
 }
