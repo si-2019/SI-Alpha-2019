@@ -134,9 +134,6 @@
     <Compile Include="Odgovor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Odgovor.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Odsjek.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
