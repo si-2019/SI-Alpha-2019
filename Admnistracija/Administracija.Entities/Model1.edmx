@@ -102,6 +102,7 @@
           <Property Name="danUSedmici" Type="int" />
           <Property Name="vrijeme" Type="varchar" MaxLength="10" />
           <Property Name="trajanje" Type="int" />
+          <Property Name="rok" Type="date" />
         </EntityType>
         <EntityType Name="GrupaZabiljeska">
           <Key>
@@ -2357,6 +2358,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="danUSedmici" Type="Int32" />
           <Property Name="vrijeme" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="trajanje" Type="Int32" />
+          <Property Name="rok" Type="DateTime" />
           <NavigationProperty Name="grupaTermin_student" Relationship="TYQcLL35gVModel.idGrupaTermina" FromRole="GrupaTermina" ToRole="grupaTermin_student" />
           <NavigationProperty Name="Predmet" Relationship="TYQcLL35gVModel.FKgwjyytiad4amobdgj6n6k14rk" FromRole="GrupaTermina" ToRole="Predmet" />
           <NavigationProperty Name="Rasporeds" Relationship="TYQcLL35gVModel.FKm957568aos8bshvn5ogtmqpn1" FromRole="GrupaTermina" ToRole="Raspored" />
@@ -3921,6 +3923,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <EntitySetMapping Name="GrupaTerminas">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.GrupaTermina">
               <MappingFragment StoreEntitySet="GrupaTermina">
+                <ScalarProperty Name="rok" ColumnName="rok" />
                 <ScalarProperty Name="trajanje" ColumnName="trajanje" />
                 <ScalarProperty Name="vrijeme" ColumnName="vrijeme" />
                 <ScalarProperty Name="danUSedmici" ColumnName="danUSedmici" />

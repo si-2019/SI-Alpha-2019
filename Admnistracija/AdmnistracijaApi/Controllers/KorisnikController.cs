@@ -24,5 +24,21 @@ namespace AdmnistracijaApi.Controllers
         public IHttpActionResult GetLoginData(string ime, string prezime) {
             return Ok(_korisnikRepository.GenerateLoginData(ime, prezime));           
         }
+
+        [HttpPost]
+        [HttpOptions]
+        [ActionName("AddNewStudent")]
+        public IHttpActionResult AddNewStudent([FromBody]KorisnikDto korisnik) {
+            if (korisnik != null) {
+                LoginDataDto loginData = _korisnikRepository.GenerateLoginData(korisnik.Ime, korisnik.Prezime);
+                korisnik.Username = loginData.Username;
+                korisnik.Password = loginData.Password;
+                korisnik.Indeks = loginData.Indeks;
+                korisnik.IdUloga = 1;
+
+                _korisnikRepository.AddNewStudent(korisnik);
+            }
+            return Ok("Uspješno je dodan korisnik " + korisnik.Username);
+        }
     }
 }
