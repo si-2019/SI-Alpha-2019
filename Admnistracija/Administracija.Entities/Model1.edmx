@@ -184,6 +184,7 @@ warning 6002: The table/view 'def.TYQcLL35gV.issue_category' does not have a pri
           <Property Name="kapacitet" Type="int" />
           <Property Name="namjena" Type="varchar" MaxLength="10" />
         </EntityType>
+
         <EntityType Name="Korisnik">
           <Key>
             <PropertyRef Name="id" />
@@ -214,6 +215,7 @@ warning 6002: The table/view 'def.TYQcLL35gV.issue_category' does not have a pri
           <Property Name="semestar" Type="varchar" MaxLength="50" />
           <Property Name="titula" Type="varchar" MaxLength="50" />
         </EntityType>
+
         <EntityType Name="Materijal">
           <Key>
             <PropertyRef Name="idMaterijal" />
@@ -245,6 +247,7 @@ warning 6002: The table/view 'def.TYQcLL35gV.issue_category' does not have a pri
           <Property Name="idPonudjeniOdgovor" Type="int" Nullable="false" />
           <Property Name="tekstOdgovora" Type="varchar" MaxLength="255" />
         </EntityType>
+
         <EntityType Name="Odsjek">
           <Key>
             <PropertyRef Name="idOdsjek" />
@@ -265,53 +268,6 @@ warning 6002: The table/view 'def.TYQcLL35gV.odsjek_predmet' does not have a pri
           <Property Name="ciklus" Type="int" />
           <Property Name="tip" Type="bit" />
         </EntityType>
-        <EntityType Name="Pitanje">
-          <Key>
-            <PropertyRef Name="idPitanja" />
-          </Key>
-          <Property Name="idPitanja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idAnketa" Type="int" Nullable="false" />
-          <Property Name="vrstaPitanja" Type="varchar" MaxLength="255" />
-          <Property Name="tekstPitanja" Type="varchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="PonudjeniOdgovor">
-          <Key>
-            <PropertyRef Name="idPonudjeniOdgovor" />
-          </Key>
-          <Property Name="idPonudjeniOdgovor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idPitanja" Type="int" Nullable="false" />
-          <Property Name="tekstOdgovora" Type="varchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="PopunjenaAnketa">
-          <Key>
-            <PropertyRef Name="idPopunjenaAnketa" />
-          </Key>
-          <Property Name="idPopunjenaAnketa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idAnketa" Type="int" Nullable="false" />
-          <Property Name="idPopunio" Type="int" Nullable="false" />
-          <Property Name="vrijemePopunjavanja" Type="datetime" Precision="0" />
-        </EntityType>
-        <EntityType Name="Poruka">
-          <Key>
-            <PropertyRef Name="idPoruka" />
-          </Key>
-          <Property Name="idPoruka" Type="int" Nullable="false" />
-          <Property Name="idPosiljaoc" Type="int" />
-          <Property Name="idPrimaoc" Type="int" />
-          <Property Name="idGrupa" Type="int" />
-          <Property Name="sadrzajPoruke" Type="varchar" MaxLength="100" />
-          <Property Name="file" Type="blob" />
-        </EntityType>
-        <EntityType Name="Pozicija">
-          <Key>
-            <PropertyRef Name="idPozicija" />
-          </Key>
-          <Property Name="idPozicija" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="x1" Type="float" />
-          <Property Name="x2" Type="float" />
-          <Property Name="y1" Type="float" />
-          <Property Name="y2" Type="float" />
-        </EntityType>
         <EntityType Name="Predmet">
           <Key>
             <PropertyRef Name="id" />
@@ -325,12 +281,7 @@ warning 6002: The table/view 'def.TYQcLL35gV.odsjek_predmet' does not have a pri
           <Property Name="brojVjezbi" Type="int" Nullable="false" />
           <Property Name="opis" Type="varchar" MaxLength="1024" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.TYQcLL35gV.predmet_kabinet' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="predmet_kabinet">
-          <Property Name="idPredmet" Type="int" />
-          <Property Name="idKabinet" Type="int" />
-        </EntityType>-->
+
         <EntityType Name="predmet_student">
           <Key>
             <PropertyRef Name="id" />
@@ -348,6 +299,7 @@ warning 6013: The table/view 'def.TYQcLL35gV.predmet_kabinet' does not have a pr
           <Property Name="idPrivilegija" Type="int" Nullable="false" />
           <Property Name="privilegija" Type="varchar" MaxLength="50" />
         </EntityType>
+
         <EntityType Name="Projekat">
           <Key>
             <PropertyRef Name="idProjekat" />
@@ -450,6 +402,7 @@ warning 6002: The table/view 'def.TYQcLL35gV.projektniZadatak_clanGrupe' does no
           <Property Name="idTipoviMaterijala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="naziv" Type="varchar" MaxLength="20" />
         </EntityType>
+
         <EntityType Name="Uloga">
           <Key>
             <PropertyRef Name="idUloga" />
@@ -457,6 +410,11 @@ warning 6002: The table/view 'def.TYQcLL35gV.projektniZadatak_clanGrupe' does no
           <Property Name="idUloga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="naziv" Type="varchar" MaxLength="25" />
         </EntityType>
+
+        <Association Name="FK2yfvolihodnqf57g9oksumrs0">
+          <End Role="Uloga" Type="Self.Uloga" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+
         <!--Errors Found During Generation:
 warning 6002: The table/view 'def.TYQcLL35gV.uloga_privilegija' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="uloga_privilegija">
@@ -648,12 +606,13 @@ error 6004: The table 'def.TYQcLL35gV.predmet_kabinet' is referenced by a relati
             <OnDelete Action="Cascade" />
           </End>
           <End Role="PopunjenaAnketa" Type="Self.PopunjenaAnketa" Multiplicity="*" />
+
           <ReferentialConstraint>
-            <Principal Role="Anketa">
-              <PropertyRef Name="idAnketa" />
+            <Principal Role="Uloga">
+              <PropertyRef Name="idUloga" />
             </Principal>
-            <Dependent Role="PopunjenaAnketa">
-              <PropertyRef Name="idAnketa" />
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="idUloga" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -671,6 +630,10 @@ error 6004: The table 'def.TYQcLL35gV.predmet_kabinet' is referenced by a relati
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
+        <Association Name="idOdsjekFK">
+          <End Role="Odsjek" Type="Self.Odsjek" Multiplicity="0..1">
+
         <Association Name="idCategoryFK">
           <End Role="Category" Type="Self.Category" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -741,74 +704,89 @@ error 6004: The table 'def.TYQcLL35gV.predmet_kabinet' is referenced by a relati
         </Association>
         <Association Name="idGrupaChatFK">
           <End Role="GrupaChat" Type="Self.GrupaChat" Multiplicity="0..1">
+
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ClanoviGrupe" Type="Self.ClanoviGrupe" Multiplicity="*" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="GrupaChat">
-              <PropertyRef Name="idGrupa" />
+            <Principal Role="Odsjek">
+              <PropertyRef Name="idOdsjek" />
             </Principal>
-            <Dependent Role="ClanoviGrupe">
-              <PropertyRef Name="idGrupa" />
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="idOdsjek" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="idGrupaFK">
-          <End Role="GrupaProjekta" Type="Self.GrupaProjekta" Multiplicity="1">
+        <Association Name="idOdsjekFK3">
+          <End Role="Odsjek" Type="Self.Odsjek" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ClanGrupe" Type="Self.ClanGrupe" Multiplicity="*" />
+          <End Role="odsjek_predmet" Type="Self.odsjek_predmet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="GrupaProjekta">
-              <PropertyRef Name="idGrupaProjekta" />
+            <Principal Role="Odsjek">
+              <PropertyRef Name="idOdsjek" />
             </Principal>
-            <Dependent Role="ClanGrupe">
-              <PropertyRef Name="idGrupaProjekta" />
+            <Dependent Role="odsjek_predmet">
+              <PropertyRef Name="idOdsjek" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="idGrupaTermina">
-          <End Role="GrupaTermina" Type="Self.GrupaTermina" Multiplicity="1">
+        <Association Name="idPredmetFK3">
+          <End Role="Predmet" Type="Self.Predmet" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="grupaTermin_student" Type="Self.grupaTermin_student" Multiplicity="*" />
+          <End Role="odsjek_predmet" Type="Self.odsjek_predmet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="GrupaTermina">
-              <PropertyRef Name="idGrupaTermina" />
+            <Principal Role="Predmet">
+              <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="grupaTermin_student">
-              <PropertyRef Name="idGrupaTermina" />
+            <Dependent Role="odsjek_predmet">
+              <PropertyRef Name="idPredmet" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="idGrupaTerminFK">
-          <End Role="GrupaTermina" Type="Self.GrupaTermina" Multiplicity="1">
+        <!--Errors Found During Generation:
+error 6004: The table 'def.TYQcLL35gV.predmet_student' is referenced by a relationship, but cannot be found.
+        <Association Name="idPredmetFK4" />-->
+        <Association Name="idProfesorFK">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Raspored" Type="Self.Raspored" Multiplicity="*" />
+          <End Role="Predmet" Type="Self.Predmet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="GrupaTermina">
-              <PropertyRef Name="idGrupaTermina" />
+            <Principal Role="Korisnik">
+              <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Raspored">
-              <PropertyRef Name="idGrupaTermin" />
+            <Dependent Role="Predmet">
+              <PropertyRef Name="idProfesor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="idIspitFK">
-          <End Role="Ispit" Type="Self.Ispit" Multiplicity="1">
+        <!--Errors Found During Generation:
+error 6004: The table 'def.TYQcLL35gV.predmet_student' is referenced by a relationship, but cannot be found.
+        <Association Name="idStudentFK5" />-->
+        <Association Name="idUloga1">
+          <End Role="Uloga" Type="Self.Uloga" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ispiti_rezultati" Type="Self.ispiti_rezultati" Multiplicity="*" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Ispit">
-              <PropertyRef Name="idIspit" />
+            <Principal Role="Uloga">
+              <PropertyRef Name="idUloga" />
             </Principal>
-            <Dependent Role="ispiti_rezultati">
-              <PropertyRef Name="idIspit" />
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="idUloga" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
+        <EntityContainer Name="TYQcLL35gVModelStoreContainer">
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="TYQcLL35gV" store:Type="Tables" />
+          <EntitySet Name="Odsjek" EntityType="Self.Odsjek" Schema="TYQcLL35gV" store:Type="Tables" />
+          <EntitySet Name="Predmet" EntityType="Self.Predmet" Schema="TYQcLL35gV" store:Type="Tables" />
+          <EntitySet Name="Privilegija" EntityType="Self.Privilegija" Schema="TYQcLL35gV" store:Type="Tables" />
+          <EntitySet Name="Uloga" EntityType="Self.Uloga" Schema="TYQcLL35gV" store:Type="Tables" />
+
         <Association Name="idIssueFK">
           <End Role="Issue" Type="Self.Issue" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1602,6 +1580,7 @@ FROM `ispiti_rezultati` AS `ispiti_rezultati`</DefiningQuery>
 `issue_category`.`idIssue`
 FROM `issue_category` AS `issue_category`</DefiningQuery>
           </EntitySet>
+
           <EntitySet Name="odsjek_predmet" EntityType="Self.odsjek_predmet" store:Type="Tables" store:Schema="TYQcLL35gV">
             <DefiningQuery>SELECT
 `odsjek_predmet`.`idOdsjek`, 
@@ -1611,6 +1590,7 @@ FROM `issue_category` AS `issue_category`</DefiningQuery>
 `odsjek_predmet`.`tip`
 FROM `odsjek_predmet` AS `odsjek_predmet`</DefiningQuery>
           </EntitySet>
+
           <EntitySet Name="projektniZadatak_clanGrupe" EntityType="Self.projektniZadatak_clanGrupe" store:Type="Tables" store:Schema="TYQcLL35gV">
             <DefiningQuery>SELECT
 `projektniZadatak_clanGrupe`.`idProjektniZadatak`, 
@@ -1625,10 +1605,12 @@ FROM `projektniZadatak_clanGrupe` AS `projektniZadatak_clanGrupe`</DefiningQuery
 `uloga_privilegija`.`id_privilegija`
 FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           </EntitySet>
+
           <AssociationSet Name="FK2yfvolihodnqf57g9oksumrs0" Association="Self.FK2yfvolihodnqf57g9oksumrs0">
             <End Role="Uloga" EntitySet="Uloga" />
             <End Role="Korisnik" EntitySet="Korisnik" />
           </AssociationSet>
+
           <AssociationSet Name="FK4sfal4qpi5xwvcqy47aioi6pt" Association="Self.FK4sfal4qpi5xwvcqy47aioi6pt">
             <End Role="Korisnik" EntitySet="Korisnik" />
             <End Role="ZeljeniTermin" EntitySet="ZeljeniTermin" />
@@ -1661,10 +1643,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Anketa" EntitySet="Anketa" />
             <End Role="PopunjenaAnketa" EntitySet="PopunjenaAnketa" />
           </AssociationSet>
+
           <AssociationSet Name="idAsistentFK" Association="Self.idAsistentFK">
             <End Role="Korisnik" EntitySet="Korisnik" />
             <End Role="Predmet" EntitySet="Predmet" />
           </AssociationSet>
+
           <AssociationSet Name="idCategoryFK" Association="Self.idCategoryFK">
             <End Role="Category" EntitySet="Category" />
             <End Role="issue_category" EntitySet="issue_category" />
@@ -1733,6 +1717,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Korisnik" EntitySet="Korisnik" />
             <End Role="Anketa" EntitySet="Anketa" />
           </AssociationSet>
+
           <AssociationSet Name="idOdsjekFK" Association="Self.idOdsjekFK">
             <End Role="Odsjek" EntitySet="Odsjek" />
             <End Role="Korisnik" EntitySet="Korisnik" />
@@ -1741,6 +1726,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Odsjek" EntitySet="Odsjek" />
             <End Role="odsjek_predmet" EntitySet="odsjek_predmet" />
           </AssociationSet>
+
           <AssociationSet Name="idPitanje" Association="Self.idPitanje">
             <End Role="Pitanje" EntitySet="Pitanje" />
             <End Role="PonudjeniOdgovor" EntitySet="PonudjeniOdgovor" />
@@ -1781,10 +1767,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Predmet" EntitySet="Predmet" />
             <End Role="Projekat" EntitySet="Projekat" />
           </AssociationSet>
+
           <AssociationSet Name="idPredmetFK3" Association="Self.idPredmetFK3">
             <End Role="Predmet" EntitySet="Predmet" />
             <End Role="odsjek_predmet" EntitySet="odsjek_predmet" />
           </AssociationSet>
+
           <AssociationSet Name="idPredmetFK4" Association="Self.idPredmetFK4">
             <End Role="Predmet" EntitySet="Predmet" />
             <End Role="predmet_student" EntitySet="predmet_student" />
@@ -1813,10 +1801,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Privilegija" EntitySet="Privilegija" />
             <End Role="uloga_privilegija" EntitySet="uloga_privilegija" />
           </AssociationSet>
+
           <AssociationSet Name="idProfesorFK" Association="Self.idProfesorFK">
             <End Role="Korisnik" EntitySet="Korisnik" />
             <End Role="Predmet" EntitySet="Predmet" />
           </AssociationSet>
+
           <AssociationSet Name="idProfesorFK5" Association="Self.idProfesorFK5">
             <End Role="Korisnik" EntitySet="Korisnik" />
             <End Role="Ispit" EntitySet="Ispit" />
@@ -1885,10 +1875,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Uloga" EntitySet="Uloga" />
             <End Role="uloga_privilegija" EntitySet="uloga_privilegija" />
           </AssociationSet>
+
           <AssociationSet Name="idUloga1" Association="Self.idUloga1">
             <End Role="Uloga" EntitySet="Uloga" />
             <End Role="Korisnik" EntitySet="Korisnik" />
           </AssociationSet>
+
           <AssociationSet Name="idUserFK2" Association="Self.idUserFK2">
             <End Role="Korisnik" EntitySet="Korisnik" />
             <End Role="Sticky" EntitySet="Sticky" />
@@ -1913,11 +1905,19 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Zadaca" EntitySet="Zadaca" />
             <End Role="Zadatak" EntitySet="Zadatak" />
           </AssociationSet>
+
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TYQcLL35gVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TYQcLL35gVEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Korisniks" EntityType="TYQcLL35gVModel.Korisnik" />
+          <EntitySet Name="Odsjeks" EntityType="TYQcLL35gVModel.Odsjek" />
+          <EntitySet Name="Predmets" EntityType="TYQcLL35gVModel.Predmet" />
+          <EntitySet Name="Privilegijas" EntityType="TYQcLL35gVModel.Privilegija" />
+          <EntitySet Name="Ulogas" EntityType="TYQcLL35gVModel.Uloga" />
+          <EntitySet Name="odsjek_predmet" EntityType="TYQcLL35gVModel.odsjek_predmet" />
         <EntityContainer Name="TYQcLL35gVEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Anketas" EntityType="TYQcLL35gVModel.Anketa" />
           <EntitySet Name="Categories" EntityType="TYQcLL35gVModel.Category" />
@@ -2091,26 +2091,32 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Kabinet" EntitySet="Kabinets" />
             <End Role="Raspored" EntitySet="Rasporeds" />
           </AssociationSet>
+
           <AssociationSet Name="FK2yfvolihodnqf57g9oksumrs0" Association="TYQcLL35gVModel.FK2yfvolihodnqf57g9oksumrs0">
             <End Role="Uloga" EntitySet="Ulogas" />
             <End Role="Korisnik" EntitySet="Korisniks" />
           </AssociationSet>
+
           <AssociationSet Name="FK4sfal4qpi5xwvcqy47aioi6pt" Association="TYQcLL35gVModel.FK4sfal4qpi5xwvcqy47aioi6pt">
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="ZeljeniTermin" EntitySet="ZeljeniTermins" />
           </AssociationSet>
+
           <AssociationSet Name="idAsistentFK" Association="TYQcLL35gVModel.idAsistentFK">
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="Predmet" EntitySet="Predmets" />
           </AssociationSet>
+
           <AssociationSet Name="idKorisnikFK" Association="TYQcLL35gVModel.idKorisnikFK">
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="Projekat" EntitySet="Projekats" />
           </AssociationSet>
+
           <AssociationSet Name="idOdsjekFK" Association="TYQcLL35gVModel.idOdsjekFK">
             <End Role="Odsjek" EntitySet="Odsjeks" />
             <End Role="Korisnik" EntitySet="Korisniks" />
           </AssociationSet>
+
           <AssociationSet Name="idPopunjena" Association="TYQcLL35gVModel.idPopunjena">
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="PopunjenaAnketa" EntitySet="PopunjenaAnketas" />
@@ -2127,10 +2133,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="Poruka" EntitySet="Porukas" />
           </AssociationSet>
+
           <AssociationSet Name="idProfesorFK" Association="TYQcLL35gVModel.idProfesorFK">
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="Predmet" EntitySet="Predmets" />
           </AssociationSet>
+
           <AssociationSet Name="idStudenta" Association="TYQcLL35gVModel.idStudenta">
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="ZahtjevZaPotvrdu" EntitySet="ZahtjevZaPotvrdus" />
@@ -2147,10 +2155,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="ispiti_rezultati" EntitySet="ispiti_rezultati" />
           </AssociationSet>
+
           <AssociationSet Name="idUloga1" Association="TYQcLL35gVModel.idUloga1">
             <End Role="Uloga" EntitySet="Ulogas" />
             <End Role="Korisnik" EntitySet="Korisniks" />
           </AssociationSet>
+
           <AssociationSet Name="idUserFK2" Association="TYQcLL35gVModel.idUserFK2">
             <End Role="Korisnik" EntitySet="Korisniks" />
             <End Role="Sticky" EntitySet="Stickies" />
@@ -2187,10 +2197,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="PopunjenaAnketa" EntitySet="PopunjenaAnketas" />
             <End Role="Odgovor" EntitySet="Odgovors" />
           </AssociationSet>
+
           <AssociationSet Name="idOdsjekFK3" Association="TYQcLL35gVModel.idOdsjekFK3">
             <End Role="Odsjek" EntitySet="Odsjeks" />
             <End Role="odsjek_predmet" EntitySet="odsjek_predmet" />
           </AssociationSet>
+
           <AssociationSet Name="idPitanje" Association="TYQcLL35gVModel.idPitanje">
             <End Role="Pitanje" EntitySet="Pitanjes" />
             <End Role="PonudjeniOdgovor" EntitySet="PonudjeniOdgovors" />
@@ -2199,10 +2211,13 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <End Role="Predmet" EntitySet="Predmets" />
             <End Role="Projekat" EntitySet="Projekats" />
           </AssociationSet>
+
           <AssociationSet Name="idPredmetFK3" Association="TYQcLL35gVModel.idPredmetFK3">
             <End Role="Predmet" EntitySet="Predmets" />
             <End Role="odsjek_predmet" EntitySet="odsjek_predmet" />
           </AssociationSet>
+        </EntityContainer>
+
           <AssociationSet Name="idPredmetFK4" Association="TYQcLL35gVModel.idPredmetFK4">
             <End Role="Predmet" EntitySet="Predmets" />
             <End Role="predmet_student" EntitySet="predmet_student" />
@@ -2445,6 +2460,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <NavigationProperty Name="Rasporeds" Relationship="TYQcLL35gVModel.FKsdsdclr81wjrlf3bmd3ofjarw" FromRole="Kabinet" ToRole="Raspored" />
           <NavigationProperty Name="Rasporeds1" Relationship="TYQcLL35gVModel.idKabinetFK3" FromRole="Kabinet" ToRole="Raspored" />
         </EntityType>
+
         <EntityType Name="Korisnik">
           <Key>
             <PropertyRef Name="id" />
@@ -2474,6 +2490,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="ciklus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="semestar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="titula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Uloga" Relationship="TYQcLL35gVModel.FK2yfvolihodnqf57g9oksumrs0" FromRole="Korisnik" ToRole="Uloga" />
+          <NavigationProperty Name="Predmets" Relationship="TYQcLL35gVModel.idAsistentFK" FromRole="Korisnik" ToRole="Predmet" />
+          <NavigationProperty Name="Odsjek" Relationship="TYQcLL35gVModel.idOdsjekFK" FromRole="Korisnik" ToRole="Odsjek" />
+          <NavigationProperty Name="Predmets1" Relationship="TYQcLL35gVModel.idProfesorFK" FromRole="Korisnik" ToRole="Predmet" />
+          <NavigationProperty Name="Uloga1" Relationship="TYQcLL35gVModel.idUloga1" FromRole="Korisnik" ToRole="Uloga" />
+
           <NavigationProperty Name="Anketas" Relationship="TYQcLL35gVModel.idNapravio" FromRole="Korisnik" ToRole="Anketa" />
           <NavigationProperty Name="ClanGrupes" Relationship="TYQcLL35gVModel.idClanFK" FromRole="Korisnik" ToRole="ClanGrupe" />
           <NavigationProperty Name="ClanoviGrupes" Relationship="TYQcLL35gVModel.idAdministratorFK" FromRole="Korisnik" ToRole="ClanoviGrupe" />
@@ -2541,6 +2563,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <NavigationProperty Name="Pitanje" Relationship="TYQcLL35gVModel.idPitanjeFK" FromRole="Odgovor" ToRole="Pitanje" />
           <NavigationProperty Name="PonudjeniOdgovor" Relationship="TYQcLL35gVModel.idPonudjeniOdgovorFK" FromRole="Odgovor" ToRole="PonudjeniOdgovor" />
           <NavigationProperty Name="PopunjenaAnketa" Relationship="TYQcLL35gVModel.idPopunjenaAnketaFK" FromRole="Odgovor" ToRole="PopunjenaAnketa" />
+
         </EntityType>
         <EntityType Name="Odsjek">
           <Key>
@@ -2551,6 +2574,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <NavigationProperty Name="Korisniks" Relationship="TYQcLL35gVModel.idOdsjekFK" FromRole="Odsjek" ToRole="Korisnik" />
           <NavigationProperty Name="odsjek_predmet" Relationship="TYQcLL35gVModel.idOdsjekFK3" FromRole="Odsjek" ToRole="odsjek_predmet" />
         </EntityType>
+
         <EntityType Name="Pitanje">
           <Key>
             <PropertyRef Name="idPitanja" />
@@ -2608,6 +2632,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="y1" Type="Single" />
           <Property Name="y2" Type="Single" />
         </EntityType>
+
         <EntityType Name="Predmet">
           <Key>
             <PropertyRef Name="id" />
@@ -2620,6 +2645,10 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="brojPredavanja" Type="Int32" Nullable="false" />
           <Property Name="brojVjezbi" Type="Int32" Nullable="false" />
           <Property Name="opis" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Korisnik" Relationship="TYQcLL35gVModel.idAsistentFK" FromRole="Predmet" ToRole="Korisnik" />
+          <NavigationProperty Name="Korisnik1" Relationship="TYQcLL35gVModel.idProfesorFK" FromRole="Predmet" ToRole="Korisnik" />
+          <NavigationProperty Name="odsjek_predmet" Relationship="TYQcLL35gVModel.idPredmetFK3" FromRole="Predmet" ToRole="odsjek_predmet" />
+
           <NavigationProperty Name="Anketas" Relationship="TYQcLL35gVModel.idPredmet1" FromRole="Predmet" ToRole="Anketa" />
           <NavigationProperty Name="GrupaTerminas" Relationship="TYQcLL35gVModel.FKgwjyytiad4amobdgj6n6k14rk" FromRole="Predmet" ToRole="GrupaTermina" />
           <NavigationProperty Name="GrupaTerminas1" Relationship="TYQcLL35gVModel.idPredmetFK8" FromRole="Predmet" ToRole="GrupaTermina" />
@@ -2643,6 +2672,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="datum_upisa" Type="DateTime" />
           <NavigationProperty Name="Korisnik" Relationship="TYQcLL35gVModel.idStudentFK5" FromRole="predmet_student" ToRole="Korisnik" />
           <NavigationProperty Name="Predmet" Relationship="TYQcLL35gVModel.idPredmetFK4" FromRole="predmet_student" ToRole="Predmet" />
+
         </EntityType>
         <EntityType Name="Privilegija">
           <Key>
@@ -2650,6 +2680,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           </Key>
           <Property Name="idPrivilegija" Type="Int32" Nullable="false" />
           <Property Name="privilegija1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+
           <NavigationProperty Name="uloga_privilegija" Relationship="TYQcLL35gVModel.idPrivilegija" FromRole="Privilegija" ToRole="uloga_privilegija" />
         </EntityType>
         <EntityType Name="Projekat">
@@ -2765,6 +2796,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="idTipoviMaterijala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="naziv" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Materijals" Relationship="TYQcLL35gVModel.idTipoviMaterijala" FromRole="TipoviMaterijala" ToRole="Materijal" />
+
         </EntityType>
         <EntityType Name="Uloga">
           <Key>
@@ -2774,6 +2806,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="naziv" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Korisniks" Relationship="TYQcLL35gVModel.FK2yfvolihodnqf57g9oksumrs0" FromRole="Uloga" ToRole="Korisnik" />
           <NavigationProperty Name="Korisniks1" Relationship="TYQcLL35gVModel.idUloga1" FromRole="Uloga" ToRole="Korisnik" />
+
           <NavigationProperty Name="uloga_privilegija" Relationship="TYQcLL35gVModel.idUloga" FromRole="Uloga" ToRole="uloga_privilegija" />
         </EntityType>
         <EntityType Name="uloga_v2">
@@ -2861,6 +2894,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <Property Name="bodovi" Type="Int32" />
           <NavigationProperty Name="Ispit" Relationship="TYQcLL35gVModel.idIspitFK" FromRole="ispiti_rezultati" ToRole="Ispit" />
           <NavigationProperty Name="Korisnik" Relationship="TYQcLL35gVModel.idStudentFK7" FromRole="ispiti_rezultati" ToRole="Korisnik" />
+
         </EntityType>
         <EntityType Name="odsjek_predmet">
           <Key>
@@ -2875,6 +2909,10 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <NavigationProperty Name="Odsjek" Relationship="TYQcLL35gVModel.idOdsjekFK3" FromRole="odsjek_predmet" ToRole="Odsjek" />
           <NavigationProperty Name="Predmet" Relationship="TYQcLL35gVModel.idPredmetFK3" FromRole="odsjek_predmet" ToRole="Predmet" />
         </EntityType>
+        <Association Name="FK2yfvolihodnqf57g9oksumrs0">
+          <End Type="TYQcLL35gVModel.Uloga" Role="Uloga" Multiplicity="0..1" />
+          <End Type="TYQcLL35gVModel.Korisnik" Role="Korisnik" Multiplicity="*" />
+
         <EntityType Name="uloga_privilegija">
           <Key>
             <PropertyRef Name="idUloga" />
@@ -3747,52 +3785,78 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <OnDelete Action="Cascade" />
           </End>
           <End Type="TYQcLL35gVModel.ProjektniZadatak" Role="ProjektniZadatak" Multiplicity="*" />
+
           <ReferentialConstraint>
-            <Principal Role="Projekat">
-              <PropertyRef Name="idProjekat" />
+            <Principal Role="Uloga">
+              <PropertyRef Name="idUloga" />
             </Principal>
-            <Dependent Role="ProjektniZadatak">
-              <PropertyRef Name="idProjekta" />
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="idUloga" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="idPZFK2">
-          <End Type="TYQcLL35gVModel.ProjektniZadatak" Role="ProjektniZadatak" Multiplicity="1">
+        <Association Name="idAsistentFK">
+          <End Type="TYQcLL35gVModel.Korisnik" Role="Korisnik" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="TYQcLL35gVModel.ProjektniFile" Role="ProjektniFile" Multiplicity="*" />
+          <End Type="TYQcLL35gVModel.Predmet" Role="Predmet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProjektniZadatak">
-              <PropertyRef Name="idProjektnogZadatka" />
-            </Principal>
-            <Dependent Role="ProjektniFile">
-              <PropertyRef Name="idProjektniZadatak" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="idThemeFK">
-          <End Type="TYQcLL35gVModel.Theme" Role="Theme" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TYQcLL35gVModel.Sticky" Role="Sticky" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Theme">
-              <PropertyRef Name="idTheme" />
-            </Principal>
-            <Dependent Role="Sticky">
-              <PropertyRef Name="idTheme" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="idSvrhe">
-          <End Type="TYQcLL35gVModel.SvrhaPotvrde" Role="SvrhaPotvrde" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TYQcLL35gVModel.ZahtjevZaPotvrdu" Role="ZahtjevZaPotvrdu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SvrhaPotvrde">
+            <Principal Role="Korisnik">
               <PropertyRef Name="id" />
             </Principal>
+            <Dependent Role="Predmet">
+              <PropertyRef Name="idAsistent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idOdsjekFK">
+          <End Type="TYQcLL35gVModel.Odsjek" Role="Odsjek" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TYQcLL35gVModel.Korisnik" Role="Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Odsjek">
+              <PropertyRef Name="idOdsjek" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="idOdsjek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idProfesorFK">
+          <End Type="TYQcLL35gVModel.Korisnik" Role="Korisnik" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TYQcLL35gVModel.Predmet" Role="Predmet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Predmet">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idUloga1">
+          <End Type="TYQcLL35gVModel.Uloga" Role="Uloga" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TYQcLL35gVModel.Korisnik" Role="Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloga">
+              <PropertyRef Name="idUloga" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="idUloga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idOdsjekFK3">
+          <End Type="TYQcLL35gVModel.Odsjek" Role="Odsjek" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TYQcLL35gVModel.odsjek_predmet" Role="odsjek_predmet" Multiplicity="*" />
+
             <Dependent Role="ZahtjevZaPotvrdu">
               <PropertyRef Name="idSvrhe" />
             </Dependent>
@@ -3803,26 +3867,30 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
             <OnDelete Action="Cascade" />
           </End>
           <End Type="TYQcLL35gVModel.uloga_privilegija" Role="uloga_privilegija" Multiplicity="*" />
+
           <ReferentialConstraint>
-            <Principal Role="Uloga">
-              <PropertyRef Name="idUloga" />
+            <Principal Role="Odsjek">
+              <PropertyRef Name="idOdsjek" />
             </Principal>
-            <Dependent Role="uloga_privilegija">
-              <PropertyRef Name="idUloga" />
+            <Dependent Role="odsjek_predmet">
+              <PropertyRef Name="idOdsjek" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="idPredmetFK3">
+          <End Type="TYQcLL35gVModel.Predmet" Role="Predmet" Multiplicity="1">
         <Association Name="Zadatak_ibfk_1">
           <End Type="TYQcLL35gVModel.Zadaca" Role="Zadaca" Multiplicity="0..1">
+
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="TYQcLL35gVModel.Zadatak" Role="Zadatak" Multiplicity="*" />
+          <End Type="TYQcLL35gVModel.odsjek_predmet" Role="odsjek_predmet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Zadaca">
-              <PropertyRef Name="idZadaca" />
+            <Principal Role="Predmet">
+              <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Zadatak">
-              <PropertyRef Name="idZadaca" />
+            <Dependent Role="odsjek_predmet">
+              <PropertyRef Name="idPredmet" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3834,11 +3902,14 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
           <End Type="TYQcLL35gVModel.ClanGrupe" Role="ClanGrupe" Multiplicity="*" />
           <End Type="TYQcLL35gVModel.ProjektniZadatak" Role="ProjektniZadatak" Multiplicity="*" />
         </Association>
+
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TYQcLL35gVModelStoreContainer" CdmEntityContainer="TYQcLL35gVEntities1">
+
         <EntityContainerMapping StorageEntityContainer="TYQcLL35gVModelStoreContainer" CdmEntityContainer="TYQcLL35gVEntities">
           <EntitySetMapping Name="Anketas">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.Anketa">
@@ -4014,6 +4085,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="Korisniks">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.Korisnik">
               <MappingFragment StoreEntitySet="Korisnik">
@@ -4045,6 +4117,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="Materijals">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.Materijal">
               <MappingFragment StoreEntitySet="Materijal">
@@ -4079,63 +4152,12 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="Odsjeks">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.Odsjek">
               <MappingFragment StoreEntitySet="Odsjek">
                 <ScalarProperty Name="naziv" ColumnName="naziv" />
                 <ScalarProperty Name="idOdsjek" ColumnName="idOdsjek" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pitanjes">
-            <EntityTypeMapping TypeName="TYQcLL35gVModel.Pitanje">
-              <MappingFragment StoreEntitySet="Pitanje">
-                <ScalarProperty Name="tekstPitanja" ColumnName="tekstPitanja" />
-                <ScalarProperty Name="vrstaPitanja" ColumnName="vrstaPitanja" />
-                <ScalarProperty Name="idAnketa" ColumnName="idAnketa" />
-                <ScalarProperty Name="idPitanja" ColumnName="idPitanja" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PonudjeniOdgovors">
-            <EntityTypeMapping TypeName="TYQcLL35gVModel.PonudjeniOdgovor">
-              <MappingFragment StoreEntitySet="PonudjeniOdgovor">
-                <ScalarProperty Name="tekstOdgovora" ColumnName="tekstOdgovora" />
-                <ScalarProperty Name="idPitanja" ColumnName="idPitanja" />
-                <ScalarProperty Name="idPonudjeniOdgovor" ColumnName="idPonudjeniOdgovor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PopunjenaAnketas">
-            <EntityTypeMapping TypeName="TYQcLL35gVModel.PopunjenaAnketa">
-              <MappingFragment StoreEntitySet="PopunjenaAnketa">
-                <ScalarProperty Name="vrijemePopunjavanja" ColumnName="vrijemePopunjavanja" />
-                <ScalarProperty Name="idPopunio" ColumnName="idPopunio" />
-                <ScalarProperty Name="idAnketa" ColumnName="idAnketa" />
-                <ScalarProperty Name="idPopunjenaAnketa" ColumnName="idPopunjenaAnketa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Porukas">
-            <EntityTypeMapping TypeName="TYQcLL35gVModel.Poruka">
-              <MappingFragment StoreEntitySet="Poruka">
-                <ScalarProperty Name="file" ColumnName="file" />
-                <ScalarProperty Name="sadrzajPoruke" ColumnName="sadrzajPoruke" />
-                <ScalarProperty Name="idGrupa" ColumnName="idGrupa" />
-                <ScalarProperty Name="idPrimaoc" ColumnName="idPrimaoc" />
-                <ScalarProperty Name="idPosiljaoc" ColumnName="idPosiljaoc" />
-                <ScalarProperty Name="idPoruka" ColumnName="idPoruka" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pozicijas">
-            <EntityTypeMapping TypeName="TYQcLL35gVModel.Pozicija">
-              <MappingFragment StoreEntitySet="Pozicija">
-                <ScalarProperty Name="y2" ColumnName="y2" />
-                <ScalarProperty Name="y1" ColumnName="y1" />
-                <ScalarProperty Name="x2" ColumnName="x2" />
-                <ScalarProperty Name="x1" ColumnName="x1" />
-                <ScalarProperty Name="idPozicija" ColumnName="idPozicija" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4150,6 +4172,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
                 <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
                 <ScalarProperty Name="idAsistent" ColumnName="idAsistent" />
                 <ScalarProperty Name="id" ColumnName="id" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4161,6 +4184,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
                 <ScalarProperty Name="idPredmet" ColumnName="idPredmet" />
                 <ScalarProperty Name="idStudent" ColumnName="idStudent" />
                 <ScalarProperty Name="id" ColumnName="id" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4172,6 +4196,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="Projekats">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.Projekat">
               <MappingFragment StoreEntitySet="Projekat">
@@ -4273,6 +4298,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="Ulogas">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.Uloga">
               <MappingFragment StoreEntitySet="Uloga">
@@ -4281,6 +4307,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="uloga_v2">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.uloga_v2">
               <MappingFragment StoreEntitySet="uloga_v2">
@@ -4363,6 +4390,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="odsjek_predmet">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.odsjek_predmet">
               <MappingFragment StoreEntitySet="odsjek_predmet">
@@ -4374,6 +4402,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="uloga_privilegija">
             <EntityTypeMapping TypeName="TYQcLL35gVModel.uloga_privilegija">
               <MappingFragment StoreEntitySet="uloga_privilegija">
@@ -4400,6 +4429,7 @@ FROM `uloga_privilegija` AS `uloga_privilegija`</DefiningQuery>
               <ScalarProperty Name="idClanGrupe" ColumnName="idClanGrupe" />
             </EndProperty>
           </AssociationSetMapping>
+
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -7,5 +7,6 @@ using Administracija.Contracts;
 namespace Administracija.DAL.Interfaces {
     public interface IKorisnikRepository {
         LoginDataDto GenerateLoginData(string ime, string prezime);
+        void AddNewStudent(KorisnikDto student);
     }
 }
