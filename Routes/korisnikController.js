@@ -7,7 +7,7 @@ var md5 = require('md5');
 const db = require('../models/db.js');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
-//var validacija = require('./validacija.js');
+var validacija = require('./validacija.js')();
 
 //generisanje username-a i passworda za profesora
 korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
@@ -39,23 +39,43 @@ korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
 })
 
 //dodavanje profesora u bazu
-korisnikRouter.post('/AddNewProfessor',function(req,res) {
+korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     let body = req.body;
-    if(!body.spol || !body.ime || !body.prezime) {
-        res.status(400).end("Neispravan foramt");
-    }
-
-    db.Odsjek.findOne({where:{naziv:body.idOdsjek}}).then(odsjek =>{
+    await db.Odsjek.findOne({where:{naziv:body.idOdsjek}}).then(odsjek =>{
         body.idOdsjek = odsjek.idOdsjek;
         console.log('Odjsek'+odsjek.idOdsjek);
     })
-    var parts = body.datumRodjenja.split('-');
-    var date = new Date(parts[0], parts[1] - 1, parts[2]); 
     
+  
+    date = body.datumRodjenja.substring(0,10);
     body.datumRodjenja = date;
+    console.log('datum :'+date);
     console.log(body);
+
+
+    //validacija
+   await db.Korisnik.findOne({where:{JMBG:body.JMBG}}).then(prof => {
+    if(prof != null) {
+        console.log('profa'+prof);
+        return res.status(400).end('Postoji korisnik sa istim JMBG!');
+    }   
+})
+
+    var provjera = await validacijaPodataka(body);    
+    console.log(provjera);
+    var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
+    console.log(dr);
+    var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
+    console.log(dj);
+    if(provjera != 'Ok') return res.status(400).end('Greska:'+provjera);
+    else if(!dr) return res.status(400).end('Neispravan datum rodjenja!');
+    else if(!dj) return res.status(400).end('JMBG i datum rodjenja se ne poklapaju');
+     
+
+
+
     var ajax = new XMLHttpRequest();
-    ajax.onreadystatechange = function() {
+    ajax.onreadystatechange = async function() {
         if(ajax.readyState == 4 && ajax.status == 200) {
             var data = JSON.parse(ajax.responseText);
             console.log(data);
@@ -64,14 +84,12 @@ korisnikRouter.post('/AddNewProfessor',function(req,res) {
             else if(body.spol.toLowerCase() == 'zensko' || body.spol.toLowerCase() == 'žensko')
                 body.spol = 0;
 
-            body.JMBG = body.jmbg;
             body.idUloga = 3;
             body.username = data.username;
             body.password = md5(data.password);
-            body.indeks = null;
-            db.Korisnik.create(body);   
+            await db.Korisnik.create(body);   
             console.log("tu");   
-            res.end("Uspješno dodan korisnik " + body.username);
+           return res.end("Uspješno dodan korisnik " + body.username);
           
         }
     }
