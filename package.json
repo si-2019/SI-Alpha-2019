@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t Odsjek,Predmet"
   },
   "repository": {
     "type": "git",
