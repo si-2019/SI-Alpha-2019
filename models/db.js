@@ -13,5 +13,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Korisnik = sequelize.import(__dirname + '/Korisnik.js');
+db.Odsjek = sequelize.import(__dirname + '/Odsjek.js');
 
 module.exports = db;
