@@ -7,7 +7,7 @@ var md5 = require('md5');
 const db = require('../models/db.js');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
-var validacija = require('./validacija.js')();
+require('./validacija.js')();
 
 //generisanje username-a i passworda za profesora
 korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
@@ -97,4 +97,34 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
 });
+
+//brisanje predmeta po nazivu
+korisnikRouter.delete('/deleteSubject', function(req,res) {
+    console.log(req.query.naziv);
+    //provjerit imal u bazi sa tim imenom (jedan unutar drugog)
+    db.Predmet.findAll({where: {naziv: req.query.naziv}}).then( predmet => {
+        console.log(predmet);
+        res.contentType('application/json');
+        if(predmet != []) {
+        db.Predmet.destroy({where: {naziv: req.query.naziv}}).then( function(rowDeleted){
+            if(rowDeleted == 1) {
+                console.log('Uspjesno obrisano');
+                res.send({message: 'Uspjesno obrisan predmet'})
+            }
+            else {
+            
+            res.status(400).send({message: 'Ne postoji predmet sa tim nazivom'})
+            }
+        }, function(err) {
+            console.log(err);
+        })
+        } 
+        else {
+            res.contentType('application/json');
+            res.status(400).send('Ne postoji predmet sa tim nazivom')
+        }
+    })
+   
+})
+
 module.exports = korisnikRouter;
