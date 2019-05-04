@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./Tests --exit",
     "baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t Predmet"
   },
   "repository": {
@@ -19,12 +19,16 @@
   "homepage": "https://github.com/si-2019/SI-Alpha-2019#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "generate-password": "^1.4.1",
     "md5": "^2.2.1",
+    "mocha": "^6.1.4",
     "mysql2": "^1.6.5",
     "sequelize": "^5.8.1",
+    "sequelize-mock": "^0.10.2",
     "xmlhttprequest": "^1.8.0"
   }
 }
