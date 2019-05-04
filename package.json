@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./Tests",
-	"test-addNewStudent": "mocha ./Tests/addNewStudentTest"
+    "test": "mocha ./Tests"
   },
   "repository": {
     "type": "git",
