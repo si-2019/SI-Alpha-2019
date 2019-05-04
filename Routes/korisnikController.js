@@ -10,11 +10,13 @@ db.sequelize.sync();
 var validacija = require('./validacija.js')();
 
 //generisanje username-a i passworda za profesora
+// link: http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=Nemanja&prezime=Nemanjovic
 korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
     var ime = req.query.ime;
     var prezime = req.query.prezime;
     res.contentType('application/json');  
-    if(!ime || !prezime) res.status(400).end('Unesite ime/prezime')
+    if(!ime || !prezime) res.status(400).send({message: 'Unesite ime/prezime'});
+         
   
     var userName = ime + '.'+ prezime;
     userName = userName.toLowerCase();
@@ -28,7 +30,7 @@ korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
         length: 8,
         numbers: true
         });
-        res.end(JSON.stringify({
+        res.status(200).send(JSON.stringify({
             username: userName,
             password: password
         }));                
@@ -36,13 +38,37 @@ korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
     })
     .catch(err => {
         console.log("GRESKA: " + err);
-        res.end(err);
+        res.send(err);
     });
 })
 
 //dodavanje profesora u bazu
+// link http://localhost:31901/api/korisnik/AddNewProfessor
+/* test za postmana
+idOdsjek:RI
+idUloga:2
+ime:Melkom
+prezime:Avti
+datumRodjenja:1993-04-05
+JMBG:0504993175070
+email:h@gm.com
+mjestoRodjenja:Travnik
+kanton:SBK
+drzavljanstvo:BiH
+telefon:062/033-033
+spol:musko
+imePrezimeMajke:Fatima Aktic
+imePrezimeOca: Meho Amsovic
+adresa:Gornji Hrast
+username:null
+password:null
+linkedin:prof.com
+website:prof_muha.com
+titula:red*/
 korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     let body = req.body;
+    res.contentType('application/json');
+
     await db.Odsjek.findOne({where:{naziv:body.idOdsjek}}).then(odsjek =>{
         body.idOdsjek = odsjek.idOdsjek;
         console.log('Odjsek'+odsjek.idOdsjek);
@@ -59,19 +85,22 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
    await db.Korisnik.findOne({where:{JMBG:body.JMBG}}).then(prof => {
     if(prof != null) {
         console.log('profa'+prof);
-        return res.status(400).end('Postoji korisnik sa istim JMBG!');
+        return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
     }   
 })
 
+    var duzine = await validacijaStringova(req.body);
+    console.log(duzine);
     var provjera = await validacijaPodataka(body);    
     console.log(provjera);
     var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
     console.log(dr);
     var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
     console.log(dj);
-    if(provjera != 'Ok') return res.status(400).end('Greska:'+provjera);
-    else if(!dr) return res.status(400).end('Neispravan datum rodjenja!');
-    else if(!dj) return res.status(400).end('JMBG i datum rodjenja se ne poklapaju');
+    if(duzine != 'Ok') return res.status(400).send({message: duzine});
+    else if(provjera != 'Ok') return res.status(400).send({message: 'Greska:'+provjera});
+    else if(!dr) return res.status(400).send({message: 'Neispravan datum rodjenja!'});
+    else if(!dj) return res.status(400).send({message: 'JMBG i datum rodjenja se ne poklapaju'});
      
 
 
@@ -91,7 +120,7 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
             body.password = md5(data.password);
             await db.Korisnik.create(body);   
             console.log("tu");   
-           return res.end("Uspješno dodan korisnik " + body.username);
+           return res.status(200).send({message: "Uspješno dodan korisnik " + body.username});
           
         }
     }
