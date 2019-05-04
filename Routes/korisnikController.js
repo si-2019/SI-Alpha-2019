@@ -48,6 +48,7 @@ global.JsonNiz = async function(korisnici,res) {
 }
 
 //pretraga profesora 
+// link: http://localhost:31901/api/korisnik/searchProfessor?ime=Amer
 korisnikRouter.get('/searchProfessor', function(req,res){
     console.log(req.query);
     res.contentType('application/json');
