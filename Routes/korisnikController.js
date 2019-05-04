@@ -9,48 +9,52 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
 const Op = db.Sequelize.Op;
 
-korisnikRouter.get('/GetLoginData',function(req,res){
+korisnikRouter.get('/GetLoginData',function(req,res) {
     var ime = req.query.ime;
     var prezime = req.query.prezime;
-    res.contentType('application/json');   
-    var userName = ime[0] + prezime;
-    userName = userName.toLowerCase();
-    console.log(userName);
-    db.Korisnik.findAll({
-        where:{
-            username: {
-                [Op.like]: `${userName}%`
-            }
-        },
-        attributes:['username']
-        
-    })
-    .then(data => {
-        var brojDuplikata = data.length;
-        console.log(brojDuplikata);
-        userName += ++brojDuplikata;
-        var password = generator.generate({
-        length: 8,
-        numbers: true
-        });
+    res.contentType('application/json');  
 
-        db.Korisnik.max('indeks')
-            .then(data => {
-                var indeks = parseInt(data) + 1;
-                res.end(JSON.stringify({
-                    username: userName,
-                    password: password,
-                    indeks: indeks
-                }));
-            })
-            .catch(err => {
-                res.end(err);
-            });        
-    })
-    .catch(err => {
-        console.log("GRESKA: " + err);
-        res.end(err);
-    });
+    if(!ime || !prezime) {
+        res.status(400).end(JSON.stringify({message: "Unesite ime/prezime"}));
+    }
+    else {     
+        var userName = ime[0] + prezime;
+        userName = userName.toLowerCase();
+        db.Korisnik.findAll({
+            where:{
+                username: {
+                    [Op.like]: `${userName}%`
+                }
+            },
+            attributes:['username']
+            
+        })
+        .then(data => {
+            var brojDuplikata = data.length;
+            userName += ++brojDuplikata;
+            var password = generator.generate({
+            length: 8,
+            numbers: true
+            });
+        
+            db.Korisnik.max('indeks')
+                .then(data => {
+                    var indeks = parseInt(data) + 1;
+                    res.end(JSON.stringify({
+                        username: userName,
+                        password: password,
+                        indeks: indeks
+                    }));
+                })
+                .catch(err => {
+                    res.end(err);
+                });        
+        })
+        .catch(err => {
+            console.log("GRESKA: " + err);
+            res.end(err);
+        });
+    }
 })
 
 korisnikRouter.post('/AddNewStudent',function(req,res) {
