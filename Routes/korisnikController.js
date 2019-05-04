@@ -50,7 +50,6 @@ global.JsonNiz = async function(korisnici,res) {
 //pretraga profesora 
 // link: http://localhost:31901/api/korisnik/searchProfessor?ime=Amer
 korisnikRouter.get('/searchProfessor', function(req,res){
-    console.log(req.query);
     res.contentType('application/json');
     if(req.query.ime != null && req.query.ime != '' && req.query.prezime != null && req.query.prezime != '') { // ime i prezime
         db.Korisnik.findAll({where: {idUloga: 3, ime: req.query.ime, prezime: req.query.prezime}}).then( korisnici => {
