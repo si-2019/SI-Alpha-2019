@@ -13,7 +13,9 @@ var validacija = require('./validacija.js')();
 korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
     var ime = req.query.ime;
     var prezime = req.query.prezime;
-    res.contentType('application/json');   
+    res.contentType('application/json');  
+    if(!ime || !prezime) res.status(400).end('Unesite ime/prezime')
+  
     var userName = ime + '.'+ prezime;
     userName = userName.toLowerCase();
     console.log(userName);
