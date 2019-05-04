@@ -58,30 +58,31 @@ korisnikRouter.post('/AddNewStudent',function(req,res) {
     if(!body.spol || !body.ime || !body.prezime) {
         res.status(400).end("Neispravan foramt");
     }
-    console.log(body);
-    var ajax = new XMLHttpRequest();
-    ajax.onreadystatechange = function() {
-        if(ajax.readyState == 4 && ajax.status == 200) {
-            var data = JSON.parse(ajax.responseText);
-            console.log(data);
-            if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
-                body.spol = 1;            
-            else if(body.spol.toLowerCase() == 'zensko' || body.spol.toLowerCase() == 'žensko')
-                body.spol = 0;
+    else{
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = function() {
+            if(ajax.readyState == 4 && ajax.status == 200) {
+                var data = JSON.parse(ajax.responseText);
+                console.log(data);
+                if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
+                    body.spol = 1;            
+                else 
+	    			body.spol = 0;
 
-            body.JMBG = body.jmbg;
-            body.idUloga = 1;
-            body.username = data.username;
-            body.password = md5(data.password);
-            body.indeks = data.indeks;
-            db.Korisnik.create(body);      
-            res.end("Uspješno dodan korisnik " + body.username);
-          
+                body.JMBG = body.jmbg;
+                body.idUloga = 1;
+                body.username = data.username;
+                body.password = md5(data.password);
+                body.indeks = data.indeks;
+                db.Korisnik.create(body);      
+                res.end("Uspješno dodan korisnik " + body.username);
+            
+            }
         }
+        ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
+        ajax.setRequestHeader('Content-Type','application/json');
+        ajax.send();  
     }
-    ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
-    ajax.setRequestHeader('Content-Type','application/json');
-    ajax.send();  
 });
 
 module.exports = korisnikRouter;
