@@ -68,11 +68,11 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
     body.mjestoRodjenja = body.mjesto;
 
     // Validacija
-    await db.Korisnik.findOne({where:{JMBG: body.jmbg}}).then(korisnik => {
-        if(korisnik != null) {
-            return res.status(400).end('Postoji korisnik sa istim JMBG!');
-        }   
-    })
+    // await db.Korisnik.findOne({where:{JMBG: body.jmbg}}).then(korisnik => {
+    //     if(korisnik != null) {
+    //         return res.status(400).end('Postoji korisnik sa istim JMBG!');
+    //     }   
+    // })
 
     var provjera = await validacijaPodataka(body);    
     console.log(provjera);
@@ -91,7 +91,7 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
                 body.spol = 1;            
             else 
 				body.spol = 0;
-
+            body.semestar = 1;
             body.JMBG = body.jmbg;
             body.datumRodjenja = body.datum;
             body.idUloga = 1;
