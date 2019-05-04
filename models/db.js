@@ -13,5 +13,13 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Korisnik = sequelize.import(__dirname + '/Korisnik.js');
+db.Odsjek = sequelize.import(__dirname + '/Odsjek.js');
+db.Predmet = sequelize.import(__dirname + '/Predmet.js');
+
+
+db.Odsjek.hasMany(db.Korisnik, {as : 'OdsjekKorisnik', foreignKey : 'idOdsjek'});
+db.Korisnik.hasMany(db.Predmet, {as : 'PredmetProfesor', foreignKey : 'idProfesor'});
+db.Korisnik.hasMany(db.Predmet, {as : 'PredmetAsistent', foreignKey : 'idAsistent'});
+
 
 module.exports = db;
