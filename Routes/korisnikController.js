@@ -11,6 +11,7 @@ db.sequelize.sync();
 
 //editovanje podataka za profesora
 //http://localhost:31901/api/korisnik/editProfessor
+// body x-www-form-urlencoded
 korisnikRouter.put('/editProfessor', async function(req,res) {
     res.contentType('application/json');
     var podaci =  req.body;
