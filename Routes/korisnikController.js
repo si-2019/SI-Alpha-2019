@@ -9,6 +9,8 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
 const Op = db.Sequelize.Op;
 
+var validacija = require('./validacija.js')();
+
 korisnikRouter.get('/GetLoginData',function(req,res) {
     var ime = req.query.ime;
     var prezime = req.query.prezime;
@@ -57,36 +59,53 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
     }
 })
 
-korisnikRouter.post('/AddNewStudent',function(req,res) {
+korisnikRouter.post('/AddNewStudent', async function(req,res) {
     let body = req.body;
-    if(!body.spol || !body.ime || !body.prezime) {
-        res.status(400).end("Neispravan foramt");
-    }
-    else{
-        var ajax = new XMLHttpRequest();
-        ajax.onreadystatechange = function() {
-            if(ajax.readyState == 4 && ajax.status == 200) {
-                var data = JSON.parse(ajax.responseText);
-                console.log(data);
-                if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
-                    body.spol = 1;            
-                else 
-	    			body.spol = 0;
 
-                body.JMBG = body.jmbg;
-                body.idUloga = 1;
-                body.username = data.username;
-                body.password = md5(data.password);
-                body.indeks = data.indeks;
-                db.Korisnik.create(body);      
-                res.end("Uspješno dodan korisnik " + body.username);
-            
-            }
+    // Prilagodjavanje imenovanja
+    body.datumRodjenja = body.datum;
+    body.JMBG = body.jmbg;
+    body.mjestoRodjenja = body.mjesto;
+
+    // Validacija
+    // await db.Korisnik.findOne({where:{JMBG: body.jmbg}}).then(korisnik => {
+    //     if(korisnik != null) {
+    //         return res.status(400).end('Postoji korisnik sa istim JMBG!');
+    //     }   
+    // })
+
+    var provjera = await validacijaPodataka(body);    
+    console.log(provjera);
+    var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
+    var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
+    if(provjera != 'Ok') return res.status(400).end('Greska: '+provjera);
+    else if(!dr) return res.status(400).end('Neispravan datum rodjenja!');
+    else if(!dj) return res.status(400).end('JMBG i datum rodjenja se ne poklapaju');
+    
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function() {
+        if(ajax.readyState == 4 && ajax.status == 200) {
+            var data = JSON.parse(ajax.responseText);
+            console.log(data);
+            if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
+                body.spol = 1;            
+            else 
+				body.spol = 0;
+            body.semestar = 1;
+            body.JMBG = body.jmbg;
+            body.datumRodjenja = body.datum;
+            body.idUloga = 1;
+            body.username = data.username;
+            body.password = md5(data.password);
+            body.indeks = data.indeks;
+            db.Korisnik.create(body);      
+            res.end("Uspješno dodan korisnik " + body.username);        
         }
-        ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
-        ajax.setRequestHeader('Content-Type','application/json');
-        ajax.send();  
     }
+    ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
+    ajax.setRequestHeader('Content-Type','application/json');
+    ajax.send();  
+    
 });
 
 module.exports = korisnikRouter;

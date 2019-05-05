@@ -32,15 +32,15 @@ module.exports = function(){
         return false;
     },
     validacijaPodataka = function(body) {
-        console.log('jel sta null'+body.email+body.mjestoRodjenja+body.drzavljanstvo+body.telefon+body.imePrezimeMajke+body.imePrezimeOca+body.adresa+body.titula);
+        // console.log('jel sta null'+body.email+body.mjestoRodjenja+body.drzavljanstvo+body.telefon+body.imePrezimeMajke+body.imePrezimeOca+body.adresa+body.titula);
         var regexJMBG = /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$/m;
         var validno = regexJMBG.test(body.JMBG);
         if(validno == false) return 'Format JMBG nije dobar!';
         else if(!body.ime) return 'Niste unijeli ime!';
         else if(!body.prezime) return 'Niste unijeli prezime!';
-        else if( !body.email || !body.mjestoRodjenja || !body.drzavljanstvo || !body.telefon || !body.imePrezimeMajke || !body.imePrezimeOca || !body.adresa || !body.titula) return 'Popunite sva polja';
-        return 'Ok';
-            
+        else if(!body.spol || !body.email || !body.mjestoRodjenja || !body.drzavljanstvo || !body.telefon || !body.adresa) return 'Popunite sva polja';
+        else if(body.ime.length > 50 || body.prezime.length > 50 || body.email.length > 50 || body.mjestoRodjenja.length > 50 
+            || body.drzavljanstvo.length > 50 || body.adresa.length > 50) return 'Uneseni podaci su predugi';
+        return 'Ok';            
     }
-
 };
