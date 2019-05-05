@@ -63,9 +63,10 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
     let body = req.body;
 
     // Prilagodjavanje imenovanja
-   /* body.datumRodjenja = body.datum;
+
+    body.datumRodjenja = body.datum;
     body.JMBG = body.jmbg;
-    body.mjestoRodjenja = body.mjesto;*/
+    body.mjestoRodjenja = body.mjesto;
 
     // Validacija
     // await db.Korisnik.findOne({where:{JMBG: body.jmbg}}).then(korisnik => {
