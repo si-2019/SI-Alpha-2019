@@ -22,21 +22,23 @@ korisnikRouter.put('/editProfessor', async function(req,res) {
         }
         else {
              //validacija
-            await db.Korisnik.findOne({where:{JMBG:req.body.JMBG}}).then(prof => {
+             var duzine = await validacijaStringova(req.body);
+             console.log(duzine);
+             var provjera = await validacijaPodataka(req.body);    
+             console.log(provjera);
+             await db.Korisnik.findOne({where:{JMBG:req.body.JMBG}}).then(prof => {
                 if(prof != null && prof.username != req.body.username) {
                 console.log('profa'+prof);
                 return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
                 }   
             })
+             var dr = await validacijaDatumaRodjenja(req.body.datumRodjenja);    
+             console.log(dr);
+             var dj = await provjeriDatumJmbg(req.body.datumRodjenja, req.body.JMBG);    
+             console.log(dj);
+           
 
-            var duzine = await validacijaStringova(req.body);
-            console.log(duzine);
-            var provjera = await validacijaPodataka(req.body);    
-            console.log(provjera);
-            var dr = await validacijaDatumaRodjenja(req.body.datumRodjenja);    
-            console.log(dr);
-            var dj = await provjeriDatumJmbg(req.body.datumRodjenja, req.body.JMBG);    
-            console.log(dj);
+           
             if(duzine != 'Ok') return res.status(400).send({message: duzine});
             else if(provjera != 'Ok') return res.status(400).send({message :'Greska:'+provjera});
             else if(!dr) return res.status(400).send({message: 'Neispravan datum rodjenja!'});

@@ -27,3 +27,5 @@ db.sequelize.sync()
 app.listen(PORT, () => {
     console.log(`Rest-api service started on ${PORT} port!`);
 });
+
+module.exports = app;
