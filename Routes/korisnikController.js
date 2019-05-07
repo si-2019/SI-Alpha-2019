@@ -1,3 +1,4 @@
+"use strict";
 const express = require('express');
 const korisnikRouter = express.Router();
 
@@ -13,12 +14,12 @@ db.sequelize.sync();
 //http://localhost:31901/api/korisnik/editProfessor
 // body x-www-form-urlencoded
 korisnikRouter.put('/editProfessor', async function(req,res) {
-    res.contentType('application/json');
+    
     var podaci =  req.body;
-    res.contentType('application/json')
+    res.contentType('application/json');
     await db.Korisnik.findOne({where:{username: req.body.username}}).then( async function(prof) {
         if(!prof) {
-            res.status(400).send({message: 'Profesor se ne nalazi u bazi'});
+            return res.status(400).send({message: 'Profesor se ne nalazi u bazi'});
         }
         else {
              //validacija
@@ -26,12 +27,16 @@ korisnikRouter.put('/editProfessor', async function(req,res) {
              console.log(duzine);
              var provjera = await validacijaPodataka(req.body);    
              console.log(provjera);
-             await db.Korisnik.findOne({where:{JMBG:req.body.JMBG}}).then(prof => {
+             try{
+            await db.Korisnik.findOne({where:{JMBG:req.body.JMBG}}).then( prof => {
                 if(prof != null && prof.username != req.body.username) {
                 console.log('profa'+prof);
                 return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
                 }   
             })
+        }catch(err) {
+            console.error(err);
+        }
              var dr = await validacijaDatumaRodjenja(req.body.datumRodjenja);    
              console.log(dr);
              var dj = await provjeriDatumJmbg(req.body.datumRodjenja, req.body.JMBG);    
@@ -45,8 +50,8 @@ korisnikRouter.put('/editProfessor', async function(req,res) {
             else if(!dj) return res.status(400).send({message: 'JMBG i datum rodjenja se ne poklapaju'});
             else {
             //json kao u pretraga liste
-      
-            await db.Odsjek.findOne({where: {naziv: req.body.odsjek}}).then( async function(odsjek) {
+       try{
+            await db.Odsjek.findOne({where: {naziv: req.body.odsjek}}).then( function(odsjek) {
                 var json = {
                     idOdsjek: odsjek.idOdsjek, 
                     ime: podaci.ime, 
@@ -67,9 +72,13 @@ korisnikRouter.put('/editProfessor', async function(req,res) {
                     linkedin: podaci.linkedin,
                     website: podaci.website,
                     titula: podaci.titula};
-                await prof.update(json);
-                return res.status(200).send({message: 'Uspjesno azurirane informacije o profesoru'})
+                    prof.update(json);
+                    console.log('de pls');
+                    return res.status(200).send({message: 'Uspjesno azurirane informacije o profesoru'})
         })
+    }catch(err) {
+        console.error(err);
+    }
     }
     }
     })
