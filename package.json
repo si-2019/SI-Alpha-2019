@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",    
     "test": "mocha ./Tests --exit"
   },
   "repository": {
@@ -17,16 +18,24 @@
   },
   "homepage": "https://github.com/si-2019/SI-Alpha-2019#readme",
   "dependencies": {
+    "babel": "^6.23.0",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "generate-password": "^1.4.1",
+    "http": "0.0.0",
     "md5": "^2.2.1",
     "mocha": "^6.1.4",
     "mysql2": "^1.6.5",
+    "nodemon": "^1.19.0",
+    "request": "^2.88.0",
     "sequelize": "^5.8.1",
+    "supertest": "^4.0.2",
     "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3"
   }
 }

@@ -1,2 +1,6 @@
 # SI-Alpha-2019
-US : User Story 257: Administrator mora da ima mogućnost ažuriranje podataka o profesoru u bazi podataka <br/>
+<br/>
+Prelazak sa ASP.NET na node <br/>
+US: Administrator generiše username i password za profesora radi spašavanja u bazu podataka <br/>
+US: Administrator treba imati mogućnost dodavanja novog profesora u bazu podataka
+<br/>

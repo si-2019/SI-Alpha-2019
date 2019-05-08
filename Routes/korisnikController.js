@@ -1,88 +1,141 @@
-"use strict";
 const express = require('express');
 const korisnikRouter = express.Router();
 
 var generator = require('generate-password');
 var md5 = require('md5'); 
-require('./validacija.js')();
 
 const db = require('../models/db.js');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
+var validacija = require('./validacija.js')();
 
-//editovanje podataka za profesora
-//http://localhost:31901/api/korisnik/editProfessor
-// body x-www-form-urlencoded
-korisnikRouter.put('/editProfessor', async function(req,res) {
-    
-    var podaci =  req.body;
-    res.contentType('application/json');
-    await db.Korisnik.findOne({where:{username: req.body.username}}).then( async function(prof) {
-        if(!prof) {
-            return res.status(400).send({message: 'Profesor se ne nalazi u bazi'});
-        }
-        else {
-             //validacija
-             var duzine = await validacijaStringova(req.body);
-             console.log(duzine);
-             var provjera = await validacijaPodataka(req.body);    
-             console.log(provjera);
-             try{
-            await db.Korisnik.findOne({where:{JMBG:req.body.JMBG}}).then( prof => {
-                if(prof != null && prof.username != req.body.username) {
-                console.log('profa'+prof);
-                return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
-                }   
-            })
-        }catch(err) {
-            console.error(err);
-        }
-             var dr = await validacijaDatumaRodjenja(req.body.datumRodjenja);    
-             console.log(dr);
-             var dj = await provjeriDatumJmbg(req.body.datumRodjenja, req.body.JMBG);    
-             console.log(dj);
-           
+//generisanje username-a i passworda za profesora
+// link: http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=Nemanja&prezime=Nemanjovic
+korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
+    var ime = req.query.ime;
+    var prezime = req.query.prezime;
+    res.contentType('application/json');  
+    if(!ime || !prezime) res.status(400).send({message: 'Unesite ime/prezime'});
+         
+  
+    var userName = ime + '.'+ prezime;
+    userName = userName.toLowerCase();
+    console.log(userName);
 
-           
-            if(duzine != 'Ok') return res.status(400).send({message: duzine});
-            else if(provjera != 'Ok') return res.status(400).send({message :'Greska:'+provjera});
-            else if(!dr) return res.status(400).send({message: 'Neispravan datum rodjenja!'});
-            else if(!dj) return res.status(400).send({message: 'JMBG i datum rodjenja se ne poklapaju'});
-            else {
-            //json kao u pretraga liste
-       try{
-            await db.Odsjek.findOne({where: {naziv: req.body.odsjek}}).then( function(odsjek) {
-                var json = {
-                    idOdsjek: odsjek.idOdsjek, 
-                    ime: podaci.ime, 
-                    prezime: podaci.prezime, 
-                    datumRodjenja: podaci.datumRodjenja, 
-                    JMBG: podaci.JMBG, 
-                    email: podaci.email,
-                    mjestoRodjenja: podaci.mjestoRodjenja,
-                    kanton: podaci.kanton,
-                    drzavljanstvo: podaci.drzavljanstvo,
-                    telefon: podaci.telefon,
-                    spol: parseInt(podaci.spol),  //musko zensko
-                    imePrezimeMajke: podaci.imePrezimeMajke,
-                    imePrezimeOca: podaci.imePrezimeOca,
-                    adresa: podaci.adresa,
-                    username: podaci.username,
-                    //password:null
-                    linkedin: podaci.linkedin,
-                    website: podaci.website,
-                    titula: podaci.titula};
-                    prof.update(json);
-                    console.log('de pls');
-                    return res.status(200).send({message: 'Uspjesno azurirane informacije o profesoru'})
-        })
-    }catch(err) {
-        console.error(err);
-    }
-    }
-    }
+    db.Korisnik.findAll({where:{ime:ime,prezime:prezime}}).then(data => {
+        var brojDuplikata = data.length;
+        console.log(brojDuplikata);
+        userName += ++brojDuplikata;
+        var password = generator.generate({
+        length: 8,
+        numbers: true
+        });
+        res.status(200).send(JSON.stringify({
+            username: userName,
+            password: password
+        }));                
+              
     })
+    .catch(err => {
+        console.log("GRESKA: " + err);
+        res.send(err);
+    });
 })
 
+//dodavanje profesora u bazu
+// link http://localhost:31901/api/korisnik/AddNewProfessor
+/* test za postmana
+idOdsjek:RI
+idUloga:2
+ime:Melkom
+prezime:Avti
+datumRodjenja:1993-04-05
+JMBG:0504993175070
+email:h@gm.com
+mjestoRodjenja:Travnik
+kanton:SBK
+drzavljanstvo:BiH
+telefon:062/033-033
+spol:musko
+imePrezimeMajke:Fatima Aktic
+imePrezimeOca: Meho Amsovic
+adresa:Gornji Hrast
+username:null
+password:null
+linkedin:prof.com
+website:prof_muha.com
+titula:red*/
+korisnikRouter.post('/AddNewProfessor', async function(req,res) {
+    let body = req.body;
+    res.setHeader('Content-Type','application/json');
+   // res.contentType('application/json');
+    try{
+    await db.Odsjek.findOne({where:{naziv:body.idOdsjek}}).then(odsjek =>{
+        console.log('Odjsek'+odsjek.idOdsjek);
+        return body.idOdsjek = odsjek.idOdsjek;
+       
+    })
+}catch (err) {
+    console.log(err);
+  }
+    
+  
+    date = body.datumRodjenja.substring(0,10);
+    body.datumRodjenja = date;
+    console.log('datum :'+date);
+    console.log(body);
 
+
+    //validacija
+    try{
+   await db.Korisnik.findOne({where:{JMBG:body.JMBG}}).then(prof => {
+    if(prof != null) {
+        console.log('profa'+prof);
+         res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
+         res.end();
+    }   
+})
+    }catch(err) {
+        console.log(err);
+    }
+
+    var duzine = await validacijaStringova(req.body);
+    console.log(duzine);
+    var provjera = await validacijaPodataka(body);    
+    console.log(provjera);
+    var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
+    console.log(dr);
+    var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
+    console.log(dj);
+    if(duzine != 'Ok') return res.status(400).send({message: duzine});
+    else if(provjera != 'Ok') return res.status(400).send({message: 'Greska:'+provjera});
+    else if(!dr) return res.status(400).send({message: 'Neispravan datum rodjenja!'});
+    else if(!dj) return res.status(400).send({message: 'JMBG i datum rodjenja se ne poklapaju'});
+     
+
+
+
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = async function() {
+        if(ajax.readyState == 4 && ajax.status == 200) {
+            var data = JSON.parse(ajax.responseText);
+            console.log(data);
+            if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
+                body.spol = 1;            
+            else if(body.spol.toLowerCase() == 'zensko' || body.spol.toLowerCase() == 'žensko')
+                body.spol = 0;
+
+            body.idUloga = 3;
+            body.username = data.username;
+            body.password = md5(data.password);
+            await db.Korisnik.create(body);   
+            console.log("tu");   
+           return res.status(200).send({message: "Uspješno dodan korisnik " + body.username});
+          
+        }
+    }
+    ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=' + body.ime + '&prezime=' + body.prezime, true);
+    ajax.setRequestHeader('Content-Type','application/json');
+    ajax.send();  
+});
 module.exports = korisnikRouter;
