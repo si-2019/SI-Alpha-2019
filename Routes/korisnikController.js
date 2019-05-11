@@ -67,17 +67,12 @@ website:prof_muha.com
 titula:red*/
 korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     let body = req.body;
-    res.setHeader('Content-Type','application/json');
-   // res.contentType('application/json');
-    try{
+    res.contentType('application/json');
+
     await db.Odsjek.findOne({where:{naziv:body.idOdsjek}}).then(odsjek =>{
+        body.idOdsjek = odsjek.idOdsjek;
         console.log('Odjsek'+odsjek.idOdsjek);
-        return body.idOdsjek = odsjek.idOdsjek;
-       
     })
-}catch (err) {
-    console.log(err);
-  }
     
   
     date = body.datumRodjenja.substring(0,10);
@@ -87,17 +82,12 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
 
 
     //validacija
-    try{
    await db.Korisnik.findOne({where:{JMBG:body.JMBG}}).then(prof => {
     if(prof != null) {
         console.log('profa'+prof);
-         res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
-         res.end();
+        return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
     }   
 })
-    }catch(err) {
-        console.log(err);
-    }
 
     var duzine = await validacijaStringova(req.body);
     console.log(duzine);
