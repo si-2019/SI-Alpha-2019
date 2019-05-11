@@ -17,7 +17,7 @@ describe('POST /linkProfessorSubject', () => {
         let prof = idevi.idProfesor;
         idevi.idProfesor = '6823790876235456172889320';
         chai.request(app)
-        .post('/api/korisnik/linkProfessorSubject')
+        .post('/api/povezivanje/linkProfessorSubject')
         .send(idevi)
         .end((err, res) => {
             res.should.have.status(400)
@@ -31,7 +31,7 @@ describe('POST /linkProfessorSubject', () => {
         let predmet = idevi.idPredmet;
         idevi.idPredmet = '90876543456789098765434567890';
         chai.request(app)
-        .post('/api/korisnik/linkProfessorSubject')
+        .post('/api/povezivanje/linkProfessorSubject')
         .send(idevi)
         .end((err, res) => {
             res.should.have.status(400)
@@ -45,7 +45,7 @@ describe('POST /linkProfessorSubject', () => {
         let prof = idevi.idProfesor;
         idevi.idProfesor = '0';
         chai.request(app)
-        .post('/api/korisnik/linkProfessorSubject')
+        .post('/api/povezivanje/linkProfessorSubject')
         .send(idevi)
         .end((err, res) => {
             res.should.have.status(400)
@@ -58,7 +58,7 @@ describe('POST /linkProfessorSubject', () => {
         let predmet = idevi.idPredmet;
         idevi.idPredmet = '0';
         chai.request(app)
-        .post('/api/korisnik/linkProfessorSubject')
+        .post('/api/povezivanje/linkProfessorSubject')
         .send(idevi)
         .end((err, res) => {
             res.should.have.status(400)
@@ -69,7 +69,7 @@ describe('POST /linkProfessorSubject', () => {
 
     it('Uspjesno povezan predmet-profesor', function(done) {
         chai.request(app)
-        .post('/api/korisnik/linkProfessorSubject')
+        .post('/api/povezivanje/linkProfessorSubject')
         .send(idevi)
         .end((err, res) => {
             res.should.have.status(200)

@@ -13,49 +13,6 @@ const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
 
-korisnikRouter.post('/linkProfessorSubject', function(req,res) {
-    var idPredmeta = req.body.idPredmet.toString();
-    var idProfesora = req.body.idProfesor.toString();
-    res.contentType('application/json');
-    
-    //hocel bit string sa frontenda
-    
-    if(idProfesora.length > 10) {
-        res.status(400).send({message: 'ID vezan za profesora ima više od 10 cifri'})
-    }
-    else if(idPredmeta.length > 10) {
-        res.status(400).send({message: 'ID vezan za predmet ima više od 10 cifri'})
-     
-    }
-    else {
-       
-
-
-    db.Korisnik.findOne({where: {id: idProfesora, idUloga:3}}).then( korisnik => {
-        if(korisnik == null) {
-            res.status(400).send({message: 'Profesor ne postoji'});
-        }
-        else {
-        db.Predmet.findOne({where: {id:idPredmeta}}).then( predmet => {
-            if(predmet == null) {
-                res.status(400).send({message: 'Predmet ne postoji'});
-            }
-            else {
-            predmet.update({idProfesor:idProfesora});
-            res.status(200).send({message: 'Uspjesno dodana veza predmet-profesor'});
-            }
-        })
-    }
-    })
-}
-    /*.catch(function(err){
-        res.status(400).end(JSON.stringify({message: "Nije se mogao naci"}));
-        });*/
-
-  
-})
-
-
 //brisanje predmeta po nazivu
 //link : http://localhost:31901/api/korisnik/deleteSubject?naziv=test Predmet za brisanje 4
 korisnikRouter.delete('/deleteSubject', function(req,res) {
