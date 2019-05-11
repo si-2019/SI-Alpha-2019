@@ -13,10 +13,24 @@ const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
 
-korisnikRouter.post('/connectProfessorSubject', function(req,res) {
+korisnikRouter.post('/linkProfessorSubject', function(req,res) {
     var idPredmeta = req.body.idPredmet;
     var idProfesora = req.body.idProfesor;
     res.contentType('application/json');
+    
+    //hocel bit string sa frontenda
+    
+    if(req.body.idProfesor.length > 10) {
+        res.status(400).send({message: 'ID vezan za profesora ima više od 10 cifri'})
+    }
+    else if(req.body.idPredmet.length > 10) {
+        res.status(400).send({message: 'ID vezan za predmet ima više od 10 cifri'})
+     
+    }
+    else {
+       
+
+
     db.Korisnik.findOne({where: {id: idProfesora, idUloga:3}}).then( korisnik => {
         if(korisnik == null) {
             res.status(400).send({message: 'Profesor ne postoji'});
@@ -33,6 +47,7 @@ korisnikRouter.post('/connectProfessorSubject', function(req,res) {
         })
     }
     })
+}
     /*.catch(function(err){
         res.status(400).end(JSON.stringify({message: "Nije se mogao naci"}));
         });*/
