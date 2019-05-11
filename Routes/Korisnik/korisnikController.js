@@ -31,6 +31,9 @@ korisnikRouter.get('/GetNewPassword',function(req,res){
                     password:password
                 })
                 res.status(200).send({password:pas});
+            }
+            else {
+                res.status(400).send({message: 'Ne postoji korisnik sa tim usernameom'})
             }  
         }) 
               
