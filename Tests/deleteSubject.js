@@ -9,7 +9,7 @@ chai.should();
 describe('DELETE /deleteSubject', () => {
     it('Treba vratiti status 400 sa porukom o gresci', function(done){
         chai.request(app)
-        .delete('/api/korisnik/deleteSubject')
+        .delete('/api/predmet/deleteSubject')
         .query({naziv: "IM1"})
         .end((err, res) => {
             res.should.have.status(400);
@@ -23,7 +23,7 @@ describe('DELETE /deleteSubject', () => {
     
     it('Treba vratit status 200 i poruku da je obrisan predmet iz baze', function(done) {
         chai.request(app)
-        .delete('/api/korisnik/deleteSubject')
+        .delete('/api/predmet/deleteSubject')
         .query({naziv: "test Predmet 4"})
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
