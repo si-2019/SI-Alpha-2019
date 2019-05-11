@@ -5,6 +5,7 @@ const db = require('../../models/db.js');
 db.sequelize.sync();
 
 odsjekRouter.get('/GetOdsjeci', function(req, res){
+	res.contentType('application/json');
 	console.log("Pretražuje bazu podataka");
 	db.Odsjek.findAll({
     })
