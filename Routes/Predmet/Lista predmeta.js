@@ -5,6 +5,7 @@ const db = require('../../models/db.js');
 db.sequelize.sync();
 
 predmetRouter.get('/GetPredmeti', function(req, res){
+	res.contentType('application/json');
 	console.log("Pretražuje bazu podataka");
 	db.Predmet.findAll({
     })
