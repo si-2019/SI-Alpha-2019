@@ -12,7 +12,7 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
-
+//link: http://localhost:31901/api/povezivanje/linkProfessorSubject
 povezivanjeRouter.post('/linkProfessorSubject', function(req,res) {
     var idPredmeta = req.body.idPredmet.toString();
     var idProfesora = req.body.idProfesor.toString();
