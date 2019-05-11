@@ -11,11 +11,13 @@ const Op = db.Sequelize.Op;
 asistentPredmetRouter.post('/linkAssistantSubject', function(req,res) {
     res.contentType('application/json');
     let body = req.body;
-
-    if(!body.idAsistent || (!body.idPredmet && !body.id)) {
+        if(!body.idAsistent || (!body.idPredmet && !body.id)) {
         return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
     }
     if(!body.id) body.id = body.idPredmet;
+
+    body.id = body.id.toString();
+    body.idAsistent = body.idAsistent.toString();
 
     let idParse = parseInt(body.id);
     let idAsistentParse = parseInt(body.idAsistent);
@@ -26,6 +28,7 @@ asistentPredmetRouter.post('/linkAssistantSubject', function(req,res) {
         return res.status(400).end(JSON.stringify({message: "Id su predugacki!"}));
     }
     
+
     let promiseList = [];
     let odsjek;
     let asistent;
