@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv'); 
+const fs = require('fs');
 dotenv.config();                   
 
 const app = express();
@@ -16,8 +17,16 @@ app.use('/*', (req, res, next) => {
     next();
 });
 
-const korisnikRouter = require('./Routes/korisnikController');
-app.use('/api/korisnik', korisnikRouter); 
+const Folder = './Routes/';
+
+fs.readdir(Folder, (err, files) => {
+  files.forEach(file => {
+	var Path = require("path").join(__dirname, Folder + file +"/");
+	require("fs").readdirSync(Path).forEach(function(file2) {
+		app.use('/api/' + file.toLowerCase(), require(Folder + file + "/" + file2));
+	});
+  });
+});
 
 const db = require ('./models/db.js');
 db.sequelize.sync()
