@@ -43,26 +43,6 @@ korisnikRouter.get('/GetNewPassword',function(req,res){
 })
 
 
-//brisanje predmeta po nazivu
-//link : http://localhost:31901/api/korisnik/deleteSubject?naziv=test Predmet za brisanje 4
-korisnikRouter.delete('/deleteSubject', function(req,res) {
-    db.Predmet.findAll({where: {naziv: req.query.naziv}}).then( predmet => {
-        res.contentType('application/json');
-        if(predmet != []) {
-        db.Predmet.destroy({where: {naziv: req.query.naziv}}).then( function(rowDeleted){
-            if(rowDeleted == 1) {
-                res.status(200).send({message: 'Uspjesno obrisan predmet'})
-            }
-            else {            
-            res.status(400).send({message: 'Ne postoji predmet sa tim nazivom'})
-            }
-        }, function(err) {
-            console.log(err);
-        })   
-    }
-   
-})
-})
 
 korisnikRouter.get('/GetLoginData',function(req,res) {
     var ime = req.query.ime;
@@ -161,7 +141,46 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
     
 });
 
+korisnikRouter.post('/AddNewAssistant', async function(req,res) {
+    let body = req.body;
 
+    // Prilagodjavanje imenovanja
+    if(!body.datumRodjenja) body.datumRodjenja = body.datum;
+    if(!body.JMBG) body.JMBG = body.jmbg;
+    if(!body.mjestoRodjenja) body.mjestoRodjenja = body.mjesto;
+
+    var provjera = await validacijaPodataka(body);    
+    console.log(provjera);
+    var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
+    var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
+    if(provjera != 'Ok') return res.status(400).end('Greska: '+provjera);
+    else if(!dr) return res.status(400).end('Neispravan datum rodjenja!');
+    else if(!dj) return res.status(400).end('JMBG i datum rodjenja se ne poklapaju');
+    
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function() {
+        if(ajax.readyState == 4 && ajax.status == 200) {
+            var data = JSON.parse(ajax.responseText);
+            console.log(data);
+            if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
+                body.spol = 1;            
+            else 
+				body.spol = 0;
+            body.JMBG = body.jmbg;
+            body.datumRodjenja = body.datum;
+            body.idUloga = 2;
+            body.username = data.username;
+            body.password = md5(data.password);
+            body.indeks = data.indeks;
+            db.Korisnik.create(body);      
+            res.end("Uspješno dodan korisnik " + body.username);        
+        }
+    }
+    ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
+    ajax.setRequestHeader('Content-Type','application/json');
+    ajax.send();  
+    
+});
 
 global.JsonNiz = async function(korisnici,res) {
   
@@ -169,6 +188,7 @@ global.JsonNiz = async function(korisnici,res) {
     for(var el in korisnici) {
        await db.Odsjek.findOne({where: {idOdsjek: korisnici[el].idOdsjek}}).then( odsjek => {
             var json = {
+                id: korisnici[el].id,
                 odsjek: odsjek.naziv, 
                 ime: korisnici[el].ime, 
                 prezime: korisnici[el].prezime, 
