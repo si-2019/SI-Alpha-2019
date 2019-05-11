@@ -139,6 +139,7 @@ global.JsonNiz = async function(korisnici,res) {
     for(var el in korisnici) {
        await db.Odsjek.findOne({where: {idOdsjek: korisnici[el].idOdsjek}}).then( odsjek => {
             var json = {
+                id: korisnici[el].id,
                 odsjek: odsjek.naziv, 
                 ime: korisnici[el].ime, 
                 prezime: korisnici[el].prezime, 
