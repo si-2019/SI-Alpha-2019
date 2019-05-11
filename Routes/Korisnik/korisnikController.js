@@ -12,6 +12,33 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+korisnikRouter.get('/GetNewPassword',function(req,res){
+    var userName = req.query.username;
+    res.contentType('application/json');  
+  
+        var password = generator.generate({
+        length: 8,
+        numbers: true
+        });
+        var pas = password;
+        password = md5(password);
+
+
+        db.Korisnik.findOne({where:{username:userName}}).then(korisnik => {
+            if(korisnik != null) {
+                //console.log('profa'+prof);
+                korisnik.update({
+                    password:password
+                })
+                res.status(200).send({password:pas});
+            }  
+        }) 
+              
+              
+    
+    
+})
+
 
 //brisanje predmeta po nazivu
 //link : http://localhost:31901/api/korisnik/deleteSubject?naziv=test Predmet za brisanje 4
