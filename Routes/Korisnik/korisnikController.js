@@ -14,16 +14,16 @@ require('../../Funkcije/validacija.js')();
 
 
 korisnikRouter.post('/linkProfessorSubject', function(req,res) {
-    var idPredmeta = req.body.idPredmet;
-    var idProfesora = req.body.idProfesor;
+    var idPredmeta = req.body.idPredmet.toString();
+    var idProfesora = req.body.idProfesor.toString();
     res.contentType('application/json');
     
     //hocel bit string sa frontenda
     
-    if(req.body.idProfesor.length > 10) {
+    if(idProfesora.length > 10) {
         res.status(400).send({message: 'ID vezan za profesora ima više od 10 cifri'})
     }
-    else if(req.body.idPredmet.length > 10) {
+    else if(idPredmeta.length > 10) {
         res.status(400).send({message: 'ID vezan za predmet ima više od 10 cifri'})
      
     }
