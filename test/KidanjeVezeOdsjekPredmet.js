@@ -8,7 +8,7 @@ var idPredmet;
 chai.use(chaiHttp);
 chai.should();
 
-describe('/GET PretraziOdsjekPredmet', () => {
+describe('/DELETE BrisiOdsjekPredmet', () => {
 	it('Treba se unijeti odsjek u bazi podataka', function(done) {
 		chai.request(app)
 			.post('/api/odsjek/AddNewOdsjek')
@@ -78,25 +78,22 @@ describe('/GET PretraziOdsjekPredmet', () => {
 			})
 	})
 	
-	it('Pretražuje se predmet', function(done) {
+	it('Briše se veza', function(done) {
 		chai.request(app)
-			.get('/api/odsjek/PretraziOdsjekPredmet')
+			.delete('/api/povezivanje/BrisiOdsjekPredmet')
 			.set('content-type', 'application/x-www-form-urlencoded')
 			.send({
 				idOdsjek: idOdsjek,
-				semestar: 1,
-				godina: 2,
-				ciklus: 2,
-				obavezan: 1
+				idPredmet: idPredmet
 			})
 			.end((err, res) => {
 				if(res.body==0 || res.body==1){
+					res.should.have.status(200)
 					done();
 				}
-				res.should.have.status(200)
-                res.body.should.be.a('Array')
-				res.body[0].should.have.property('naziv')
-				done();
+				else{
+					res.should.have.status(400)
+				}
 			})
 	})
 })
