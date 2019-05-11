@@ -8,6 +8,7 @@ chai.should();
 //ime, prezime,username, ime i prezime , greska
 var json = [
     {
+        "id": 2,
         "odsjek": "RI",
         "ime": "Emira",
         "prezime": "Zukic",
