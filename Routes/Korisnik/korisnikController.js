@@ -12,6 +12,45 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+
+korisnikRouter.post('/updateStudent', function(req,res) {
+    res.contentType('application/json');
+    let body = req.body;
+    if(!body.id)  return res.status(400).end(JSON.stringify({message: "Nije poslan id!"}));
+    if(body.id.toString().length > 10) return res.status(400).end(JSON.stringify({message: "Id je predugacak!"}));
+    if(!parseInt(body.id)) return res.status(400).end(JSON.stringify({message: "Nevalidan id!"}));
+
+    if(!body.ime || !body.prezime || body.ime == '' || body.prezime == '') return res.status(400).end(JSON.stringify({message: "Nisu uneseni svi obavezni podaci!"}));
+    if(body.ime.length > 50 || body.prezime.length > 50 || ((body.email && body.email.length > 50) || (body.telefon && body.telefon.length > 50) || (body.adresa && body.adresa.length > 50) || (body.telefon && body.telefon.length > 50)))
+      return res.status(400).end(JSON.stringify({message: "Podaci su predugacki!"}));
+
+    db.Korisnik.findOne({where:{id: body.id, idUloga: 1}})
+    .then(student => {
+        if(!student) return res.status(400).end(JSON.stringify({message: "Odabrani student ne postoji!"}));
+        else {
+        return student.update({
+            ime: body.ime,
+            prezime: body.prezime,
+            email: body.email,
+            telefon: body.telefon,
+            adresa: body.adresa,
+            indeks: body.indeks
+        }).then( () => {
+           return res.status(200).end(JSON.stringify({message: "Student uspjesno azuriran!"}));
+        }).catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do greske!"}));
+        })
+    }
+     
+    })
+    .catch(err => {
+        console.log(err);
+         res.status(500).end(JSON.stringify({message: "Doslo je do greske!"}));
+    });
+    
+})
+
 korisnikRouter.get('/GetNewPassword',function(req,res){
     var userName = req.query.username;
     res.contentType('application/json');  
