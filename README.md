@@ -17,7 +17,7 @@ USER STORY na dev-node: <br/> <br/>
 
 --------------------- <br/>
 User Story 373: Prebacivanje dio koda za backend sa ASP.NET na NodeJS 2 <br/>
-{
+{ <br/>
 User Story 254: Administrator generiše indeks, username i password za studenta/asistenta radi spašavanja u bazu podataka <br/>
 User Story 264: Administrator treba imati mogućnost da doda novog studenta u bazu podataka <br/>
 User Story 265: Administrator treba imati mogućnost dodavanja novog asistenta u bazu podataka <br/>
