@@ -12,27 +12,37 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+korisnikRouter.get('/GetNewPassword',function(req,res){
+    var userName = req.query.username;
+    res.contentType('application/json');  
+  
+        var password = generator.generate({
+        length: 8,
+        numbers: true
+        });
+        var pas = password;
+        password = md5(password);
 
-//brisanje predmeta po nazivu
-//link : http://localhost:31901/api/korisnik/deleteSubject?naziv=test Predmet za brisanje 4
-korisnikRouter.delete('/deleteSubject', function(req,res) {
-    db.Predmet.findAll({where: {naziv: req.query.naziv}}).then( predmet => {
-        res.contentType('application/json');
-        if(predmet != []) {
-        db.Predmet.destroy({where: {naziv: req.query.naziv}}).then( function(rowDeleted){
-            if(rowDeleted == 1) {
-                res.status(200).send({message: 'Uspjesno obrisan predmet'})
+
+        db.Korisnik.findOne({where:{username:userName}}).then(korisnik => {
+            if(korisnik != null) {
+                //console.log('profa'+prof);
+                korisnik.update({
+                    password:password
+                })
+                res.status(200).send({password:pas});
             }
-            else {            
-            res.status(400).send({message: 'Ne postoji predmet sa tim nazivom'})
-            }
-        }, function(err) {
-            console.log(err);
-        })   
-    }
-   
+            else {
+                res.status(400).send({message: 'Ne postoji korisnik sa tim usernameom'})
+            }  
+        }) 
+              
+              
+    
+    
 })
-})
+
+
 
 korisnikRouter.get('/GetLoginData',function(req,res) {
     var ime = req.query.ime;
@@ -178,6 +188,7 @@ global.JsonNiz = async function(korisnici,res) {
     for(var el in korisnici) {
        await db.Odsjek.findOne({where: {idOdsjek: korisnici[el].idOdsjek}}).then( odsjek => {
             var json = {
+                id: korisnici[el].id,
                 odsjek: odsjek.naziv, 
                 ime: korisnici[el].ime, 
                 prezime: korisnici[el].prezime, 
@@ -238,5 +249,30 @@ korisnikRouter.get('/searchProfessor', function(req,res){
     }
 })
 
+//Pretraga studenata
+korisnikRouter.get('/searchStudent', function(req,res){
+    res.contentType('application/json');
+    if(req.query.ime != null && req.query.ime != '' && req.query.prezime != null && req.query.prezime != '') { // ime i prezime
+        db.Korisnik.findAll({where: {idUloga: 1, ime: req.query.ime, prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.ime != null && req.query.ime != '') { //ime
+       db.Korisnik.findAll({where: {idUloga: 1, ime: req.query.ime}}).then( korisnici => {
+           JsonNiz(korisnici,res);
+       })
+    }
+    else if(req.query.prezime != null && req.query.prezime != '') { //prezime
+        db.Korisnik.findAll({where: {idUloga: 1, prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.username != null && req.query.username != '') { //username
+        db.Korisnik.findAll({where: {idUloga: 1, username: req.query.username}}).then( korisnici => {
+            JsonNiz(korisnici,res);      
+           
+        })
+    }
+})
 
 module.exports = korisnikRouter;

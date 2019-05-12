@@ -6,25 +6,25 @@ const exepect = chai.expect
 chai.use(chaiHttp);
 chai.should();
 
-describe('/POST AddNewAssistant', () => {
+describe('/POST AddNewStudent', () => {
     let student = {
-        ime: 'Testimea',
-        prezime: 'Testprezimea',
-        datum: '1992-05-05',
-        jmbg: '0505992512426',
+        ime: 'Testime',
+        prezime: 'Testprezime',
+        datum: '1991-11-11',
+        jmbg: '1111991561426',
         email: 'test@gmail.com',
         mjesto: 'Sarajevo',
         kanton: 'Sarajevski',
         drzavljanstvo: 'BiH',
-        telefon: '061123124',
+        telefon: '061123123',
         spol: 'Musko',
-        roditelj: 'Testov Roditelja',
+        roditelj: 'Testov Roditelj',
         adresa: 'Testna 123'
     }
 
     it('Basic case - uspjesno dodavanje, treba vratiti status 200', function(done) {        
         chai.request(app)
-            .post('/api/korisnik/AddNewAssistant')
+            .post('/api/korisnik/AddNewStudent')
             .send(student)
             .end((err, res) => {
                 res.should.have.status(200)
@@ -36,7 +36,7 @@ describe('/POST AddNewAssistant', () => {
         let prezimeBackup = student.prezime;
         student.prezime = '';
         chai.request(app)
-            .post('/api/korisnik/AddNewAssistant')
+            .post('/api/korisnik/AddNewStudent')
             .send(student)
             .end((err, res) => {
                 res.should.have.status(400)
@@ -50,7 +50,7 @@ describe('/POST AddNewAssistant', () => {
         let imeBackup = student.ime;
         student.ime = '';
         chai.request(app)
-            .post('/api/korisnik/AddNewAssistant')
+            .post('/api/korisnik/AddNewStudent')
             .send(student)
             .end((err, res) => {
                 res.should.have.status(400)
@@ -64,7 +64,7 @@ describe('/POST AddNewAssistant', () => {
         let jmbgBackup = student.jmbg;
         student.jmbg = '1207993561426';
         chai.request(app)
-            .post('/api/korisnik/AddNewAssistant')
+            .post('/api/korisnik/AddNewStudent')
             .send(student)
             .end((err, res) => {
                 res.should.have.status(400)
@@ -78,7 +78,7 @@ describe('/POST AddNewAssistant', () => {
         let jmbgBackup = student.jmbg;
         student.jmbg = '1207993561426123';
         chai.request(app)
-            .post('/api/korisnik/AddNewAssistant')
+            .post('/api/korisnik/AddNewStudent')
             .send(student)
             .end((err, res) => {
                 res.should.have.status(400)
@@ -92,7 +92,7 @@ describe('/POST AddNewAssistant', () => {
         let imeBackup = student.ime;
         student.ime = 'test123456789test123456789test123456789test123456789test123456789test123456789test123456789test123456789';
         chai.request(app)
-            .post('/api/korisnik/AddNewAssistant')
+            .post('/api/korisnik/AddNewStudent')
             .send(student)
             .end((err, res) => {
                 res.should.have.status(400)
@@ -108,7 +108,7 @@ describe('/POST AddNewAssistant', () => {
         student.datum = student.datum.replace(/^.{4}/g,tmpGod);
 
         chai.request(app)
-            .post('/api/korisnik/AddNewAssistant')
+            .post('/api/korisnik/AddNewStudent')
             .send(student)
             .end((err, res) => {
                 res.should.have.status(400)
