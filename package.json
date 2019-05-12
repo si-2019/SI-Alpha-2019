@@ -9,7 +9,9 @@
 	  "test-povezivanje-assistantsubject" : "mocha ./Tests/linkAssistantSubjectTest.js --exit",
 	  "test-searchAssistant" : "mocha ./Tests/searcrhAssistantTest.js --exit",
 	  "test-searchStudent" : "mocha ./Tests/searchStudentTest.js --exit",
-	  "test-povezivanje-assistantsubject" : "mocha ./Tests/linkAssistantSubjectTest.js --exit"
+	  "test-povezivanje-assistantsubject" : "mocha ./Tests/linkAssistantSubjectTest.js --exit",
+    "test-searchStudent": "mocha ./Tests/searchStudentTest.js --exit",
+    "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit"
   },
   "repository": {
     "type": "git",
