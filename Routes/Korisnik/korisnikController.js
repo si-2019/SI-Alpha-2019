@@ -279,7 +279,9 @@ korisnikRouter.get('/searchStudent', function(req,res){
 korisnikRouter.post('/promoteStudentToAssistant', function(req,res) {
     let body = req.body;
     if(!body.id) return res.status(400).send({message: 'Nije unesen id!'});
+    if(!parseInt(body.id)) return res.status(400).send({message: 'Uneseni id nije validan!'});
     if(body.id.toString().length > 10) return res.status(400).send({message: 'Uneseni id je predugacak!'});
+
     db.Korisnik.findOne({where: {idUloga: 1, id: body.id}})
     .then(student => {
         if(!student) return res.status(400).send({message: 'Student sa unesenim Id-em ne postoji u sistemu!'});

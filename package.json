@@ -7,7 +7,8 @@
     "test": "mocha ./Tests --exit",
     "baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t Odsjek,Predmet",
     "test-searchStudent": "mocha ./Tests/searchStudentTest.js --exit",
-    "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit"
+    "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit",
+	"test-promoteStudentToAssistant" : "mocha ./Tests/promoteStudentToAssistantTest.js --exit"
   },
   "repository": {
     "type": "git",
