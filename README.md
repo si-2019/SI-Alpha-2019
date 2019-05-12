@@ -14,6 +14,7 @@ npm run test<br/><br/><br/><br/>
 
 USER STORY na dev-node: <br/> <br/>
 --------------------- <br/>
+User Story 252: Administrator kreira listu svih odsjeka iz baze podataka <br/>
 
 --------------------- <br/>
 User Story 373: Prebacivanje dio koda za backend sa ASP.NET na NodeJS 2 <br/>
@@ -37,5 +38,5 @@ User Story 272: Administrator povezuje profesor-predmet i stavlja vezu u bazi po
 User Story 236: Administrator briše predmet sa odsjeka da bi uklonio nepostojeće predmete <br/>
 User Story 249: Administrator kreira listu svih profesora iz baze prema zadanom tekstu pretrage radi prikaza <br/>
 User Story 252: Administrator kreira listu svih odsjeka iz baze podataka <br/>
-
+User Story 259: Administrator mora imati mogućnost ažuriranja podataka o studentu u bazi podataka <br/>
 
