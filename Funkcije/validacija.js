@@ -1,13 +1,16 @@
 const db = require('../models/db.js');
 db.sequelize.sync();
 module.exports = function(){
-    validacijaStringova = function(body) {
-        if(body.ime.length > 50 || body.prezime.length > 50 || body.email.length > 50 || body.mjestoRodjenja.length > 50 || body.kanton.length > 50 || body.drzavljanstvo.length > 50 || body.telefon.length > 50) return 'Polja koja nisu JMBG i ime na smiju biti duza od 50 znakova';
-        else if(body.JMBG.length > 13) return 'JMBG ne smije biti duzi od 13 znakova';
-        else if(body.imePrezimeMajke.length > 100 || body.imePrezimeOca.length > 100) return 'Imena roditelja ne smiju biti duza od 100 znakova';
-        else if(body.adresa.length > 50 || body.linkedin.length > 50 || body.website.length > 50 || body.titula.length > 50 ) return 'Polja koja nisu JMBG i ime na smiju biti duza od 50 znakova';
-        return 'Ok';
-        },  
+  /*  provjeraDaLiPostojiJMBG = async function(profesor_jmbg) {
+        console.log(profesor_jmbg);
+        await db.Korisnik.findOne({where:{JMBG:profesor_jmbg}}).then(prof => {
+            if(prof != null) {
+                console.log('profa'+prof);
+                return 'Postoji korisnik sa istim JMBG!';
+            }
+            return 'Ok';
+        })
+    }, */    
     validacijaDatumaRodjenja = function(datum) {
         var dns = new Date();
         if (datum.substring(0,4) > dns.getFullYear()) return false;
@@ -29,15 +32,15 @@ module.exports = function(){
         return false;
     },
     validacijaPodataka = function(body) {
-        console.log('jel sta null'+body.email+body.mjestoRodjenja+body.drzavljanstvo+body.telefon+body.imePrezimeMajke+body.imePrezimeOca+body.adresa+body.titula);
+        // console.log('jel sta null'+body.email+body.mjestoRodjenja+body.drzavljanstvo+body.telefon+body.imePrezimeMajke+body.imePrezimeOca+body.adresa+body.titula);
         var regexJMBG = /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$/m;
         var validno = regexJMBG.test(body.JMBG);
         if(validno == false) return 'Format JMBG nije dobar!';
         else if(!body.ime) return 'Niste unijeli ime!';
         else if(!body.prezime) return 'Niste unijeli prezime!';
-        else if( !body.email || !body.mjestoRodjenja || !body.drzavljanstvo || !body.telefon || !body.imePrezimeMajke || !body.imePrezimeOca || !body.adresa || !body.titula) return 'Popunite sva polja';
-        return 'Ok';
-            
+        else if(!body.spol || !body.email || !body.mjestoRodjenja || !body.drzavljanstvo || !body.telefon || !body.adresa) return 'Popunite sva polja';
+        else if(body.ime.length > 50 || body.prezime.length > 50 || body.email.length > 50 || body.mjestoRodjenja.length > 50 
+            || body.drzavljanstvo.length > 50 || body.adresa.length > 50) return 'Uneseni podaci su predugi';
+        return 'Ok';            
     }
-
 };
