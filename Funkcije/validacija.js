@@ -43,4 +43,4 @@ module.exports = function(){
             || body.drzavljanstvo.length > 50 || body.adresa.length > 50) return 'Uneseni podaci su predugi';
         return 'Ok';            
     }
-}
+};
