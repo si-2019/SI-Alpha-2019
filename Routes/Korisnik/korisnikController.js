@@ -82,10 +82,6 @@ await db.Korisnik.findOne({where:{username: req.body.username, idUloga: 3}}).the
 })
 });
 
-
-
-
-
 korisnikRouter.get('/GetNewPassword',function(req,res){
     var userName = req.query.username;
     res.contentType('application/json');  
