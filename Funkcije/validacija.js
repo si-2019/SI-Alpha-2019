@@ -7,7 +7,7 @@ module.exports = function(){
         else if(body.imePrezimeMajke.length > 100 || body.imePrezimeOca.length > 100) return 'Imena roditelja ne smiju biti duza od 100 znakova';
         else if(body.adresa.length > 50 /*|| body.linkedin.length > 50 || body.website.length > 50 */|| body.titula.length > 50 ) return 'Uneseni podaci su duzi od 50 znakova';
         return 'Ok';
-     },    
+     },
     validacijaDatumaRodjenja = function(datum) {
         var dns = new Date();
         if (datum.substring(0,4) > dns.getFullYear()) return false;

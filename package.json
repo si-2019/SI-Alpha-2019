@@ -10,6 +10,7 @@
     "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit",
     "test1": "mocha ./Tests/addNewProfessor.js --exit",
     "test2": "mocha ./Tests/getLoginDataForProfessor.js --exit"
+
   },
   "repository": {
     "type": "git",

@@ -12,6 +12,7 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+
 //generisanje username-a i passworda za profesora
 // link: http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=Nemanja&prezime=Nemanjovic
 korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
@@ -134,6 +135,7 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     ajax.send();  
     }
 });
+
 
 korisnikRouter.get('/GetNewPassword',function(req,res){
     var userName = req.query.username;
