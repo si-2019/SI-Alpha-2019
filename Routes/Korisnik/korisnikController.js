@@ -15,28 +15,29 @@ require('../../Funkcije/validacija.js')();
 //generisanje username-a i passworda za profesora
 // link: http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=Nemanja&prezime=Nemanjovic
 korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
+    res.contentType('application/json');  
     var ime = req.query.ime;
     var prezime = req.query.prezime;
-    res.contentType('application/json');  
-    if(!ime || !prezime) res.status(400).send({message: 'Unesite ime/prezime'});
+    console.log()
+    if(!ime || ime == undefined || !prezime || prezime == undefined) return res.status(400).send({message: 'Unesite ime/prezime'});
          
   
     var userName = ime + '.'+ prezime;
     userName = userName.toLowerCase();
-    console.log(userName);
+   // console.log(userName);
 
     db.Korisnik.findAll({where:{ime:ime,prezime:prezime}}).then(data => {
         var brojDuplikata = data.length;
-        console.log(brojDuplikata);
+        //console.log(brojDuplikata);
         userName += ++brojDuplikata;
         var password = generator.generate({
         length: 8,
         numbers: true
         });
-        res.status(200).send(JSON.stringify({
-            username: userName,
-            password: password
-        }));                
+        return res.status(200).send(JSON.stringify({
+                username: userName,
+                password: password
+            }));                
               
     })
     .catch(err => {
@@ -74,6 +75,8 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
 
     await db.Odsjek.findOne({where:{naziv:body.odsjek}}).then(odsjek =>{
         return body.idOdsjek = odsjek.idOdsjek;        
+    }).catch( err => {
+        console.log(err);
     })    
   
     date = body.datumRodjenja.substring(0,10);
@@ -82,13 +85,13 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     //validacija        
     
     var duzine = await validacijaStringova(req.body);
-    console.log(duzine);
+   // console.log(duzine);
     var provjera = await validacijaPodataka(body);    
-    console.log(provjera);
+   // console.log(provjera);
     var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
-    console.log(dr);
+  //  console.log(dr);
     var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
-    console.log(dj);   
+   // console.log(dj);   
 
     if(duzine != 'Ok') return res.status(400).send({message: duzine});
     else if(provjera != 'Ok') return res.status(400).send({message: provjera});
@@ -98,16 +101,18 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
          //pomjereno radi testova 
         await db.Korisnik.findOne({where:{JMBG:body.JMBG}}).then(prof => {
             if(prof != null) {
-                console.log('profa'+prof);
+              //  console.log('profa'+prof);
                 return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
             }   
-        })
+        }).catch( err => {
+            console.log(err);
+        }) 
 
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = async function() {
         if(ajax.readyState == 4 && ajax.status == 200) {
             var data = JSON.parse(ajax.responseText);
-            console.log(data);
+         //   console.log(data);
             if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
             body.spol = 1;            
             else if(body.spol.toLowerCase() == 'zensko' || body.spol.toLowerCase() == 'žensko')
@@ -116,11 +121,11 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
             body.idUloga = 3;
             body.username = data.username;
             body.password = md5(data.password);
-            await db.Korisnik.create(body).then( () => {
-                console.log("tu");   
+            await db.Korisnik.create(body).then( () => {              
                 return res.status(200).send({message: "Uspješno dodan profesor"});
-            });   
-           
+            }).catch( err => {
+                console.log(err);
+            })           
           
         }
     }
