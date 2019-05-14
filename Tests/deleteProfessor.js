@@ -22,11 +22,19 @@ describe('DELETE /deleteProfessor', () => {
         })
     })
     //dodat test za dodavanje profesora sa stalnim idem koji ce se u iducem testu obrisat
+    it(' Hardkodirani test koji dodaje profesora, koji ce biti obrisan u iducem testu', function(done) {
+        chai.request(app)
+        .get('/api/unos/upisiProfesora')
+        .end((err,res) => {
+            res.should.have.status(200);
+            done();
+        })
+    })
     
     it('Treba vratit status 200 i poruku da je obrisan profesor iz baze', function(done) {
         chai.request(app)
         .delete('/api/korisnik/deleteProfessor')
-        .query({id:5})
+        .query({id:3})
         .end((err,res) => {
             res.should.have.status(200);
             res.body.should.have.property('message');

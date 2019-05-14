@@ -20,11 +20,11 @@ korisnikRouter.delete('/deleteProfessor', function(req,res) {
     
 
     //izbrisat veze sa predmetima
-    db.Predmet.findAll({where:{idProfesor:idProfesora}}).then( async function(lista) {
+   db.Predmet.findAll({where:{idProfesor:idProfesora}}).then( async function(lista) {
         //console.log(lista);
         for(i = 0; i < lista.length; i++)
         await lista[i].update({idProfesor:null})
-        await db.Korisnik.destroy({where: {id: idProfesora,idUloga:3}}).then( function(rowDeleted){
+    db.Korisnik.destroy({where: {id: idProfesora,idUloga:3}}).then( function(rowDeleted){
             console.log('tu')
                 if(rowDeleted == 1) {
                 return res.status(200).send({message: 'Uspjesno obrisan profesor'})
@@ -35,9 +35,10 @@ korisnikRouter.delete('/deleteProfessor', function(req,res) {
             }).catch( err => {
                 console.log(err);
             })
-    }).catch( err => {
-        console.log(err);
-    })
+        }).catch( err => {
+            console.log(err);
+        })
+  
 })
 
 
