@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./Tests"
+    "test": "mocha ./Tests --exit",
+    "baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t Odsjek,Predmet",
+    "test-searchStudent": "mocha ./Tests/searchStudentTest.js --exit",
+    "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit",
+    "test-deleteSubject": "mocha ./Tests/deleteSubject.js --exit"
   },
   "repository": {
     "type": "git",
@@ -19,6 +23,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "generate-password": "^1.4.1",
