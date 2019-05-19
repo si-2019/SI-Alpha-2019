@@ -12,6 +12,40 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+//generisanje username-a i passworda za profesora
+// link: http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=Nemanja&prezime=Nemanjovic
+korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
+    res.contentType('application/json');  
+    var ime = req.query.ime;
+    var prezime = req.query.prezime;
+    console.log()
+    if(!ime || ime == undefined || !prezime || prezime == undefined) return res.status(400).send({message: 'Unesite ime/prezime'});
+         
+  
+    var userName = ime + '.'+ prezime;
+    userName = userName.toLowerCase();
+   // console.log(userName);
+
+    db.Korisnik.findAll({where:{ime:ime,prezime:prezime}}).then(data => {
+        var brojDuplikata = data.length;
+        //console.log(brojDuplikata);
+        userName += ++brojDuplikata;
+        var password = generator.generate({
+        length: 8,
+        numbers: true
+        });
+        return res.status(200).send(JSON.stringify({
+                username: userName,
+                password: password
+            }));                
+              
+    })
+    .catch(err => {
+        console.log("GRESKA: " + err);
+        res.send(err);
+    });
+})
+
 korisnikRouter.get('/GetNewPassword',function(req,res){
     var userName = req.query.username;
     res.contentType('application/json');  
@@ -272,6 +306,49 @@ korisnikRouter.get('/searchStudent', function(req,res){
             JsonNiz(korisnici,res);      
            
         })
+    }
+})
+
+// Unapređivanje asistenta u profesora
+korisnikRouter.post('/promoteAssistantToProfessor', function(req,res) {
+    let body = req.body;
+    if(!body.id) return res.status(400).send({message: 'Nije unesen id!'});
+    if(!parseInt(body.id)) return res.status(400).send({message: 'Uneseni id nije validan!'});
+    if(body.id.toString().length > 10) return res.status(400).send({message: 'Uneseni id je predugacak!'});
+
+    let assistant;
+    var ajax = new XMLHttpRequest();
+
+    db.Korisnik.findOne({where: {idUloga: 2, id: body.id}})
+    .then(foundAssistant => {
+        assistant = foundAssistant;
+        if(!assistant) return res.status(400).send({message: 'Asistent sa unesenim Id-em ne postoji u sistemu!'});
+
+        ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=' + assistant.ime + '&prezime=' + assistant.prezime, true);
+        ajax.setRequestHeader('Content-Type','application/json');
+        ajax.send();
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).send({message: 'Doslo je do interne greske!'});
+    });
+
+    ajax.onreadystatechange = function() {
+        if(ajax.readyState == 4 && ajax.status == 200) {
+            var data = JSON.parse(ajax.responseText);
+            console.log(data);
+            assistant.update({idUloga : 3, username : data.username})
+            .then(data => {
+                return res.status(200).send({message: 'Asistent je uspjesno unaprijedjen u profesora!'});
+                })
+            .catch(err => {
+                console.log(err);
+                return res.status(500).send({message: 'Doslo je do interne greske!'});
+            })
+        }
+        else if (ajax.readyState == 4) {
+            return res.status(500).send({message: 'Doslo je do interne greske!'});
+        }
     }
 })
 
