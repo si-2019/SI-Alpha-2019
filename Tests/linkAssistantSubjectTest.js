@@ -52,7 +52,7 @@ describe('/POST linkAssistantSubject', () => {
                 res.body.should.be.a('object')
                 res.body.should.have.property('message')
                 res.body.message.should.equal("Id su predugacki!")
-                zahtjev.id = 1;
+                zahtjev.id = 4;
                 done();
             })
     });
