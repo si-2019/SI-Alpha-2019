@@ -38,3 +38,4 @@ User Story 236: Administrator briÅ¡e predmet sa odsjeka da bi uklonio nepostojeÄ
 User Story 249: Administrator kreira listu svih profesora iz baze prema zadanom tekstu pretrage radi prikaza <br/>
 
 
+
