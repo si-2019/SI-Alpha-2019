@@ -36,6 +36,6 @@ User Story 263: Administrator treba moći da izmjeni šifre i generiše nove po 
 User Story 272: Administrator povezuje profesor-predmet i stavlja vezu u bazi podataka <br/>
 User Story 236: Administrator briše predmet sa odsjeka da bi uklonio nepostojeće predmete <br/>
 User Story 249: Administrator kreira listu svih profesora iz baze prema zadanom tekstu pretrage radi prikaza <br/>
-
+User Story 259: Administrator mora imati mogućnost ažuriranja podataka o studentu u bazi podataka <br/>
 
 
