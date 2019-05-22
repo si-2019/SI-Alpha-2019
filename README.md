@@ -15,6 +15,10 @@ npm run test<br/><br/><br/><br/>
 USER STORY na dev-node: <br/> <br/>
 --------------------- <br/>
 User Story 252: Administrator kreira listu svih odsjeka iz baze podataka <br/>
+User Story 253: Administrator kreira listu svih predmeta na fakultetu iz baze podataka <br/>
+User Story 268: Administrator dodaje novi predmet u bazi podataka <br/>
+User Story 269: Administrator dodaje novi odsjek u bazi podataka <br/>
+User Story 382: Administrator mora imati mogućnost ažuriranja podataka o predmetu u bazi podataka <br/>
 --------------------- <br/>
 User Story 373: Prebacivanje dio koda za backend sa ASP.NET na NodeJS 2 <br/>
 { <br/>
