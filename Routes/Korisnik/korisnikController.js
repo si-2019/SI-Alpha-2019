@@ -12,7 +12,7 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
-
+//isprobat
 korisnikRouter.delete('/deleteProfessor', function(req,res) {
     res.contentType('application/json')
     var idProfesora = req.query.id;
@@ -24,6 +24,8 @@ korisnikRouter.delete('/deleteProfessor', function(req,res) {
         //console.log(lista);
         for(i = 0; i < lista.length; i++)
         await lista[i].update({idProfesor:null})
+    db.Ispit.destroy({where:{idProfesor:idProfesora}}).then( async function(lista) {
+            
     db.Korisnik.destroy({where: {id: idProfesora,idUloga:3}}).then( function(rowDeleted){
             console.log('tu')
                 if(rowDeleted == 1) {
@@ -38,7 +40,7 @@ korisnikRouter.delete('/deleteProfessor', function(req,res) {
         }).catch( err => {
             console.log(err);
         })
-  
+    })
 })
 
 
@@ -238,7 +240,7 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     let body = req.body;
     res.contentType('application/json');   
 
-    await db.Odsjek.findOne({where:{naziv:body.odsjek}}).then(odsjek =>{
+    await db.Odsjek.findOne({where:{naziv:body.idOdsjek}}).then(odsjek =>{
         return body.idOdsjek = odsjek.idOdsjek;        
     }).catch( err => {
         console.log(err);
