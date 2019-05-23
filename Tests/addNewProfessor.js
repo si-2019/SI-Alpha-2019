@@ -9,7 +9,7 @@ chai.should();
 //dodat da obrise korisnika kojeg doda, kako bi prolazili testovi
 describe('/POST AddNewProfessor', () => {
     let profesor = { 
-            "idOdsjeka": "RI",
+            "idOdsjek": "RI",
             "ime": "Amela",
             "prezime": "Karac",
             "datumRodjenja": "1991-03-06",
