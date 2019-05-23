@@ -540,6 +540,7 @@ korisnikRouter.get('/searchProfessor', function(req,res){
     }
 })
 
+
 //Pretraga studenata
 korisnikRouter.get('/searchStudent', function(req,res){
     res.contentType('application/json');
@@ -560,6 +561,32 @@ korisnikRouter.get('/searchStudent', function(req,res){
     }
     else if(req.query.username != null && req.query.username != '') { //username
         db.Korisnik.findAll({where: {idUloga: 1, username: req.query.username}}).then( korisnici => {
+            JsonNiz(korisnici,res);      
+           
+        })
+    }
+})
+
+//Pretraga asistenata
+korisnikRouter.get('/searchAssistant', function(req,res){
+    res.contentType('application/json');
+    if(req.query.ime != null && req.query.ime != '' && req.query.prezime != null && req.query.prezime != '') { // ime i prezime
+        db.Korisnik.findAll({where: {idUloga: 2, ime: req.query.ime, prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.ime != null && req.query.ime != '') { //ime
+       db.Korisnik.findAll({where: {idUloga: 2, ime: req.query.ime}}).then( korisnici => {
+           JsonNiz(korisnici,res);
+       })
+    }
+    else if(req.query.prezime != null && req.query.prezime != '') { //prezime
+        db.Korisnik.findAll({where: {idUloga: 2, prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.username != null && req.query.username != '') { //username
+        db.Korisnik.findAll({where: {idUloga: 2, username: req.query.username}}).then( korisnici => {
             JsonNiz(korisnici,res);      
            
         })
