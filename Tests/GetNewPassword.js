@@ -21,7 +21,7 @@ describe('/GET GetNewPassword', () => {
     it('Status 200 jer ima korisnika i password je poslan', function(done) {
         chai.request(app)
             .get('/api/korisnik/GetNewPassword')
-            .query({username:'amer.pasic2'})
+            .query({username:'almir.karabegovic1'})
             .end((err, res) => {
                 res.should.have.status(200)
 

@@ -20,11 +20,19 @@ describe('DELETE /deleteSubject', () => {
         })
     })
     //dodat test za dodavanje predmeta koji ce se u iducem testu obrisat
+    it('Dodan hardkodirani predmet, da bi se izbrisao u iducem testu', function(done) {
+        chai.request(app)
+        .get('/api/unos/unesiPredmet')
+        .end((err,res) => {
+            res.should.have.status(200);
+            done();
+        }) 
+    })
     
     it('Treba vratit status 200 i poruku da je obrisan predmet iz baze', function(done) {
         chai.request(app)
         .delete('/api/predmet/deleteSubject')
-        .query({naziv: "test Predmet 4"})
+        .query({naziv: "RPP"})
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .end((err,res) => {
