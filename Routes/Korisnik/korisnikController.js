@@ -12,6 +12,36 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+
+korisnikRouter.delete('/deleteProfessor', function(req,res) {
+    res.contentType('application/json')
+    var idProfesora = req.query.id;
+    if(!idProfesora || idProfesora == undefined || idProfesora == null) return res.status(400).send({message: 'ID nije poslan'})
+    
+
+    //izbrisat veze sa predmetima
+   db.Predmet.findAll({where:{idProfesor:idProfesora}}).then( async function(lista) {
+        //console.log(lista);
+        for(i = 0; i < lista.length; i++)
+        await lista[i].update({idProfesor:null})
+    db.Korisnik.destroy({where: {id: idProfesora,idUloga:3}}).then( function(rowDeleted){
+            console.log('tu')
+                if(rowDeleted == 1) {
+                return res.status(200).send({message: 'Uspjesno obrisan profesor'})
+                }
+                else {            
+                return res.status(400).send({message: 'Ne postoji taj profesor'})
+                }
+            }).catch( err => {
+                console.log(err);
+            })
+        }).catch( err => {
+            console.log(err);
+        })
+  
+})
+
+
 korisnikRouter.get('/getAllStudents', function(req,res) {
     res.contentType('application/json');
     console.log('tu')

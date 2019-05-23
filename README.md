@@ -51,4 +51,3 @@ User Story 436: Administrator treba imati mogućnost vraćanja liste svih studen
 User Story 403: Administrator ima mogućnost brisanja profesora zbog vanjskih zahtjeva <br/>
 
 
-

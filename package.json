@@ -8,6 +8,7 @@
     "baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t Odsjek,Predmet",
     "test-searchStudent": "mocha ./Tests/searchStudentTest.js --exit",
     "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit",
+    "test1": "mocha ./Tests/deleteProfessor.js --exit",
     "test-updateStudent": "mocha ./Tests/updateStudent.js --exit",
     "test-updateProfessor": "mocha ./Tests/updateProfessor.js --exit",
     "test1": "mocha ./Tests/addNewProfessor.js --exit",
