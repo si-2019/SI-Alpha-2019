@@ -12,6 +12,33 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+korisnikRouter.get('/getAllStudents', function(req,res) {
+    res.contentType('application/json');
+    console.log('tu')
+    db.Korisnik.findAll({where:{idUloga:1}}).then( lista => {
+        res.status(200).end(JSON.stringify(lista))
+    })
+})
+
+korisnikRouter.get('/getAllAssistants', function(req,res) {
+    res.contentType('application/json');
+    console.log('tu')
+    db.Korisnik.findAll({where:{idUloga:2}}).then( lista => {
+        res.status(200).end(JSON.stringify(lista))
+    })
+})
+
+korisnikRouter.get('/getAllProfessors', function(req,res) {
+    res.contentType('application/json');
+    console.log('tu')
+    db.Korisnik.findAll({where:{idUloga:3}}).then( lista => {
+        res.status(200).end(JSON.stringify(lista))
+    })
+})
+
+
+
+
 korisnikRouter.post('/updateStudent', function(req,res) {
     res.contentType('application/json');
     let body = req.body;
