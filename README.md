@@ -42,5 +42,6 @@ User Story 236: Administrator briše predmet sa odsjeka da bi uklonio nepostoje�
 User Story 249: Administrator kreira listu svih profesora iz baze prema zadanom tekstu pretrage radi prikaza <br/>
 User Story 259: Administrator mora imati mogućnost ažuriranja podataka o studentu u bazi podataka <br/>
 User Story 257: Administrator mora da ima mogućnost ažuriranje podataka o profesoru u bazi podataka <br/>
+User Story 436: Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora <br/>
 
 

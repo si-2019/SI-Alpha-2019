@@ -1,5 +1,5 @@
-const db = require('../models/db.js');
-db.sequelize.sync();
+/*const db = require('../models/db.js');
+db.sequelize.sync();*/
 module.exports = function(){
     validacijaStringova = function(body) {
         if(body.ime.length > 50 || body.prezime.length > 50 || body.email.length > 50 || body.mjestoRodjenja.length > 50 || body.kanton.length > 50 || body.drzavljanstvo.length > 50 || body.telefon.length > 50) return 'Uneseni podaci su duzi od 50 znakova';
