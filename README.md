@@ -19,6 +19,11 @@ User Story 253: Administrator kreira listu svih predmeta na fakultetu iz baze po
 User Story 268: Administrator dodaje novi predmet u bazi podataka <br/>
 User Story 269: Administrator dodaje novi odsjek u bazi podataka <br/>
 User Story 382: Administrator mora imati mogućnost ažuriranja podataka o predmetu u bazi podataka <br/>
+User Story 383: Administrator mora imati mogućnost ažuriranja podataka o odsjeku u bazi podataka <br/>
+User Story 270: Administrator povezuje predmet-odsjek-semestar-ciklus-tip i stavlja vezu u bazi podataka <br/>
+User Story 274: Administrator filtrira listu odsjeka i predmeta iz baze podataka na osnovu unesenih vrijednosti <br/>
+User Story 394: Administrator raskida vezu između predmeta i odsjeka u bazi <br/>
+User Story 397: Administrator briše odsjek iz baze zbog vanjskih zahtjeva <br/>
 --------------------- <br/>
 User Story 373: Prebacivanje dio koda za backend sa ASP.NET na NodeJS 2 <br/>
 { <br/>
