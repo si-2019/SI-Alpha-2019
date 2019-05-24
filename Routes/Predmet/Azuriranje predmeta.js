@@ -14,7 +14,7 @@ predmetRouter.get('/GetPredmet', function(req, res){
 	.then(data => {
 		if(!data){
 			console.log("Predmet nije u bazi");
-			res.status(400).end("Predmet nije u bazi");
+			res.status(400).end(JSON.stringify({message: "Predmet nije u bazi"}));
 		}
 		else{
 		//data sadrzi predmet, pretvara se u JSON i šalje nazad
@@ -30,7 +30,7 @@ predmetRouter.post('/PromijeniPredmet', function(req, res){
 	let body = req.body;
 	//U slučaju da su unesene vrijednosti prazne, vraca gresku
 	if(!body.Id || !body.naziv || !body.ects || !body.brojPredavanja || !body.brojVjezbi || !body.opis || body.naziv.length>255 || body.naziv.opis>1024){
-		res.status(400).end("Nisu sve vrijednosti validne");
+		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 	}
 	else{
 		console.log("Pretražuje bazu podataka");
@@ -39,7 +39,7 @@ predmetRouter.post('/PromijeniPredmet', function(req, res){
 		.then(data => {
 			if(!data){
 				console.log("Predmet nije u bazi");
-				res.status(400).end("Predmet nije u bazi");
+				res.status(400).end(JSON.stringify({message: "Predmet nije u bazi"}));
 			}
 			else{
 				console.log("Pokusaj izmjene predmeta");
