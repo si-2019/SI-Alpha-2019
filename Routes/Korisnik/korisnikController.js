@@ -388,8 +388,8 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
     let body = req.body;
 
     // Prilagodjavanje imenovanja
-    if(!body.datumRodjenja) body.datumRodjenja = body.datum;
-    if(!body.JMBG) body.JMBG = body.jmbg;
+    if(!body.datumRodjenja && body.datum) body.datumRodjenja = body.datum;
+    if(!body.JMBG && body.jmbg) body.JMBG = body.jmbg;
     if(!body.mjestoRodjenja) body.mjestoRodjenja = body.mjesto;
 
     // Validacija
@@ -417,8 +417,6 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
             else 
 				body.spol = 0;
             body.semestar = 1;
-            body.JMBG = body.jmbg;
-            body.datumRodjenja = body.datum;
             body.idUloga = 1;
             body.username = data.username;
             body.password = md5(data.password);
@@ -437,8 +435,8 @@ korisnikRouter.post('/AddNewAssistant', async function(req,res) {
     let body = req.body;
 
     // Prilagodjavanje imenovanja
-    if(!body.datumRodjenja) body.datumRodjenja = body.datum;
-    if(!body.JMBG) body.JMBG = body.jmbg;
+    if(!body.datumRodjenja && body.datum) body.datumRodjenja = body.datum;
+    if(!body.JMBG && body.jmbg) body.JMBG = body.jmbg;
     if(!body.mjestoRodjenja) body.mjestoRodjenja = body.mjesto;
 
     var provjera = await validacijaPodataka(body);    
@@ -457,9 +455,7 @@ korisnikRouter.post('/AddNewAssistant', async function(req,res) {
             if(body.spol.toLowerCase() == 'musko' || body.spol.toLowerCase() == 'muško')
                 body.spol = 1;            
             else 
-				body.spol = 0;
-            body.JMBG = body.jmbg;
-            body.datumRodjenja = body.datum;
+                body.spol = 0;
             body.idUloga = 2;
             body.username = data.username;
             body.password = md5(data.password);
