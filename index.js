@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv'); 
 const fs = require('fs');
-dotenv.config();                   
+dotenv.config();        
+const swaggerDoc = require('./swaggerDoc.js');             
 
 const app = express();
 const PORT = process.env.PORT || 31901;
@@ -16,6 +17,8 @@ app.use('/*', (req, res, next) => {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
+
+swaggerDoc(app);
 
 const Folder = './Routes/';
 
