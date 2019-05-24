@@ -7,6 +7,7 @@ db.sequelize.sync();
 //Nade se predmet u bazi i salje se frontend dijelu za izmjenu podataka
 //http://localhost:31901/api/predmet/GetPredmet?id=broj_id
 predmetRouter.get('/GetPredmet', function(req, res){
+	res.contentType('application/json');
 	var id = req.query.id;
 	console.log("Primio se zahtjev za slanje odabranog predmeta");
 	db.Predmet.findByPk(id)
@@ -24,6 +25,7 @@ predmetRouter.get('/GetPredmet', function(req, res){
 });
 
 predmetRouter.post('/PromijeniPredmet', function(req, res){
+	res.contentType('application/json');
 	console.log("Provjera validnosti unesenih vrijednosti");
 	let body = req.body;
 	//U slučaju da su unesene vrijednosti prazne, vraca gresku
