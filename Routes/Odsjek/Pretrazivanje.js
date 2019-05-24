@@ -7,23 +7,22 @@ db.sequelize.sync();
 
 odsjekRouter.get('/PretraziOdsjekPredmet', function(req, res){
 	res.contentType('application/json');
-	let body = req.body;
 	let GOD;
-	if(!body.idOdsjek ||!body.godina || !body.ciklus || !body.semestar || !body.obavezan || body.semestar<1 
-	|| body.semestar>2 || body.obavezan<0 || body.obavezan>1 || body.godina<1 || body.ciklus<1 || body.idOdsjek<1){
+	if(!req.query.idOdsjek ||!req.query.godina || !req.query.ciklus || !req.query.semestar || !req.query.obavezan || req.query.semestar<1 
+	|| req.query.semestar>2 || req.query.obavezan<0 || req.query.obavezan>1 || req.query.godina<1 || req.query.ciklus<1 || req.query.idOdsjek<1){
 		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 	}
 	else{
 	//Posto u bazi je bilo potrebno postaviti ograničenje na broj semestara, ciklusa i godina na jedan drugi nacin, 
 	//sljedeci kod konvertuje vrijednosti ciklusa i godine u onu vrijednost pogodnu za bazu
-		if(body.ciklus==1 && body.godina<4){
-			GOD=Number(body.godina);
+		if(req.query.ciklus==1 && req.query.godina<4){
+			GOD=Number(req.query.godina);
 		}
-		else if(body.ciklus==2 && body.godina<3){
-			GOD=Number(body.godina) + 3;
+		else if(req.query.ciklus==2 && req.query.godina<3){
+			GOD=Number(req.query.godina) + 3;
 		}
-		else if(body.ciklus==3 && body.godina<3){
-			GOD=Number(body.godina) + 5;
+		else if(req.query.ciklus==3 && req.query.godina<3){
+			GOD=Number(req.query.godina) + 5;
 		}
 		else{
 			res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
@@ -32,10 +31,10 @@ odsjekRouter.get('/PretraziOdsjekPredmet', function(req, res){
 		console.log("Pokusaj pronalaska svih redova u medutabeli koji zadovoljavaju unesene vrijednoti");
 		db.odsjek_predmet.findAll({
 			where: {
-				idOdsjek: body.idOdsjek,
-				semestar: body.semestar,
+				idOdsjek: req.query.idOdsjek,
+				semestar: req.query.semestar,
 				godina: GOD,
-				obavezan: body.obavezan
+				obavezan: req.query.obavezan
 			}
 		})
 		.then(data => {
