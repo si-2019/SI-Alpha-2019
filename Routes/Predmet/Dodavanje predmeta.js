@@ -5,6 +5,7 @@ const db = require('../../models/db.js');
 db.sequelize.sync();
 
 predmetRouter.post('/AddNewPredmet', function(req, res){
+	res.contentType('application/json');
 	console.log("Provjera validnosti unesenih vrijednosti");
 	let body = req.body;
 	//U slučaju da je uneseno prazno ime, vraca gresku
