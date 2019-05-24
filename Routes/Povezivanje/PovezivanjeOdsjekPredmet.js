@@ -6,23 +6,22 @@ db.sequelize.sync();
 
 odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 	res.contentType('application/json');
-	let body = req.body;
 	let GOD;
-	if(!body.idOdsjek || !body.idPredmet || !body.godina || !body.ciklus || !body.semestar || !body.obavezan || body.idPredmet < 1
-	|| body.semestar<1 || body.semestar>2 || body.obavezan<0 || body.obavezan>1 || body.godina<1 || body.ciklus<1 || body.idOdsjek < 1){
+	if(!req.query.idOdsjek || !req.query.idPredmet || !req.query.godina || !req.query.ciklus || !req.query.semestar || !req.query.obavezan || req.query.idPredmet < 1
+	|| req.query.semestar<1 || req.query.semestar>2 || req.query.obavezan<0 || req.query.obavezan>1 || req.query.godina<1 || req.query.ciklus<1 || req.query.idOdsjek < 1){
 		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 	}
 	else{
 	//Posto u bazi je bilo potrebno postaviti ograničenje na broj semestara, ciklusa i godina na jedan drugi nacin, 
 	//sljedeci kod konvertuje vrijednosti ciklusa i godine u onu vrijednost pogodnu za bazu
-		if(body.ciklus==1 && body.godina<4){
-			GOD=Number(body.godina);
+		if(req.query.ciklus==1 && req.query.godina<4){
+			GOD=Number(req.query.godina);
 		}
-		else if(body.ciklus==2 && body.godina<3){
-			GOD=Number(body.godina) + 3;
+		else if(req.query.ciklus==2 && req.query.godina<3){
+			GOD=Number(req.query.godina) + 3;
 		}
-		else if(body.ciklus==3 && body.godina<3){
-			GOD=Number(body.godina) + 5;
+		else if(req.query.ciklus==3 && req.query.godina<3){
+			GOD=Number(req.query.godina) + 5;
 		}
 		else{
 			res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
@@ -32,16 +31,16 @@ odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 		let Predmet;
 		let Odsjek;
 		let ListaPromisea =[];
-		ListaPromisea.push(db.Odsjek.findByPk(body.idOdsjek).then(nadeniOdsjek =>{
+		ListaPromisea.push(db.Odsjek.findByPk(req.query.idOdsjek).then(nadeniOdsjek =>{
 			Odsjek=nadeniOdsjek;
 		}).catch(function(err){
 			res.status(400).end(JSON.stringify({message: "Nije se mogao naci odsjek"}));
 			}))
 		
-		ListaPromisea.push(db.Predmet.findByPk(body.idPredmet).then(nadeniPredmet =>{
+		ListaPromisea.push(db.Predmet.findByPk(req.query.idPredmet).then(nadeniPredmet =>{
 			Predmet=nadeniPredmet;
 		}).catch(function(err){
-			res.status(400).end(JSON.stringify({message: "Nije se mogao naci odsjek"}));
+			res.status(400).end(JSON.stringify({message: "Nije se mogao naci predmet"}));
 			}))
 		
 	//Nakon sto se nadu predmet i odsjek u bazi, stavlja se veza medu njih
@@ -55,9 +54,9 @@ odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 				else{
 					Odsjek.addPredmeti(Predmet, {
 						through: {
-							semestar: body.semestar,
+							semestar: req.query.semestar,
 							godina: GOD,
-							obavezan: body.obavezan
+							obavezan: req.query.obavezan
 						}
 					})
 					.then(spoj =>{
