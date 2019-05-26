@@ -5,12 +5,12 @@ const db = require('../../models/db.js');
 db.sequelize.sync();
 
 //Nade se odsjek u bazi i salje se frontend dijelu za izmjenu podataka
-//http://localhost:31901/api/odsjek/GetOdsjek?id=broj_id
+//http://localhost:31901/api/odsjek/GetOdsjek?naziv=naziv_odsjek
 OdsjekRouter.get('/GetOdsjek', function(req, res){
 	res.contentType('application/json');
-	var id = req.query.id;
+	var naziv = decodeURIComponent(req.query.naziv);
 	console.log("Primio se zahtjev za slanje odabranog odsjeka");
-	db.Odsjek.findByPk(id)
+	db.Odsjek.findOne({where:{naziv: naziv}})
 	.then(data => {
 		if(!data){
 			console.log("Odsjek nije u bazi");

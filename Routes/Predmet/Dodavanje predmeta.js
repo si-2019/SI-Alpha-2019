@@ -10,7 +10,7 @@ predmetRouter.post('/AddNewPredmet', function(req, res){
 	let body = req.body;
 	//U slučaju da je uneseno prazno ime, vraca gresku
 	if(!body.naziv || !body.ects || !body.brojPredavanja || !body.brojVjezbi || !body.opis || body.naziv.length>255 || body.naziv.opis>1024){
-		res.status(400).end("Nisu sve vrijednosti validni");
+		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validni"}));
 	}
 	else{
 		console.log("Pretražuje bazu podataka");
@@ -23,7 +23,7 @@ predmetRouter.post('/AddNewPredmet', function(req, res){
 		.then(data => {
 			console.log("Pokusaj dodavanja predmeta");
 			if(data.length!=0){
-				res.status(400).end("Predmet je vec u bazi");
+				res.status(400).end(JSON.stringify({message: "Predmet je vec u bazi"}));
 			}
 	//Dodaje u bazi predmet
 			else{
