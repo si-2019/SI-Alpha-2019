@@ -475,9 +475,12 @@ global.JsonNiz = async function(korisnici,res) {
     var niz = [];
     for(var el in korisnici) {
        await db.Odsjek.findOne({where: {idOdsjek: korisnici[el].idOdsjek}}).then( odsjek => {
+            var odjsekTmp = null;
+            if(odsjek) odjsekTmp = odsjek.naziv;
+            
             var json = {
                 id: korisnici[el].id,
-                odsjek: odsjek.naziv, 
+                odsjek: odjsekTmp,
                 ime: korisnici[el].ime, 
                 prezime: korisnici[el].prezime, 
                 datumRodjenja: korisnici[el].datumRodjenja, 
@@ -564,6 +567,7 @@ korisnikRouter.get('/searchStudent', function(req,res){
     }
 })
 
+
 // Unapređivanje studenta u asistenta
 korisnikRouter.post('/promoteStudentToAssistant', function(req,res) {
     let body = req.body;
@@ -609,6 +613,32 @@ korisnikRouter.get('/searchAssistant', function(req,res){
     }
     else if(req.query.username != null && req.query.username != '') { //username
         db.Korisnik.findAll({where: {idUloga: 2, username: req.query.username}}).then( korisnici => {
+            JsonNiz(korisnici,res);      
+           
+        })
+    }
+})
+
+// Pretraga osoba
+korisnikRouter.get('/searchUser', function(req,res){
+    res.contentType('application/json');
+    if(req.query.ime != null && req.query.ime != '' && req.query.prezime != null && req.query.prezime != '') { // ime i prezime
+        db.Korisnik.findAll({where: {ime: req.query.ime, prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.ime != null && req.query.ime != '') { //ime
+       db.Korisnik.findAll({where: {ime: req.query.ime}}).then( korisnici => {
+           JsonNiz(korisnici,res);
+       })
+    }
+    else if(req.query.prezime != null && req.query.prezime != '') { //prezime
+        db.Korisnik.findAll({where: {prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.username != null && req.query.username != '') { //username
+        db.Korisnik.findAll({where: {username: req.query.username}}).then( korisnici => {
             JsonNiz(korisnici,res);      
            
         })
