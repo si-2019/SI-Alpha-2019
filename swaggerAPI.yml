@@ -63,12 +63,12 @@
      consumes:
        - application/json
      parameters:
-       - name: id
+       - name: naziv
          in: query
          schema:
            type: object
            properties:
-             id:
+             naziv:
                type: string
      responses:
        200:
@@ -201,18 +201,18 @@
      consumes:
        - application/json
      parameters:
-       - name: id
+       - name: naziv
          in: query
          schema:
            type: object
            properties:
-             id:
+             naziv:
                type: string
      responses:
        200:
          description: Vraca se predmet
        400:
-         description: Odsjek nije u bazi
+         description: Predmet nije u bazi
 
  /api/predmet/PromijeniPredmet:
    post:
@@ -268,7 +268,7 @@
                type: string
              prezime:
                type: string
-             datumRodjenja:
+             datumRodjena:
                type: string
                format: date
              JMBG:
@@ -352,7 +352,7 @@
                type: string
              prezime:
                type: string
-             datumRodjenja:
+             datumRodjena:
                type: string
              JMBG:
                type: string
@@ -571,7 +571,7 @@
                type: string
              prezime:
                type: string
-             datumRodjenja:
+             datumRodjena:
                type: string
                format: date
              JMBG:
@@ -659,7 +659,7 @@
                type: string
              prezime:
                type: string
-             datumRodjenja:
+             datumRodjena:
                type: string
                format: date
              JMBG:
