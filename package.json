@@ -12,6 +12,7 @@
     "test-searchUser": "mocha ./Tests/searchUserTest.js --exit",
     "test-searchAssistant": "mocha ./Tests/searcrhAssistantTest.js --exit",
     "test-searchStudent": "mocha ./Tests/searchStudentTest.js --exit",
+	  "test-updateAssistant": "mocha ./Tests/updateAssistantTest.js --exit",
     "test1": "mocha ./Tests/addNewProfessor.js --exit",
     "test-updateStudent": "mocha ./Tests/updateStudent.js --exit",
     "test-updateProfessor": "mocha ./Tests/updateProfessor.js --exit",

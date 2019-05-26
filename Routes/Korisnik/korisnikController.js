@@ -567,6 +567,43 @@ korisnikRouter.get('/searchStudent', function(req,res){
     }
 })
 
+korisnikRouter.post('/updateAssistant', function(req,res) {
+    res.contentType('application/json');
+    let body = req.body;
+
+    if(!body.id) return res.status(400).end(JSON.stringify({message: "Nije poslan id!"}));
+    if(body.id.toString().length > 10) return res.status(400).end(JSON.stringify({message: "Id je predugacak!"}));
+    if(!parseInt(body.id)) return res.status(400).end(JSON.stringify({message: "Nevalidan id!"}));
+
+    if(!body.ime || !body.prezime || body.ime == '' || body.prezime == '') return res.status(400).end(JSON.stringify({message: "Nisu uneseni svi obavezni podaci!"}));
+    if(body.ime.length > 50 || body.prezime.length > 50 || ((body.email && body.email.length > 50) || (body.telefon && body.telefon.length > 50) || (body.adresa && body.adresa.length > 50) || (body.telefon && body.telefon.length > 50)))
+        return res.status(400).end(JSON.stringify({message: "Podaci su predugacki!"}));
+
+    db.Korisnik.findOne({where:{id: body.id, idUloga: 2}})
+    .then(asistent => {
+        if(!asistent) return res.status(400).end(JSON.stringify({message: "Odabrani asistent ne postoji!"}));
+        
+        asistent.update({
+            ime: body.ime,
+            prezime: body.prezime,
+            email: body.email,
+            telefon: body.telefon,
+            adresa: body.adresa
+        })
+        .then(data => {
+            return res.status(200).end(JSON.stringify({message: "Asistent uspjesno azuriran!"}));
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske!"}));
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske!"}));
+    });
+    
+});
 
 // Unapređivanje studenta u asistenta
 korisnikRouter.post('/promoteStudentToAssistant', function(req,res) {
