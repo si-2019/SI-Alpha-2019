@@ -568,6 +568,31 @@ korisnikRouter.get('/searchStudent', function(req,res){
 })
 
 
+// Unapređivanje studenta u asistenta
+korisnikRouter.post('/promoteStudentToAssistant', function(req,res) {
+    let body = req.body;
+    if(!body.id) return res.status(400).send({message: 'Nije unesen id!'});
+    if(!parseInt(body.id)) return res.status(400).send({message: 'Uneseni id nije validan!'});
+    if(body.id.toString().length > 10) return res.status(400).send({message: 'Uneseni id je predugacak!'});
+
+    db.Korisnik.findOne({where: {idUloga: 1, id: body.id}})
+    .then(student => {
+        if(!student) return res.status(400).send({message: 'Student sa unesenim Id-em ne postoji u sistemu!'});
+        student.update({idUloga : 2})
+        .then(data => {
+            return res.status(200).send({message: 'Student je uspjesno unaprijedjen u asistenta!'});
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).send({message: 'Doslo je do interne greske!'});
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).send({message: 'Doslo je do interne greske!'});
+    });
+})
+
 //Pretraga asistenata
 korisnikRouter.get('/searchAssistant', function(req,res){
     res.contentType('application/json');
