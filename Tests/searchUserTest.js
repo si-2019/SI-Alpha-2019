@@ -8,34 +8,34 @@ chai.should();
 //ime, prezime,username, ime i prezime , greska
 var json = [
     {
-        "id": 36,
+        "id": 2,
         "odsjek": "RI",
-        "ime": "Almir",
-        "prezime": "Karabegović",
-        "datumRodjenja": "1975-06-22",
-        "JMBG": "2206975842818",
-        "email": "almir.karabegovic@etf.unsa.ba",
-        "mjestoRodjenja": "Zenica",
-        "kanton": "Zeničko-Dobojski kanton",
+        "ime": "Emira",
+        "prezime": "Zukic",
+        "datumRodjenja": "2015-12-17",
+        "JMBG": "1212994186525",
+        "email": "emiraz@gmail.com",
+        "mjestoRodjenja": "Tuzla",
+        "kanton": "TK",
         "drzavljanstvo": "BiH",
-        "telefon": "+38761525926",
-        "spol": false,
-        "imePrezimeMajke": "Fatima Marić",
-        "imePrezimeOca": "Nesib Karabegović",
-        "adresa": "Zmaja od Bosne 29",
-        "username": "almir.karabegovic1",
-        "linkedin": "https://ba.linkedin.com/in/almir",
-        "website": null,
-        "titula": null
+        "telefon": "062999999",
+        "spol": true,
+        "imePrezimeMajke": "Emirina majka",
+        "imePrezimeOca": "Emirin Otac",
+        "adresa": "NovaAdresa",
+        "username": "ezukic2",
+        "linkedin": "http://www.linked.com/ezukic2",
+        "website": "www.ezukic.com",
+        "titula": "Student"
     }
 ]
 
-describe('GET /searchProfessor', () => {
+describe('GET /searchUser', () => {
 
-it('Vraca 400 i poruku da nema tog profesora', function(done) {
+it('Vraca 400 i poruku da nema tog korisnika', function(done) {
     chai.request(app)
-    .get('/api/korisnik/searchProfessor')
-    .query({ime: 'Zlata'})
+    .get('/api/korisnik/searchUser')
+    .query({ime: 'Emir123'})
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
     .end((err, res) => {
@@ -47,11 +47,11 @@ it('Vraca 400 i poruku da nema tog profesora', function(done) {
     })
 })
 
-//uloga mora biti broj 3(profesor)
+//uloga mora biti broj 1(student)
 it('Vraca 200 i json objekat za pretragu po imenu', function(done) {
     chai.request(app)
-    .get('/api/korisnik/searchProfessor')
-    .query({ime: 'Almir'})
+    .get('/api/korisnik/searchUser')
+    .query({ime: 'Emira'})
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
     .end((err, res) => {
@@ -63,8 +63,8 @@ it('Vraca 200 i json objekat za pretragu po imenu', function(done) {
 
 it('Vraca 200 i json objekat za pretragu po prezimenu', function(done) {
     chai.request(app)
-    .get('/api/korisnik/searchProfessor')
-    .query({prezime : 'Karabegović'})
+    .get('/api/korisnik/searchUser')
+    .query({prezime : 'Zukic'})
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
     .end((err, res) => {
@@ -76,8 +76,8 @@ it('Vraca 200 i json objekat za pretragu po prezimenu', function(done) {
 
 it('Vraca 200 i json objekat za pretragu po usernameu', function(done) {
     chai.request(app)
-    .get('/api/korisnik/searchProfessor')
-    .query({username: 'almir.karabegovic1'})
+    .get('/api/korisnik/searchUser')
+    .query({username: 'ezukic2'})
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
     .end((err, res) => {
@@ -89,8 +89,8 @@ it('Vraca 200 i json objekat za pretragu po usernameu', function(done) {
 
 it('Vraca 200 i json objekat za pretragu po imenu i prezimenu', function(done) {
     chai.request(app)
-    .get('/api/korisnik/searchProfessor')
-    .query({ime: 'Almir', prezime : 'Karabegović'})
+    .get('/api/korisnik/searchUser')
+    .query({ime: 'Emira', prezime : 'Zukic'})
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
     .end((err, res) => {
