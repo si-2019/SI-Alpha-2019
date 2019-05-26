@@ -2,10 +2,12 @@ const chai = require('chai')
 const chaiHttp = require('chai-http');
 const app = require('../index');
 const exepect = chai.expect
-var body;
 
 chai.use(chaiHttp);
 chai.should();
+var today = new Date();
+var naziv = 'Azuriranje odsjek' + today.getHours() + today.getMinutes() + today.getSeconds();
+var body;
 
 describe('/GET GetOdsjek i POST PromijeniOdsjek', () => {
 	it('Treba se unijeti odsjek u bazi podataka za ostala testiranja', function(done) {
@@ -13,7 +15,7 @@ describe('/GET GetOdsjek i POST PromijeniOdsjek', () => {
 			.post('/api/odsjek/AddNewOdsjek')
 			.set('content-type', 'application/x-www-form-urlencoded')
 			.send({
-				naziv: 'Azuriranje odsjek'
+				naziv: naziv
 			})
 			.end((err, res) => {
 				res.should.have.status(200)
@@ -25,9 +27,9 @@ describe('/GET GetOdsjek i POST PromijeniOdsjek', () => {
 			})
 	})
 	
-	it('Treba se moci dohvatiti odsjek preko id-a', function(done) {
+	it('Treba se moci dohvatiti odsjek preko naziva', function(done) {
 		chai.request(app)
-			.get('/api/odsjek/GetOdsjek?id=' + body.idOdsjek.toString())
+			.get('/api/odsjek/GetOdsjek?naziv=' + encodeURIComponent(naziv))
 			.end((err, res) => {
 				res.should.have.status(200)
 				res.body.should.be.a('object')
@@ -54,7 +56,7 @@ describe('/GET GetOdsjek i POST PromijeniOdsjek', () => {
 			})
 	})
 	
-	it('Treba se javiti greska u slučaju da nema odsjeka u bazi sa unesenim id-jem', function(done) {
+	it('Treba se javiti greska u slučaju da nema odsjeka u bazi sa unesenim nazivom', function(done) {
 		chai.request(app)
 			.post('/api/odsjek/PromijeniOdsjek')
 			.set('content-type', 'application/x-www-form-urlencoded')
@@ -82,6 +84,17 @@ describe('/GET GetOdsjek i POST PromijeniOdsjek', () => {
 				res.should.have.status(400)
 				res.body.should.be.a('object')
 				res.body.should.have.property('message')
+				done();
+			})
+	})
+	
+	it('Brise se odsjek iz baze', function(done) {
+		chai.request(app)
+			.delete('/api/odsjek/DeleteOdsjek?naziv=' + encodeURIComponent('Post Azuriranja'))
+			.set('content-type', 'application/x-www-form-urlencoded')
+			.end((err, res) => {
+				res.should.have.status(200)
+                res.body.should.have.property('message')
 				done();
 			})
 	})
