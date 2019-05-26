@@ -5,6 +5,8 @@ const exepect = chai.expect
 
 chai.use(chaiHttp);
 chai.should();
+var today = new Date();
+var naziv = 'Unit test predmet' + today.getHours() + today.getMinutes() + today.getSeconds();
 
 describe('/POST AddNewPredmet', () => {
 	it('Treba se unijeti predmet u bazi podataka', function(done) {
@@ -12,7 +14,7 @@ describe('/POST AddNewPredmet', () => {
 			.post('/api/predmet/AddNewPredmet')
 			.set('content-type', 'application/x-www-form-urlencoded')
 			.send({
-				naziv: 'Unit test predmet',
+				naziv: naziv,
 				ects: 5,
 				brojPredavanja: 20,
 				brojVjezbi: 10,
@@ -34,7 +36,7 @@ describe('/POST AddNewPredmet', () => {
 			.post('/api/predmet/AddNewPredmet')
 			.set('content-type', 'application/x-www-form-urlencoded')
 			.send({
-				naziv: 'Unit test predmet',
+				naziv: naziv,
 				ects: 5,
 				brojPredavanja: 20,
 				brojVjezbi: 10,
@@ -63,6 +65,17 @@ describe('/POST AddNewPredmet', () => {
 				res.should.have.status(400)
                 res.body.should.be.a('object')
 				res.body.should.have.property('message')
+				done();
+			})
+	})
+	
+	it('Brise se predmet iz baze', function(done) {
+		chai.request(app)
+			.delete('/api/predmet/deleteSubject?naziv=' + encodeURIComponent(naziv))
+			.set('content-type', 'application/x-www-form-urlencoded')
+			.end((err, res) => {
+				res.should.have.status(200)
+                res.body.should.have.property('message')
 				done();
 			})
 	})
