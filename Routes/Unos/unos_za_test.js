@@ -57,6 +57,7 @@ let as =
     { 
         "id": 36,
         "idOdsjek": 1,
+        "idUloga": 3,
         "ime": "Almir",
         "prezime": "Karabegović",
         "datumRodjenja": "1975-06-22",
@@ -92,9 +93,20 @@ test.get('/unesi', function(req,res) {
         res.status(200).send('Uspjesno dodan')
     }).catch( err => {
         console.log(err);
-        res.status(400).send('Greska vec postoji predmet sa tim IDem')
+        res.status(400).send('Greska vec postoji profesor sa tim IDem')
     })
     })
+
+ test.get('/unesiAsistenta', function(req,res) {
+     as.id = 241;
+     as.idUloga = 2;
+    db.Korisnik.create(as).then( () => {
+        res.status(200).send('Uspjesno dodan')
+    }).catch( err => {
+        console.log(err);
+        res.status(400).send('Greska vec postoji asistent sa tim IDem')
+    })
+    })  
 
 
 module.exports = test;

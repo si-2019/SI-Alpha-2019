@@ -13,6 +13,29 @@ const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
 /*
+Asistent moze biti u tabelama: ObavjestenjeGlobalno,ObavjestenjePredmet,PopunjenaAnketa,Poruka,Reply,Sticky
+
+*/
+
+korisnikRouter.delete('/deleteAssistant', function(req,res) {
+res.contentType('application/json');
+var idAsistenta = req.query.id;
+db.Korisnik.findOne({where:{id:idAsistenta, idUloga:2}}).then(asistent => {
+    if(!asistent) res.status(404).send({message:'Ne postoji asistent sa tim id-em'});
+    else {
+        db.Predmet.findAll({where: {idAsistent:idAsistenta}}).then( predmeti => {
+            for(i = 0; i < predmeti.length; i++)
+            predmeti[i].update({idAsistent:null})
+            db.Korisnik.destroy({where:{id:idAsistenta}}).then( op => {
+                res.status(200).send({message: 'Obrisan iz baze'});    
+            })
+        })
+    }
+}
+)
+})
+
+/*
 //isprobat
 korisnikRouter.delete('/deleteProfessor', function(req,res) {
     res.contentType('application/json')

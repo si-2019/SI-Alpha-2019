@@ -5,19 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./Tests --exit",
-    "baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t Odsjek,Predmet",
+    "baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t Korisnik",
     "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit",
-  	"test-promoteStudentToAssistant" : "mocha ./Tests/promoteStudentToAssistantTest.js --exit",
+    "test-promoteStudentToAssistant": "mocha ./Tests/promoteStudentToAssistantTest.js --exit",
     "test-deleteSubject": "mocha ./Tests/deleteSubject.js --exit",
     "test-searchUser": "mocha ./Tests/searchUserTest.js --exit",
     "test-searchAssistant": "mocha ./Tests/searcrhAssistantTest.js --exit",
     "test-searchStudent": "mocha ./Tests/searchStudentTest.js --exit",
-	  "test-updateAssistant": "mocha ./Tests/updateAssistantTest.js --exit",
+    "test-updateAssistant": "mocha ./Tests/updateAssistantTest.js --exit",
     "test1": "mocha ./Tests/addNewProfessor.js --exit",
     "test-updateStudent": "mocha ./Tests/updateStudent.js --exit",
     "test-updateProfessor": "mocha ./Tests/updateProfessor.js --exit",
     "test2": "mocha ./Tests/getLoginDataForProfessor.js --exit",
-    "test-get": "mocha ./Tests/getAllStudents_Professors_Assistants.js --exit"
+    "test-get": "mocha ./Tests/getAllStudents_Professors_Assistants.js --exit",
+    "test-deleteAssistant": "mocha ./Tests/deleteAssistant.js --exit"
   },
   "repository": {
     "type": "git",
