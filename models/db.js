@@ -18,5 +18,10 @@ db.Predmet = sequelize.import(__dirname + '/Predmet.js');
 db.Ispit = sequelize.import(__dirname + '/Ispit.js');
 db.odsjek_predmet = sequelize.import(__dirname + '/odsjek_predmet.js');
 
+db.Odsjek.hasMany(db.Korisnik, {as : 'OdsjekKorisnik', foreignKey : 'idOdsjek'});
+db.Korisnik.hasMany(db.Predmet, {as : 'PredmetProfesor', foreignKey : 'idProfesor'});
+db.Korisnik.hasMany(db.Predmet, {as : 'PredmetAsistent', foreignKey : 'idAsistent'});
+db.Odsjek.belongsToMany(db.Predmet,{as:'predmeti', through: db.odsjek_predmet, foreignKey:'idOdsjek'});
+db.Predmet.belongsToMany(db.Odsjek,{as:'odsjeci', through: db.odsjek_predmet, foreignKey:'idPredmet'});
 
 module.exports = db;
