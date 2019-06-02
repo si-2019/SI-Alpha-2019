@@ -8,6 +8,9 @@ db.sequelize.sync();
 odsjekRouter.get('/PretraziOdsjekPredmet', function(req, res){
 	res.contentType('application/json');
 	let GOD;
+	if(!parseInt(req.query.idOdsjek) || !parseInt(req.query.godina) || !parseInt(req.query.ciklus) || !parseInt(req.query.semestar) || !parseInt(req.query.obavezan)){
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	}
 	if(!req.query.idOdsjek ||!req.query.godina || !req.query.ciklus || !req.query.semestar || !req.query.obavezan || req.query.semestar<1 
 	|| req.query.semestar>2 || req.query.obavezan<0 || req.query.obavezan>1 || req.query.godina<1 || req.query.ciklus<1 || req.query.idOdsjek<1){
 		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
