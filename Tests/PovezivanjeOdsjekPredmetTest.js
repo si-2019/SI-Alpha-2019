@@ -115,7 +115,7 @@ describe('/POST SpojiOdsjekPredmet', () => {
 				res.should.have.status(400)
                 res.body.should.be.a('object')
 				res.body.should.have.property('message')
-				res.body.message.should.include("Nije se moglo staviti u medutabeli")
+				res.body.message.should.include("Nisu sve vrijednosti validne")
 				done();
 			})
 	})
