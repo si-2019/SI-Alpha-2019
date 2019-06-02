@@ -14,7 +14,7 @@ var json = [
         "prezime": "Zukic",
         "datumRodjenja": "2015-12-17",
         "JMBG": "1212994186525",
-        "email": "emiraz@gmail.com",
+        "email": "merio.s@hotmail.com",
         "mjestoRodjenja": "Tuzla",
         "kanton": "TK",
         "drzavljanstvo": "BiH",

@@ -12,11 +12,11 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
 
 let profesor = {
-    id: 3,
+    id: 3333,
     idOdsjek: 1,
     idUloga: 3,    
-    ime:'Zulfikar',
-    prezime: 'Teskic',
+    ime:'Zulfo',
+    prezime: 'Zulfic',
     datumRodjenja: '1911-01-01',
     JMBG: '0101911175070',
     email: 'malalala.com',
@@ -28,7 +28,7 @@ let profesor = {
     imePrezimeMajke: 'Fatima Aktic',
     imePrezimeOca: 'Meho Pasic',
     adresa: 'Gornja Maoca',
-    username: 'amer.pasic2',
+    username: 'zulfo.zulfic1',
     linkedin: 'prof.com',
     website: 'prof_muha.com',
     titula: 'red'
