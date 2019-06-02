@@ -8,27 +8,37 @@ chai.should();
 
 describe('/POST updateProfessor', () => {
     let profesor = {
-        id: 183,
-        odsjek: 'TK',
-        ime: 'Amer',
-        prezime: 'Pasic',
-        datumRodjenja: '1993-04-30',
-        JMBG: '3004993175070',
+        id: 3333,
+        odsjek: 'RI',
+        idUloga: 3,    
+        ime:'Zulfo',
+        prezime: 'Zulfic',
+        datumRodjenja: '1911-01-01',
+        JMBG: '0101911175070',
         email: 'malalala.com',
         mjestoRodjenja: 'Travnik',
         kanton: 'SBK',
         drzavljanstvo: 'BiH',
         telefon: '062/033-033',
-        spol: 'musko',
+        spol: 1,
         imePrezimeMajke: 'Fatima Aktic',
         imePrezimeOca: 'Meho Pasic',
         adresa: 'Gornja Maoca',
-        username: 'amer.pasic2',
+        username: 'zulfo.zulfic1',
         linkedin: 'prof.com',
         website: 'prof_muha.com',
-        titula: 'red'      
-    };
+        titula: 'red'
+    }
     let ruta = '/api/korisnik/updateProfessor';
+
+    it(' Hardkodirani test koji dodaje profesora, koji ce biti azuriran u iducem testu', function(done) {
+        chai.request(app)
+        .get('/api/unos/upisiProfesora')
+        .end((err,res) => {
+            res.should.have.status(200);
+            done();
+        })
+    })
 
     it('Upjesno azuriranje, treba vratiti status 200', function(done) { 
 
@@ -53,7 +63,7 @@ describe('/POST updateProfessor', () => {
                 res.should.have.status(400)
                 res.body.should.have.property("message");
                 res.body.message.should.equal('Niste unijeli prezime!')
-                profesor.prezime = 'Pasic';
+                profesor.prezime = 'Zulfic';
                 done();
             })
     })
@@ -69,13 +79,13 @@ describe('/POST updateProfessor', () => {
                 res.should.have.status(400)
                 res.body.should.have.property("message");
                 res.body.message.should.equal('Niste unijeli ime!')
-                profesor.ime = 'Amer';
+                profesor.ime = 'Zulfo';
                 done();
             })
     })
 
     it('Nepostojeci profesor, treba vratiti status 400 i tekst o gresci', function(done) {
-        profesor.username ='a.k'
+        profesor.username ='zulfo.zulfic132131'
         chai.request(app)
             .post(ruta)
             .send(profesor)
@@ -83,7 +93,7 @@ describe('/POST updateProfessor', () => {
                 res.should.have.status(400)
                 res.body.should.have.property("message");
                 res.body.message.should.equal('Profesor se ne nalazi u bazi')
-                profesor.username='amer.pasic2'
+                profesor.username='zulfo.zulfic1'
                 done();
             })
     })
@@ -103,4 +113,14 @@ describe('/POST updateProfessor', () => {
                 done();
             })
     }) */
+
+    it('Treba vratit status 200 i obirsati unesenog profesora', function(done) {
+        chai.request(app)
+        .delete('/api/unos/izbrisatProfesora')
+        .query({username:'zulfo.zulfic1'})
+        .end((err,res) => {
+            res.should.have.status(200);
+            done();
+        })
+    })
 })

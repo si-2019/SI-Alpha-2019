@@ -97,4 +97,15 @@ test.get('/unesi', function(req,res) {
     })
 
 
+ test.delete('/izbrisatProfesora', function(req,res) {
+    var usernameq = req.query.username;
+     db.Korisnik.destroy({where:{username:usernameq}}).then( f => {
+         res.status(200).send('Ok')
+     }).catch( err => {
+        console.log(err);
+        res.status(400).send('Greska vec postoji predmet sa tim IDem')
+    })
+ })   
+
+
 module.exports = test;
