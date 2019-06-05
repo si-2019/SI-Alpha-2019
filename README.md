@@ -15,6 +15,15 @@ npm run test<br/><br/><br/><br/>
 USER STORY na dev-node: <br/> <br/>
 --------------------- <br/>
 User Story 252: Administrator kreira listu svih odsjeka iz baze podataka <br/>
+User Story 253: Administrator kreira listu svih predmeta na fakultetu iz baze podataka <br/>
+User Story 268: Administrator dodaje novi predmet u bazi podataka <br/>
+User Story 269: Administrator dodaje novi odsjek u bazi podataka <br/>
+User Story 382: Administrator mora imati mogućnost ažuriranja podataka o predmetu u bazi podataka <br/>
+User Story 383: Administrator mora imati mogućnost ažuriranja podataka o odsjeku u bazi podataka <br/>
+User Story 270: Administrator povezuje predmet-odsjek-semestar-ciklus-tip i stavlja vezu u bazi podataka <br/>
+User Story 274: Administrator filtrira listu odsjeka i predmeta iz baze podataka na osnovu unesenih vrijednosti <br/>
+User Story 394: Administrator raskida vezu između predmeta i odsjeka u bazi <br/>
+User Story 397: Administrator briše odsjek iz baze zbog vanjskih zahtjeva <br/>
 --------------------- <br/>
 User Story 373: Prebacivanje dio koda za backend sa ASP.NET na NodeJS 2 <br/>
 { <br/>
@@ -36,5 +45,9 @@ User Story 263: Administrator treba moći da izmjeni šifre i generiše nove po 
 User Story 272: Administrator povezuje profesor-predmet i stavlja vezu u bazi podataka <br/>
 User Story 236: Administrator briše predmet sa odsjeka da bi uklonio nepostojeće predmete <br/>
 User Story 249: Administrator kreira listu svih profesora iz baze prema zadanom tekstu pretrage radi prikaza <br/>
+User Story 259: Administrator mora imati mogućnost ažuriranja podataka o studentu u bazi podataka <br/>
+User Story 257: Administrator mora da ima mogućnost ažuriranje podataka o profesoru u bazi podataka <br/>
+User Story 436: Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora <br/>
+User Story 403: Administrator ima mogućnost brisanja profesora zbog vanjskih zahtjeva <br/>
 
 

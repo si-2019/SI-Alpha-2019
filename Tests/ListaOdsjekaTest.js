@@ -14,10 +14,6 @@ describe('/GET GetOdsjeci', () => {
 				res.should.have.status(200)
                 res.body.should.be.a('Array')
 				res.body[0].should.have.property('naziv')
-				res.body[0].naziv.should.include("RI")
-				res.body[1].naziv.should.include("AIE")
-				res.body[2].naziv.should.include("EE")
-				res.body[3].naziv.should.include("TK")
 				done();
 			})
 	})
