@@ -13,6 +13,22 @@ const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
 
+
+korisnikRouter.delete('/deleteAssistant', function(req,res) {
+res.contentType('application/json');
+var idAsistenta = req.query.id;
+db.Korisnik.findOne({where:{id:idAsistenta, idUloga:2}}).then(asistent => {
+    if(!asistent) res.status(404).send({message:'Ne postoji asistent sa tim id-em'});
+    else {
+            db.Korisnik.destroy({where:{id:idAsistenta}}).then( op => {
+                res.status(200).send({message: 'Obrisan iz baze'});    
+            })        
+    }
+})
+})
+
+
+
 korisnikRouter.delete('/deleteProfessor', function(req,res) {
     res.contentType('application/json')
     var idProfesora = req.query.id;
