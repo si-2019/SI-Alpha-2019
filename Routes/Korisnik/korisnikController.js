@@ -172,8 +172,13 @@ korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
     userName = userName.toLowerCase();
    // console.log(userName);
 
-    db.Korisnik.findAll({where:{ime:ime,prezime:prezime}}).then(data => {
-        var brojDuplikata = data.length;
+    db.Korisnik.findAll({where:{ime:ime,prezime:prezime, idUloga:3}}).then(data => {
+        var brojDuplikata = 0;
+        (data).forEach(element => {
+            var tmp = parseInt(element.username.replace( /^\D+/g, ''));
+            if(tmp > brojDuplikata) brojDuplikata = tmp;
+        });
+
         //console.log(brojDuplikata);
         userName += ++brojDuplikata;
         var password = generator.generate({
@@ -340,7 +345,12 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
             
         })
         .then(data => {
-            var brojDuplikata = data.length;
+            var brojDuplikata = 0;
+            (data).forEach(element => {
+                var tmp = parseInt(element.username.replace( /^\D+/g, ''));
+                if(tmp > brojDuplikata) brojDuplikata = tmp;
+            });
+
             userName += ++brojDuplikata;
             var password = generator.generate({
             length: 8,
@@ -350,7 +360,7 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
             db.Korisnik.max('indeks')
                 .then(data => {
                     var indeks = parseInt(data) + 1;
-                    res.end(JSON.stringify({
+                    return res.end(JSON.stringify({
                         username: userName,
                         password: password,
                         indeks: indeks
@@ -611,6 +621,49 @@ korisnikRouter.post('/promoteStudentToAssistant', function(req,res) {
         console.log(err);
         return res.status(500).send({message: 'Doslo je do interne greske!'});
     });
+})
+
+// Unapređivanje asistenta u profesora
+korisnikRouter.post('/promoteAssistantToProfessor', function(req,res) {
+    let body = req.body;
+    if(!body.id) return res.status(400).send({message: 'Nije unesen id!'});
+    if(!parseInt(body.id)) return res.status(400).send({message: 'Uneseni id nije validan!'});
+    if(body.id.toString().length > 10) return res.status(400).send({message: 'Uneseni id je predugacak!'});
+
+    let assistant;
+    var ajax = new XMLHttpRequest();
+
+    db.Korisnik.findOne({where: {idUloga: 2, id: body.id}})
+    .then(foundAssistant => {
+        assistant = foundAssistant;
+        if(!assistant) return res.status(400).send({message: 'Asistent sa unesenim Id-em ne postoji u sistemu!'});
+
+        ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=' + assistant.ime + '&prezime=' + assistant.prezime, true);
+        ajax.setRequestHeader('Content-Type','application/json');
+        ajax.send();
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).send({message: 'Doslo je do interne greske!'});
+    });
+
+    ajax.onreadystatechange = function() {
+        if(ajax.readyState == 4 && ajax.status == 200) {
+            var data = JSON.parse(ajax.responseText);
+            console.log(data);
+            assistant.update({idUloga : 3, username : data.username})
+            .then(data => {
+                return res.status(200).send({message: 'Asistent je uspjesno unaprijedjen u profesora!'});
+                })
+            .catch(err => {
+                console.log(err);
+                return res.status(500).send({message: 'Doslo je do interne greske!'});
+            })
+        }
+        else if (ajax.readyState == 4) {
+            return res.status(500).send({message: 'Doslo je do interne greske!'});
+        }
+    }
 })
 
 //Pretraga asistenata
