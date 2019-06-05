@@ -29,6 +29,9 @@ OdsjekRouter.post('/PromijeniOdsjek', function(req, res){
 	console.log("Provjera validnosti unesenih vrijednosti");
 	let body = req.body;
 	//U slučaju da su uneseni prazne vrijednosti, vraca gresku
+	if(!parseInt(body.idOdsjek)){
+		return res.status(400).end(JSON.stringify({message: "Nevalidan id!"}));
+	}
 	if(!body.idOdsjek || !body.naziv || body.naziv.length>25){
 		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 	}

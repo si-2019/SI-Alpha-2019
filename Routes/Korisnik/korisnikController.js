@@ -12,10 +12,7 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
-/*
-Asistent moze biti u tabelama: ObavjestenjeGlobalno,ObavjestenjePredmet,PopunjenaAnketa,Poruka,Reply,Sticky
 
-*/
 
 korisnikRouter.delete('/deleteAssistant', function(req,res) {
 res.contentType('application/json');
@@ -23,33 +20,20 @@ var idAsistenta = req.query.id;
 db.Korisnik.findOne({where:{id:idAsistenta, idUloga:2}}).then(asistent => {
     if(!asistent) res.status(404).send({message:'Ne postoji asistent sa tim id-em'});
     else {
-        db.Predmet.findAll({where: {idAsistent:idAsistenta}}).then( predmeti => {
-            for(i = 0; i < predmeti.length; i++)
-            predmeti[i].update({idAsistent:null})
             db.Korisnik.destroy({where:{id:idAsistenta}}).then( op => {
                 res.status(200).send({message: 'Obrisan iz baze'});    
-            })
-        })
+            })        
     }
-}
-)
+})
 })
 
-/*
-//isprobat
+
+
 korisnikRouter.delete('/deleteProfessor', function(req,res) {
     res.contentType('application/json')
     var idProfesora = req.query.id;
     if(!idProfesora || idProfesora == undefined || idProfesora == null) return res.status(400).send({message: 'ID nije poslan'})
-    
-
-    //izbrisat veze sa predmetima
-   db.Predmet.findAll({where:{idProfesor:idProfesora}}).then( async function(lista) {
-        //console.log(lista);
-        for(i = 0; i < lista.length; i++)
-        await lista[i].update({idProfesor:null})
-    db.Ispit.destroy({where:{idProfesor:idProfesora}}).then( function(lista) {
-            
+              
     db.Korisnik.destroy({where: {id: idProfesora,idUloga:3}}).then( function(rowDeleted){
             console.log('tu')
                 if(rowDeleted == 1) {
@@ -60,12 +44,9 @@ korisnikRouter.delete('/deleteProfessor', function(req,res) {
                 }
             }).catch( err => {
                 console.log(err);
-            })
-        }).catch( err => {
-            console.log(err);
-        })
-    })
-})*/
+            })    
+   
+})
 
 
 korisnikRouter.get('/getAllStudents', function(req,res) {
@@ -249,13 +230,13 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
 
     //validacija        
     
-    var duzine = await validacijaStringova(req.body);
+    let duzine = await validacijaStringova(req.body);
    // console.log(duzine);
-    var provjera = await validacijaPodataka(body);    
+    let provjera = await validacijaPodataka(body);    
    // console.log(provjera);
-    var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
+    let dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
   //  console.log(dr);
-    var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
+    let dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
    // console.log(dj);   
 
     if(duzine != 'Ok') return res.status(400).send({message: duzine});
@@ -269,9 +250,8 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
               //  console.log('profa'+prof);
                 return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
             }   
-        }).catch( err => {
-            console.log(err);
-        }) 
+            else {
+       
 
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = async function() {
@@ -291,6 +271,7 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
             }).catch( err => {
                 console.log(err);
             })           
+      
           
         }
     }
@@ -298,7 +279,12 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
     }
-});
+
+}).catch( err => {
+    console.log(err);
+}) 
+    }
+})
 
 
 korisnikRouter.get('/GetNewPassword',function(req,res){

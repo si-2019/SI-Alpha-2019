@@ -29,6 +29,9 @@ predmetRouter.post('/PromijeniPredmet', function(req, res){
 	console.log("Provjera validnosti unesenih vrijednosti");
 	let body = req.body;
 	//U slučaju da su unesene vrijednosti prazne, vraca gresku
+	if(!parseInt(body.Id) || !parseInt(body.ects) || !parseInt(body.brojPredavanja) || !parseInt(body.brojVjezbi)){
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	}
 	if(!body.Id || !body.naziv || !body.ects || !body.brojPredavanja || !body.brojVjezbi || !body.opis || body.naziv.length>255 || body.naziv.opis>1024){
 		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 	}

@@ -12,11 +12,11 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
 
 let profesor = {
-    id: 3,
+    id: 3333,
     idOdsjek: 1,
     idUloga: 3,    
-    ime:'Zulfikar',
-    prezime: 'Teskic',
+    ime:'Zulfo',
+    prezime: 'Zulfic',
     datumRodjenja: '1911-01-01',
     JMBG: '0101911175070',
     email: 'malalala.com',
@@ -28,7 +28,7 @@ let profesor = {
     imePrezimeMajke: 'Fatima Aktic',
     imePrezimeOca: 'Meho Pasic',
     adresa: 'Gornja Maoca',
-    username: 'amer.pasic2',
+    username: 'zulfo.zulfic1',
     linkedin: 'prof.com',
     website: 'prof_muha.com',
     titula: 'red'
@@ -107,6 +107,17 @@ test.get('/unesi', function(req,res) {
         res.status(400).send('Greska vec postoji asistent sa tim IDem')
     })
     })  
+
+
+ test.delete('/izbrisatProfesora', function(req,res) {
+    var usernameq = req.query.username;
+     db.Korisnik.destroy({where:{username:usernameq}}).then( f => {
+         res.status(200).send('Ok')
+     }).catch( err => {
+        console.log(err);
+        res.status(400).send('Greska vec postoji predmet sa tim IDem')
+    })
+ })   
 
 
 module.exports = test;

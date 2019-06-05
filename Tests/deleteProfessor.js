@@ -34,7 +34,7 @@ describe('DELETE /deleteProfessor', () => {
     it('Treba vratit status 200 i poruku da je obrisan profesor iz baze', function(done) {
         chai.request(app)
         .delete('/api/korisnik/deleteProfessor')
-        .query({id:3})
+        .query({id:3333})
         .end((err,res) => {
             res.should.have.status(200);
             res.body.should.have.property('message');
