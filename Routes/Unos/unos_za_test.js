@@ -78,6 +78,27 @@ let as =
    
 }
 
+let student = {
+    idOdsjek: 1,
+    idUloga: 1,    
+    ime:'Zulfo',
+    prezime: 'Zulfic',
+    datumRodjenja: '1911-01-01',
+    JMBG: '0101911175085',
+    email: 'malalala.com',
+    mjestoRodjenja: 'Travnik',
+    kanton: 'SBK',
+    drzavljanstvo: 'BiH',
+    telefon: '062/033-033',
+    spol: 1,
+    imePrezimeMajke: 'Fatima Aktic',
+    imePrezimeOca: 'Meho Pasic',
+    adresa: 'Gornja Maoca',
+    username: 'zulfo.zulfic1',
+    linkedin: 'ln.com',
+    website: 'ln.com'
+}
+
 //ako vec postoji u bazi, test ce past
 test.get('/unesiPredmet', function(req,res) {
 db.Predmet.create(predmet).then( () => {
@@ -107,6 +128,18 @@ test.get('/unesi', function(req,res) {
         res.status(400).send('Greska vec postoji asistent sa tim IDem')
     })
     })  
+
+test.post('/unesiStudenta', function(req,res) {
+    res.contentType('application/json');
+    db.Korisnik.create(student)
+    .then(data => {
+        res.status(200).end(JSON.stringify({id:data.id}));
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).end(JSON.stringify({message:'Testno dodavanje nije uspjelo'}));
+    });
+})
 
 
  test.delete('/izbrisatProfesora', function(req,res) {

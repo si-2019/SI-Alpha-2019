@@ -13,6 +13,21 @@ const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
 
+korisnikRouter.delete('/deleteStudent', function(req,res) {
+    res.contentType('application/json');
+    var idStudenta = req.query.id;
+    
+    if(!idStudenta || idStudenta == undefined || idStudenta == null) return res.status(400).end(JSON.stringify({message: 'ID nije poslan'}))
+    db.Korisnik.destroy({where: {id: idStudenta,idUloga:1}})
+    .then( function(rowDeleted) {
+        if(rowDeleted == 1) return res.status(200).end(JSON.stringify({message: 'Uspjesno obrisan student'}))
+        else return res.status(400).end(JSON.stringify({message: 'Ne postoji taj student'}))
+        })
+    .catch( err => {
+        console.log(err);
+        return res.status(500).end(JSON.stringify({message: 'Doslo je do interne greske'}))
+    })  
+})
 
 korisnikRouter.delete('/deleteAssistant', function(req,res) {
 res.contentType('application/json');
