@@ -357,18 +357,24 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
             numbers: true
             });
         
-            db.Korisnik.max('indeks')
-                .then(data => {
-                    var indeks = parseInt(data) + 1;
-                    return res.end(JSON.stringify({
-                        username: userName,
-                        password: password,
-                        indeks: indeks
-                    }));
-                })
-                .catch(err => {
-                    res.end(err);
-                });        
+            db.Korisnik.max('indeks', {
+                where: {
+                    indeks: {
+                        [Op.regexp]: '^[0-9]'
+                    }
+                }
+            })
+            .then(data => {
+                var indeks = parseInt(data) + 1;
+                return res.end(JSON.stringify({
+                    username: userName,
+                    password: password,
+                    indeks: indeks
+                }));
+            })
+            .catch(err => {
+                res.end(err);
+            });        
         })
         .catch(err => {
             console.log("GRESKA: " + err);
