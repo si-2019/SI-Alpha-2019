@@ -739,4 +739,106 @@ korisnikRouter.get('/searchUser', function(req,res){
     }
 })
 
+korisnikRouter.post('/enrollStudentToSemester', function(req,res) {
+    res.contentType('application/json');
+    let body = req.body;
+    let god;
+    let idOdsjek;
+    let idStudent;
+    let idPredmeta = [];
+    let akademskaGodina;
+
+	if(!parseInt(body.ciklus) || !parseInt(body.semestar) ||  !body.username || !body.odsjek){
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	}
+	if(body.ciklus < 1 || body.ciklus > 3 || body.semestar < 1) {
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	}
+    
+    if((body.ciklus == 1 && body.semestar > 6) || ((body.ciklus == 2 || body.ciklus == 3) && body.semestar > 4))  return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+
+    let godConverted = Math.ceil(body.semestar / 2);
+    let semestarConverted = ((body.semestar + 1) % 2) + 1 ;
+    god = body.ciklus * godConverted;
+        
+    db.Odsjek.findOne({where: {naziv: body.odsjek}})
+    .then(odsjek => {
+        if(!odsjek) return res.status(400).end(JSON.stringify({message: "Odabrani odsjek ne postoji"}));
+        idOdsjek = odsjek.idOdsjek;
+        let promiseList = [];
+
+        promiseList.push(db.Korisnik.findOne({where: {idUloga: 1, username: body.username}})
+        .then(student => {
+            if(!student) return res.status(400).end(JSON.stringify({message: "Ne postoji student sa unesenim username-om"}));
+            idStudent = student.id;  
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+        }));
+    
+
+        promiseList.push(db.odsjek_predmet.findAll({where: {idOdsjek: idOdsjek, semestar: semestarConverted, godina: god}})
+        .then(odsjekPredmet => {
+            if(!odsjekPredmet) return res.status(400).end(JSON.stringify({message: "Ne postoje predmeti za odabrani odsjek i semestar"}));
+            odsjekPredmet.forEach(element => {
+                idPredmeta.push(element.idPredmet);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+        }));
+
+        promiseList.push(db.AkademskaGodina.findOne({where: {aktuelna: 1}})
+        .then(god => {
+            if(!god) return res.status(400).end(JSON.stringify({message: "Ne postoji aktuelna akademska godina"}));
+            akademskaGodina = god.id;
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+        }));
+        
+        Promise.all(promiseList).then(x => {
+            let promiseList2 = [];
+            idPredmeta.forEach(element => {
+                db.predmet_student.findOne({where:{idStudent: idStudent, idPredmet: element}})
+                .then(obj => {
+                    console.log('OK');
+                    if(!obj) promiseList2.push(db.predmet_student.create({
+                        idStudent: idStudent,
+                        idPredmet: element,
+                        idAkademskaGodina: akademskaGodina
+                    })
+                    .then(x => {
+                        console.log('Upisan na predmet');
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        return err;
+                    })) 
+                })
+            });
+
+            Promise.all(promiseList2).then(y => {
+                return res.status(200).end(JSON.stringify({message: "Student uspjesno upisan u semestar"}));
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske!"}));
+        })
+
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+    })
+
+
+
+
+})
+
 module.exports = korisnikRouter;

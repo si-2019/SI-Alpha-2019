@@ -37,8 +37,8 @@ povezivanjeRouter.post('/linkSubjectStudent', function(req,res) {
                     res.status(400).send({message: 'Predmet ne postoji'});
                 }
                 else {
-                predmet.update({idProfesor:idProfesora});
-                res.status(200).send({message: 'Uspjesno dodana veza predmet-student'});
+                    predmet.update({idStudent:idStudenta});
+                    res.status(200).send({message: 'Uspjesno dodana veza predmet-student'});
                 }
             })
         }

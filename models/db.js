@@ -17,6 +17,9 @@ db.Odsjek = sequelize.import(__dirname + '/Odsjek.js');
 db.Predmet = sequelize.import(__dirname + '/Predmet.js');
 db.Ispit = sequelize.import(__dirname + '/Ispit.js');
 db.odsjek_predmet = sequelize.import(__dirname + '/odsjek_predmet.js');
+db.predmet_student = sequelize.import(__dirname + '/predmet_student.js');
+db.AkademskaGodina = sequelize.import(__dirname + '/AkademskaGodina.js');
+
 
 db.Odsjek.hasMany(db.Korisnik, {as : 'OdsjekKorisnik', foreignKey : 'idOdsjek'});
 db.Korisnik.hasMany(db.Predmet, {as : 'PredmetProfesor', foreignKey : 'idProfesor'});
