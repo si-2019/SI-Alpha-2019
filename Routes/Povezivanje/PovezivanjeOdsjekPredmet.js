@@ -12,7 +12,7 @@ odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne111"}));
 	}*/
 	if(!body.idOdsjek || !body.idPredmet || !body.godina || !body.ciklus || !body.semestar || !body.obavezan || body.idPredmet < 1
-	|| body.semestar<1 || body.semestar>2 || body.obavezan<0 || body.obavezan>1 || body.godina<1 || body.ciklus<1 || body.idOdsjek < 1){
+	|| body.semestar<1 || body.semestar>2 || body.obavezan<0 || body.obavezan>1 || body.godina<1 || body.godina>4 || body.ciklus<1 || body.idOdsjek < 1){
 		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne222"}));
 	}
 	else{
