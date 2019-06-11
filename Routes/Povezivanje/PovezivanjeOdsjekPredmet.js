@@ -8,9 +8,12 @@ odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 	res.contentType('application/json');
 	let body = req.body;
 	let GOD;
+	/*if(!parseInt(body.idOdsjek) || !parseInt(body.idPredmet) || !parseInt(body.ciklus) || !parseInt(body.semestar) || !parseInt(body.obavezan) || !parseInt(body.godina)){
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne111"}));
+	}*/
 	if(!body.idOdsjek || !body.idPredmet || !body.godina || !body.ciklus || !body.semestar || !body.obavezan || body.idPredmet < 1
-	|| body.semestar<1 || body.semestar>2 || body.obavezan<0 || body.obavezan>1 || body.godina<1 || body.ciklus<1 || body.idOdsjek < 1){
-		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	|| body.semestar<1 || body.semestar>2 || body.obavezan<0 || body.obavezan>1 || body.godina<1 || body.godina>4 || body.ciklus<1 || body.idOdsjek < 1){
+		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne222"}));
 	}
 	else{
 	//Posto u bazi je bilo potrebno postaviti ograničenje na broj semestara, ciklusa i godina na jedan drugi nacin, 
@@ -25,7 +28,7 @@ odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 			GOD=Number(body.godina) + 5;
 		}
 		else{
-			res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+			res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne333"}));
 		}
 	//Potrebno je koristiti Promise ovdje, jer se trebaju pretraziti predmet i odsjek po id-u
 		console.log("Pokusaj pronalaska predmeta i odsjeka");

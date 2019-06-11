@@ -7,6 +7,9 @@ db.sequelize.sync();
 odsjekRouter.delete('/BrisiOdsjekPredmet', function(req, res){
 	res.contentType('application/json');
 	let body = req.body;
+	if(!parseInt(body.idOdsjek) || !parseInt(body.idPredmet)){
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	}
 	if(!body.idOdsjek || !body.idPredmet){
 		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 	}

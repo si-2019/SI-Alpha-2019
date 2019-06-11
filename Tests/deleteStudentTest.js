@@ -6,40 +6,42 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 chai.should();
 
-describe('DELETE /deleteProfessor', () => {
+var tempId = 0;
+describe('DELETE /deleteStudent', () => {
 
 
     it('Treba vratiti status 400 sa porukom o gresci', function(done){
         chai.request(app)
-        .delete('/api/korisnik/deleteProfessor')
+        .delete('/api/korisnik/deleteStudent')
         .query({id:1})
         .end((err, res) => {
             res.should.have.status(400);
             res.body.should.have.property('message');
             res.body.should.be.a('object');
-            expect(res.body.message).to.equal('Ne postoji taj profesor');
+            expect(res.body.message).to.equal('Ne postoji taj student');
             done();
         })
     })
-    //dodat test za dodavanje profesora sa stalnim idem koji ce se u iducem testu obrisat
-    it(' Hardkodirani test koji dodaje profesora, koji ce biti obrisan u iducem testu', function(done) {
+
+    it(' Hardkodirani test koji dodaje studenta, koji ce biti obrisan u iducem testu', function(done) {
         chai.request(app)
-        .get('/api/unos/upisiProfesora')
+        .post('/api/unos/unesiStudenta')
         .end((err,res) => {
             res.should.have.status(200);
+            tempId = res.body.id;
             done();
         })
     })
     
-    it('Treba vratit status 200 i poruku da je obrisan profesor iz baze', function(done) {
+    it('Treba vratit status 200 i poruku da je obrisan student iz baze', function(done) {
         chai.request(app)
-        .delete('/api/korisnik/deleteProfessor')
-        .query({id:3333})
+        .delete('/api/korisnik/deleteStudent')
+        .query({id:tempId})
         .end((err,res) => {
             res.should.have.status(200);
             res.body.should.have.property('message');
             res.body.should.be.a('object');
-            expect(res.body.message).to.equal('Uspjesno obrisan profesor');
+            expect(res.body.message).to.equal('Uspjesno obrisan student');
             done();
         })
     })

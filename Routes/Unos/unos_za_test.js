@@ -12,11 +12,11 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
 
 let profesor = {
-    id: 3,
+    id: 3333,
     idOdsjek: 1,
     idUloga: 3,    
-    ime:'Zulfikar',
-    prezime: 'Teskic',
+    ime:'Zulfo',
+    prezime: 'Zulfic',
     datumRodjenja: '1911-01-01',
     JMBG: '0101911175070',
     email: 'malalala.com',
@@ -28,7 +28,7 @@ let profesor = {
     imePrezimeMajke: 'Fatima Aktic',
     imePrezimeOca: 'Meho Pasic',
     adresa: 'Gornja Maoca',
-    username: 'amer.pasic2',
+    username: 'zulfo.zulfic1',
     linkedin: 'prof.com',
     website: 'prof_muha.com',
     titula: 'red'
@@ -57,6 +57,7 @@ let as =
     { 
         "id": 36,
         "idOdsjek": 1,
+        "idUloga": 3,
         "ime": "Almir",
         "prezime": "Karabegović",
         "datumRodjenja": "1975-06-22",
@@ -77,6 +78,27 @@ let as =
    
 }
 
+let student = {
+    idOdsjek: 1,
+    idUloga: 1,    
+    ime:'Zulfo',
+    prezime: 'Zulfic',
+    datumRodjenja: '1911-01-01',
+    JMBG: '0101911175085',
+    email: 'malalala.com',
+    mjestoRodjenja: 'Travnik',
+    kanton: 'SBK',
+    drzavljanstvo: 'BiH',
+    telefon: '062/033-033',
+    spol: 1,
+    imePrezimeMajke: 'Fatima Aktic',
+    imePrezimeOca: 'Meho Pasic',
+    adresa: 'Gornja Maoca',
+    username: 'zulfo.zulfic1',
+    linkedin: 'ln.com',
+    website: 'ln.com'
+}
+
 //ako vec postoji u bazi, test ce past
 test.get('/unesiPredmet', function(req,res) {
 db.Predmet.create(predmet).then( () => {
@@ -92,9 +114,43 @@ test.get('/unesi', function(req,res) {
         res.status(200).send('Uspjesno dodan')
     }).catch( err => {
         console.log(err);
+        res.status(400).send('Greska vec postoji profesor sa tim IDem')
+    })
+    })
+
+ test.get('/unesiAsistenta', function(req,res) {
+     as.id = 241;
+     as.idUloga = 2;
+    db.Korisnik.create(as).then( () => {
+        res.status(200).send('Uspjesno dodan')
+    }).catch( err => {
+        console.log(err);
+        res.status(400).send('Greska vec postoji asistent sa tim IDem')
+    })
+    })  
+
+test.post('/unesiStudenta', function(req,res) {
+    res.contentType('application/json');
+    db.Korisnik.create(student)
+    .then(data => {
+        res.status(200).end(JSON.stringify({id:data.id}));
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).end(JSON.stringify({message:'Testno dodavanje nije uspjelo'}));
+    });
+})
+
+
+ test.delete('/izbrisatProfesora', function(req,res) {
+    var usernameq = req.query.username;
+     db.Korisnik.destroy({where:{username:usernameq}}).then( f => {
+         res.status(200).send('Ok')
+     }).catch( err => {
+        console.log(err);
         res.status(400).send('Greska vec postoji predmet sa tim IDem')
     })
-    })
+ })   
 
 
 module.exports = test;

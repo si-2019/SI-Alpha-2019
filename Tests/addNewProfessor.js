@@ -10,10 +10,10 @@ chai.should();
 describe('/POST AddNewProfessor', () => {
     let profesor = { 
             "idOdsjek": "RI",
-            "ime": "Amela",
+            "ime": "Mahrama",
             "prezime": "Karac",
-            "datumRodjenja": "1991-03-06",
-            "JMBG": "0603991842818",
+            "datumRodjenja": "1901-03-01",
+            "JMBG": "0103901842818",
             "email": "amela.karac@etf.unsa.ba",
             "mjestoRodjenja": "Zenica",
             "kanton": "Zeničko-Dobojski kanton",
@@ -23,7 +23,7 @@ describe('/POST AddNewProfessor', () => {
             "imePrezimeMajke": "Fatima Marić",
             "imePrezimeOca": "Nesib Karać",
             "adresa": "Zmaja od Bosne 29",
-            "username": "amela.karac1",
+            "username": "mahrama.karac1",
             "linkedin": "https://ba.linkedin.com/in/almir",
             "website": null,
             "titula": "red"
@@ -63,7 +63,7 @@ describe('/POST AddNewProfessor', () => {
             .end((err, res) => {
                 res.should.have.status(400)
                 expect(res.body.message).to.equal('Niste unijeli ime!')
-                profesor.ime = 'Amela';
+                profesor.ime = 'Mahrama';
                 done();
             })
     })
@@ -90,7 +90,7 @@ describe('/POST AddNewProfessor', () => {
             .end((err, res) => {
                 res.should.have.status(400)
                 expect(res.body.message).to.equal('Uneseni podaci su duzi od 50 znakova')
-                profesor.ime = 'Amela';
+                profesor.ime = 'Mahrama';
                 done();
             })
     })
@@ -109,5 +109,15 @@ describe('/POST AddNewProfessor', () => {
                 profesor.datumRodjenja = datumBackup;
                 done();
             })
+    })
+
+   it('Treba vratit status 200 i obirsati unesenog profesora', function(done) {
+        chai.request(app)
+        .delete('/api/unos/izbrisatProfesora')
+        .query({username:'mahrama.karac1'})
+        .end((err,res) => {
+            res.should.have.status(200);
+            done();
+        })
     })
 })

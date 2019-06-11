@@ -12,21 +12,43 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
-/*
-//isprobat
+
+korisnikRouter.delete('/deleteStudent', function(req,res) {
+    res.contentType('application/json');
+    var idStudenta = req.query.id;
+    
+    if(!idStudenta || idStudenta == undefined || idStudenta == null) return res.status(400).end(JSON.stringify({message: 'ID nije poslan'}))
+    db.Korisnik.destroy({where: {id: idStudenta,idUloga:1}})
+    .then( function(rowDeleted) {
+        if(rowDeleted == 1) return res.status(200).end(JSON.stringify({message: 'Uspjesno obrisan student'}))
+        else return res.status(400).end(JSON.stringify({message: 'Ne postoji taj student'}))
+        })
+    .catch( err => {
+        console.log(err);
+        return res.status(500).end(JSON.stringify({message: 'Doslo je do interne greske'}))
+    })  
+})
+
+korisnikRouter.delete('/deleteAssistant', function(req,res) {
+res.contentType('application/json');
+var idAsistenta = req.query.id;
+db.Korisnik.findOne({where:{id:idAsistenta, idUloga:2}}).then(asistent => {
+    if(!asistent) res.status(404).send({message:'Ne postoji asistent sa tim id-em'});
+    else {
+            db.Korisnik.destroy({where:{id:idAsistenta}}).then( op => {
+                res.status(200).send({message: 'Obrisan iz baze'});    
+            })        
+    }
+})
+})
+
+
+
 korisnikRouter.delete('/deleteProfessor', function(req,res) {
     res.contentType('application/json')
     var idProfesora = req.query.id;
     if(!idProfesora || idProfesora == undefined || idProfesora == null) return res.status(400).send({message: 'ID nije poslan'})
-    
-
-    //izbrisat veze sa predmetima
-   db.Predmet.findAll({where:{idProfesor:idProfesora}}).then( async function(lista) {
-        //console.log(lista);
-        for(i = 0; i < lista.length; i++)
-        await lista[i].update({idProfesor:null})
-    db.Ispit.destroy({where:{idProfesor:idProfesora}}).then( function(lista) {
-            
+              
     db.Korisnik.destroy({where: {id: idProfesora,idUloga:3}}).then( function(rowDeleted){
             console.log('tu')
                 if(rowDeleted == 1) {
@@ -37,12 +59,9 @@ korisnikRouter.delete('/deleteProfessor', function(req,res) {
                 }
             }).catch( err => {
                 console.log(err);
-            })
-        }).catch( err => {
-            console.log(err);
-        })
-    })
-})*/
+            })    
+   
+})
 
 
 korisnikRouter.get('/getAllStudents', function(req,res) {
@@ -120,55 +139,29 @@ await db.Korisnik.findOne({where:{username: req.body.username, idUloga: 3}}).the
         return res.status(400).send({message: 'Profesor se ne nalazi u bazi'});
     }
     else {
-         //validacija
-         var duzine = await validacijaStringova(req.body);
-         console.log(duzine);
+         //validacija       
+        req.body.spol = 1;
+        req.body.mjestoRodjenja = ' ';
+        req.body.JMBG = '0603997175555';
          var provjera = await validacijaPodataka(req.body);
-         
-        await db.Korisnik.findOne({where:{JMBG:req.body.JMBG}}).then( prof => {
-            if(prof != null && prof.username != req.body.username) {
-            console.log('profa'+prof);
-            return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
-            }   
-        }).catch(err => {
-        console.error(err);
-        })
-         var dr = await validacijaDatumaRodjenja(req.body.datumRodjenja);         
-         var dj = await provjeriDatumJmbg(req.body.datumRodjenja, req.body.JMBG);    
-         
-        if(duzine != 'Ok') return res.status(400).send({message: duzine});
-        else if(provjera != 'Ok') return res.status(400).send({message : provjera});
-        else if(!dr) return res.status(400).send({message: 'Neispravan datum rodjenja!'});
-        else if(!dj) return res.status(400).send({message: 'JMBG i datum rodjenja se ne poklapaju'});
-        else {
-         //json kao u pretraga liste
-        var spol = 0;
-        if(podaci.spol == 'zensko') spol = 1;
        
+         if(provjera != 'Ok') return res.status(400).send({message : provjera});     
+        else {       
 
         await db.Odsjek.findOne({where: {naziv: req.body.odsjek}}).then( function(odsjek) {
              var json = {
                  idOdsjek: odsjek.idOdsjek, 
                  ime: podaci.ime, 
-                 prezime: podaci.prezime, 
-                 datumRodjenja: podaci.datumRodjenja, 
-                 JMBG: podaci.JMBG, 
-                 email: podaci.email,
-                 mjestoRodjenja: podaci.mjestoRodjenja,
+                 prezime: podaci.prezime,               
+                 email: podaci.email,              
                  kanton: podaci.kanton,
                  drzavljanstvo: podaci.drzavljanstvo,
-                 telefon: podaci.telefon,
-                 spol: parseInt(spol),  //musko zensko
-                 imePrezimeMajke: podaci.imePrezimeMajke,
-                 imePrezimeOca: podaci.imePrezimeOca,
-                 adresa: podaci.adresa,
-                 username: podaci.username,
-                 //password:null
+                 telefon: podaci.telefon,             
+                 adresa: podaci.adresa,              
                  linkedin: podaci.linkedin,
                  website: podaci.website,
                  titula: podaci.titula};
                 return prof.update(json).then(()=> {
-                    console.log('de pls');
                     return res.status(200).send({message: 'Uspjesno azurirane informacije o profesoru'})
                  });
                 
@@ -194,8 +187,13 @@ korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
     userName = userName.toLowerCase();
    // console.log(userName);
 
-    db.Korisnik.findAll({where:{ime:ime,prezime:prezime}}).then(data => {
-        var brojDuplikata = data.length;
+    db.Korisnik.findAll({where:{ime:ime,prezime:prezime, idUloga:3}}).then(data => {
+        var brojDuplikata = 0;
+        (data).forEach(element => {
+            var tmp = parseInt(element.username.replace( /^\D+/g, ''));
+            if(tmp > brojDuplikata) brojDuplikata = tmp;
+        });
+
         //console.log(brojDuplikata);
         userName += ++brojDuplikata;
         var password = generator.generate({
@@ -252,13 +250,13 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
 
     //validacija        
     
-    var duzine = await validacijaStringova(req.body);
+    let duzine = await validacijaStringova(req.body);
    // console.log(duzine);
-    var provjera = await validacijaPodataka(body);    
+    let provjera = await validacijaPodataka(body);    
    // console.log(provjera);
-    var dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
+    let dr = await validacijaDatumaRodjenja(body.datumRodjenja);    
   //  console.log(dr);
-    var dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
+    let dj = await provjeriDatumJmbg(body.datumRodjenja,body.JMBG);    
    // console.log(dj);   
 
     if(duzine != 'Ok') return res.status(400).send({message: duzine});
@@ -272,9 +270,8 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
               //  console.log('profa'+prof);
                 return res.status(400).send({message: 'Postoji korisnik sa istim JMBG!'});
             }   
-        }).catch( err => {
-            console.log(err);
-        }) 
+            else {
+       
 
     var ajax = new XMLHttpRequest();
     ajax.onreadystatechange = async function() {
@@ -294,6 +291,7 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
             }).catch( err => {
                 console.log(err);
             })           
+      
           
         }
     }
@@ -301,7 +299,12 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
     }
-});
+
+}).catch( err => {
+    console.log(err);
+}) 
+    }
+})
 
 
 korisnikRouter.get('/GetNewPassword',function(req,res){
@@ -357,25 +360,36 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
             
         })
         .then(data => {
-            var brojDuplikata = data.length;
+            var brojDuplikata = 0;
+            (data).forEach(element => {
+                var tmp = parseInt(element.username.replace( /^\D+/g, ''));
+                if(tmp > brojDuplikata) brojDuplikata = tmp;
+            });
+
             userName += ++brojDuplikata;
             var password = generator.generate({
             length: 8,
             numbers: true
             });
         
-            db.Korisnik.max('indeks')
-                .then(data => {
-                    var indeks = parseInt(data) + 1;
-                    res.end(JSON.stringify({
-                        username: userName,
-                        password: password,
-                        indeks: indeks
-                    }));
-                })
-                .catch(err => {
-                    res.end(err);
-                });        
+            db.Korisnik.max('indeks', {
+                where: {
+                    indeks: {
+                        [Op.regexp]: '^[0-9]'
+                    }
+                }
+            })
+            .then(data => {
+                var indeks = parseInt(data) + 1;
+                return res.end(JSON.stringify({
+                    username: userName,
+                    password: password,
+                    indeks: indeks
+                }));
+            })
+            .catch(err => {
+                res.end(err);
+            });        
         })
         .catch(err => {
             console.log("GRESKA: " + err);
@@ -475,9 +489,12 @@ global.JsonNiz = async function(korisnici,res) {
     var niz = [];
     for(var el in korisnici) {
        await db.Odsjek.findOne({where: {idOdsjek: korisnici[el].idOdsjek}}).then( odsjek => {
+            var odjsekTmp = null;
+            if(odsjek) odjsekTmp = odsjek.naziv;
+            
             var json = {
                 id: korisnici[el].id,
-                odsjek: odsjek.naziv, 
+                odsjek: odjsekTmp,
                 ime: korisnici[el].ime, 
                 prezime: korisnici[el].prezime, 
                 datumRodjenja: korisnici[el].datumRodjenja, 
@@ -564,6 +581,112 @@ korisnikRouter.get('/searchStudent', function(req,res){
     }
 })
 
+korisnikRouter.post('/updateAssistant', function(req,res) {
+    res.contentType('application/json');
+    let body = req.body;
+
+    if(!body.id) return res.status(400).end(JSON.stringify({message: "Nije poslan id!"}));
+    if(body.id.toString().length > 10) return res.status(400).end(JSON.stringify({message: "Id je predugacak!"}));
+    if(!parseInt(body.id)) return res.status(400).end(JSON.stringify({message: "Nevalidan id!"}));
+
+    if(!body.ime || !body.prezime || body.ime == '' || body.prezime == '') return res.status(400).end(JSON.stringify({message: "Nisu uneseni svi obavezni podaci!"}));
+    if(body.ime.length > 50 || body.prezime.length > 50 || ((body.email && body.email.length > 50) || (body.telefon && body.telefon.length > 50) || (body.adresa && body.adresa.length > 50) || (body.telefon && body.telefon.length > 50)))
+        return res.status(400).end(JSON.stringify({message: "Podaci su predugacki!"}));
+
+    db.Korisnik.findOne({where:{id: body.id, idUloga: 2}})
+    .then(asistent => {
+        if(!asistent) return res.status(400).end(JSON.stringify({message: "Odabrani asistent ne postoji!"}));
+        
+        asistent.update({
+            ime: body.ime,
+            prezime: body.prezime,
+            email: body.email,
+            telefon: body.telefon,
+            adresa: body.adresa
+        })
+        .then(data => {
+            return res.status(200).end(JSON.stringify({message: "Asistent uspjesno azuriran!"}));
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske!"}));
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske!"}));
+    });
+    
+});
+
+// Unapređivanje studenta u asistenta
+korisnikRouter.post('/promoteStudentToAssistant', function(req,res) {
+    let body = req.body;
+    if(!body.id) return res.status(400).send({message: 'Nije unesen id!'});
+    if(!parseInt(body.id)) return res.status(400).send({message: 'Uneseni id nije validan!'});
+    if(body.id.toString().length > 10) return res.status(400).send({message: 'Uneseni id je predugacak!'});
+
+    db.Korisnik.findOne({where: {idUloga: 1, id: body.id}})
+    .then(student => {
+        if(!student) return res.status(400).send({message: 'Student sa unesenim Id-em ne postoji u sistemu!'});
+        student.update({idUloga : 2})
+        .then(data => {
+            return res.status(200).send({message: 'Student je uspjesno unaprijedjen u asistenta!'});
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).send({message: 'Doslo je do interne greske!'});
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).send({message: 'Doslo je do interne greske!'});
+    });
+})
+
+// Unapređivanje asistenta u profesora
+korisnikRouter.post('/promoteAssistantToProfessor', function(req,res) {
+    let body = req.body;
+    if(!body.id) return res.status(400).send({message: 'Nije unesen id!'});
+    if(!parseInt(body.id)) return res.status(400).send({message: 'Uneseni id nije validan!'});
+    if(body.id.toString().length > 10) return res.status(400).send({message: 'Uneseni id je predugacak!'});
+
+    let assistant;
+    var ajax = new XMLHttpRequest();
+
+    db.Korisnik.findOne({where: {idUloga: 2, id: body.id}})
+    .then(foundAssistant => {
+        assistant = foundAssistant;
+        if(!assistant) return res.status(400).send({message: 'Asistent sa unesenim Id-em ne postoji u sistemu!'});
+
+        ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=' + assistant.ime + '&prezime=' + assistant.prezime, true);
+        ajax.setRequestHeader('Content-Type','application/json');
+        ajax.send();
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).send({message: 'Doslo je do interne greske!'});
+    });
+
+    ajax.onreadystatechange = function() {
+        if(ajax.readyState == 4 && ajax.status == 200) {
+            var data = JSON.parse(ajax.responseText);
+            console.log(data);
+            assistant.update({idUloga : 3, username : data.username})
+            .then(data => {
+                return res.status(200).send({message: 'Asistent je uspjesno unaprijedjen u profesora!'});
+                })
+            .catch(err => {
+                console.log(err);
+                return res.status(500).send({message: 'Doslo je do interne greske!'});
+            })
+        }
+        else if (ajax.readyState == 4) {
+            return res.status(500).send({message: 'Doslo je do interne greske!'});
+        }
+    }
+})
+
 //Pretraga asistenata
 korisnikRouter.get('/searchAssistant', function(req,res){
     res.contentType('application/json');
@@ -588,6 +711,134 @@ korisnikRouter.get('/searchAssistant', function(req,res){
            
         })
     }
+})
+
+// Pretraga osoba
+korisnikRouter.get('/searchUser', function(req,res){
+    res.contentType('application/json');
+    if(req.query.ime != null && req.query.ime != '' && req.query.prezime != null && req.query.prezime != '') { // ime i prezime
+        db.Korisnik.findAll({where: {ime: req.query.ime, prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.ime != null && req.query.ime != '') { //ime
+       db.Korisnik.findAll({where: {ime: req.query.ime}}).then( korisnici => {
+           JsonNiz(korisnici,res);
+       })
+    }
+    else if(req.query.prezime != null && req.query.prezime != '') { //prezime
+        db.Korisnik.findAll({where: {prezime: req.query.prezime}}).then( korisnici => {
+            JsonNiz(korisnici,res);            
+        })
+    }
+    else if(req.query.username != null && req.query.username != '') { //username
+        db.Korisnik.findAll({where: {username: req.query.username}}).then( korisnici => {
+            JsonNiz(korisnici,res);      
+           
+        })
+    }
+})
+
+korisnikRouter.post('/enrollStudentToSemester', function(req,res) {
+    res.contentType('application/json');
+    let body = req.body;
+    let god;
+    let idOdsjek;
+    let idStudent;
+    let idPredmeta = [];
+    let akademskaGodina;
+
+	if(!parseInt(body.ciklus) || !parseInt(body.semestar) ||  !body.username || !body.odsjek){
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	}
+	if(body.ciklus < 1 || body.ciklus > 3 || body.semestar < 1) {
+		return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+	}
+    
+    if((body.ciklus == 1 && body.semestar > 6) || ((body.ciklus == 2 || body.ciklus == 3) && body.semestar > 4))  return res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
+
+    let godConverted = Math.ceil(body.semestar / 2);
+    let semestarConverted = ((body.semestar + 1) % 2) + 1 ;
+    god = body.ciklus * godConverted;
+        
+    db.Odsjek.findOne({where: {naziv: body.odsjek}})
+    .then(odsjek => {
+        if(!odsjek) return res.status(400).end(JSON.stringify({message: "Odabrani odsjek ne postoji"}));
+        idOdsjek = odsjek.idOdsjek;
+        let promiseList = [];
+
+        promiseList.push(db.Korisnik.findOne({where: {idUloga: 1, username: body.username}})
+        .then(student => {
+            if(!student) return res.status(400).end(JSON.stringify({message: "Ne postoji student sa unesenim username-om"}));
+            idStudent = student.id;  
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+        }));
+    
+
+        promiseList.push(db.odsjek_predmet.findAll({where: {idOdsjek: idOdsjek, semestar: semestarConverted, godina: god}})
+        .then(odsjekPredmet => {
+            if(!odsjekPredmet) return res.status(400).end(JSON.stringify({message: "Ne postoje predmeti za odabrani odsjek i semestar"}));
+            odsjekPredmet.forEach(element => {
+                idPredmeta.push(element.idPredmet);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+        }));
+
+        promiseList.push(db.AkademskaGodina.findOne({where: {aktuelna: 1}})
+        .then(god => {
+            if(!god) return res.status(400).end(JSON.stringify({message: "Ne postoji aktuelna akademska godina"}));
+            akademskaGodina = god.id;
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+        }));
+        
+        Promise.all(promiseList).then(x => {
+            let promiseList2 = [];
+            idPredmeta.forEach(element => {
+                db.predmet_student.findOne({where:{idStudent: idStudent, idPredmet: element}})
+                .then(obj => {
+                    console.log('OK');
+                    if(!obj) promiseList2.push(db.predmet_student.create({
+                        idStudent: idStudent,
+                        idPredmet: element,
+                        idAkademskaGodina: akademskaGodina
+                    })
+                    .then(x => {
+                        console.log('Upisan na predmet');
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        return err;
+                    })) 
+                })
+            });
+
+            Promise.all(promiseList2).then(y => {
+                return res.status(200).end(JSON.stringify({message: "Student uspjesno upisan u semestar"}));
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske!"}));
+        })
+
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).end(JSON.stringify({message: "Doslo je do interne greske"}));
+    })
+
+
+
+
 })
 
 module.exports = korisnikRouter;
