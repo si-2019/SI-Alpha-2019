@@ -20,7 +20,7 @@
     "test-updateProfessor": "mocha ./Tests/updateProfessor.js --exit",
     "test2": "mocha ./Tests/getLoginDataForProfessor.js --exit",
     "test-get": "mocha ./Tests/getAllStudents_Professors_Assistants.js --exit",
-    "test-enrollStudentToSemester" : "mocha ./Tests/enrollStudentToSemesterTest.js --exit",
+    "test-enrollStudentToSemester": "mocha ./Tests/enrollStudentToSemesterTest.js --exit",
     "start": "node index.js"
   },
   "repository": {

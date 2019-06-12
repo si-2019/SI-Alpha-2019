@@ -174,7 +174,7 @@ await db.Korisnik.findOne({where:{username: req.body.username, idUloga: 3}}).the
 });
 
 //generisanje username-a i passworda za profesora
-// link: http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=Nemanja&prezime=Nemanjovic
+// link: http://si2019alpha.herokuapp.com/api/korisnik/GetLoginDataForProfessor?ime=Nemanja&prezime=Nemanjovic
 korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
     res.contentType('application/json');  
     var ime = req.query.ime;
@@ -213,7 +213,7 @@ korisnikRouter.get('/GetLoginDataForProfessor',function(req,res){
 })
 
 //dodavanje profesora u bazu
-// link http://localhost:31901/api/korisnik/AddNewProfessor
+// link http://si2019alpha.herokuapp.com/api/korisnik/AddNewProfessor
 /* test za postmana
 idOdsjek:RI
 idUloga:2
@@ -295,7 +295,7 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
           
         }
     }
-    ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=' + body.ime + '&prezime=' + body.prezime, true);
+    ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginDataForProfessor?ime=' + body.ime + '&prezime=' + body.prezime, true);
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
     }
@@ -439,7 +439,7 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
             res.end("Uspješno dodan korisnik " + body.username);        
         }
     }
-    ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
+    ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
     
@@ -478,7 +478,7 @@ korisnikRouter.post('/AddNewAssistant', async function(req,res) {
             res.end("Uspješno dodan korisnik " + body.username);        
         }
     }
-    ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
+    ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
     
@@ -528,7 +528,7 @@ global.JsonNiz = async function(korisnici,res) {
 }
 
 //pretraga profesora 
-// link: http://localhost:31901/api/korisnik/searchProfessor?ime=Amer
+// link: http://si2019alpha.herokuapp.com/api/korisnik/searchProfessor?ime=Amer
 korisnikRouter.get('/searchProfessor', function(req,res){
     res.contentType('application/json');
     if(req.query.ime != null && req.query.ime != '' && req.query.prezime != null && req.query.prezime != '') { // ime i prezime
@@ -659,7 +659,7 @@ korisnikRouter.post('/promoteAssistantToProfessor', function(req,res) {
         assistant = foundAssistant;
         if(!assistant) return res.status(400).send({message: 'Asistent sa unesenim Id-em ne postoji u sistemu!'});
 
-        ajax.open('GET', 'http://localhost:31901/api/korisnik/GetLoginDataForProfessor?ime=' + assistant.ime + '&prezime=' + assistant.prezime, true);
+        ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginDataForProfessor?ime=' + assistant.ime + '&prezime=' + assistant.prezime, true);
         ajax.setRequestHeader('Content-Type','application/json');
         ajax.send();
     })
