@@ -13,7 +13,7 @@ odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 	}*/
 	if(!body.idOdsjek || !body.idPredmet || !body.godina || !body.ciklus || !body.semestar || !body.obavezan || body.idPredmet < 1
 	|| body.semestar<1 || body.semestar>2 || body.obavezan<0 || body.obavezan>1 || body.godina<1 || body.godina>4 || body.ciklus<1 || body.idOdsjek < 1){
-		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne222"}));
+		res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 	}
 	else{
 	//Posto u bazi je bilo potrebno postaviti ograničenje na broj semestara, ciklusa i godina na jedan drugi nacin, 
@@ -28,7 +28,7 @@ odsjekRouter.post('/SpojiOdsjekPredmet', function(req, res){
 			GOD=Number(body.godina) + 5;
 		}
 		else{
-			res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne333"}));
+			res.status(400).end(JSON.stringify({message: "Nisu sve vrijednosti validne"}));
 		}
 	//Potrebno je koristiti Promise ovdje, jer se trebaju pretraziti predmet i odsjek po id-u
 		console.log("Pokusaj pronalaska predmeta i odsjeka");
