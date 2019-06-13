@@ -1,6 +1,9 @@
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
+swaggerUi = new SwaggerUi({
+operationsSorter : "method"
+});
 
 const options = {
     swaggerDefinition: {
@@ -12,12 +15,11 @@ const options = {
       },
     },
     // List of files to be processes. You can also set globs './routes/*.js'
-    apis: ['swaggerAPI.yml'/*, 'swaggerMikroservisi.yml'*/],
-    operationsSorter: "method"
+    apis: ['swaggerAPI.yml'/*, 'swaggerMikroservisi.yml'*/]
   };
    
   const specs = swaggerJsdoc(options);
-  const swaggerUi = require('swagger-ui-express');
+  //const swaggerUi = require('swagger-ui-express');
 module.exports = (app) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 }
