@@ -12,7 +12,8 @@ const options = {
       },
     },
     // List of files to be processes. You can also set globs './routes/*.js'
-    apis: ['swaggerAPI.yml'/*, 'swaggerMikroservisi.yml'*/]
+    apis: ['swaggerAPI.yml'/*, 'swaggerMikroservisi.yml'*/],
+    operationsSorter: "method"
   };
    
   const specs = swaggerJsdoc(options);
