@@ -29,12 +29,12 @@
      consumes:
        - application/json
      parameters:
-       - name: id
+       - name: naziv
          in: query
          schema:
            type: object
            properties:
-             id:
+             naziv:
                type: string
      responses:
        200:
