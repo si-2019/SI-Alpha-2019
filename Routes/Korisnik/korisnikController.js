@@ -8,10 +8,9 @@ const db = require('../../models/db.js');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
 
-
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
-
+require('../../Funkcije/autorizacija.js')();
 
 korisnikRouter.delete('/deleteStudent', function(req,res) {
     res.contentType('application/json');
@@ -339,63 +338,73 @@ korisnikRouter.get('/GetNewPassword',function(req,res){
 
 
 
-korisnikRouter.get('/GetLoginData',function(req,res) {
-    var ime = req.query.ime;
-    var prezime = req.query.prezime;
-    res.contentType('application/json');  
+korisnikRouter.get('/GetLoginData',async function(req,res) {
+    res.contentType('application/json');
+    var id = req.query.id;
 
-    if(!ime || !prezime) {
-        res.status(400).end(JSON.stringify({message: "Unesite ime/prezime"}));
-    }
-    else {     
-        var userName = ime[0] + prezime;
-        userName = userName.toLowerCase();
-        db.Korisnik.findAll({
-            where:{
-                username: {
-                    [Op.like]: `${userName}%`
-                }
-            },
-            attributes:['username']
-            
-        })
-        .then(data => {
-            var brojDuplikata = 0;
-            (data).forEach(element => {
-                var tmp = parseInt(element.username.replace( /^\D+/g, ''));
-                if(tmp > brojDuplikata) brojDuplikata = tmp;
-            });
+    if(!id) return res.status(400).end(JSON.stringify({message: "Nije poslan id korisnika"}));
 
-            userName += ++brojDuplikata;
-            var password = generator.generate({
-            length: 8,
-            numbers: true
-            });
-        
-            db.Korisnik.max('indeks', {
-                where: {
-                    indeks: {
-                        [Op.regexp]: '^[0-9]'
+    var auth = await autorizacijaAdmin(id);
+    console.log(auth);
+    if(auth == true) {
+        var ime = req.query.ime;
+        var prezime = req.query.prezime;
+        res.contentType('application/json');  
+
+        if(!ime || !prezime) {
+            return res.status(400).end(JSON.stringify({message: "Unesite ime/prezime"}));
+        }
+        else {     
+            var userName = ime[0] + prezime;
+            userName = userName.toLowerCase();
+            db.Korisnik.findAll({
+                where:{
+                    username: {
+                        [Op.like]: `${userName}%`
                     }
-                }
+                },
+                attributes:['username']
+                
             })
             .then(data => {
-                var indeks = parseInt(data) + 1;
-                return res.end(JSON.stringify({
-                    username: userName,
-                    password: password,
-                    indeks: indeks
-                }));
+                var brojDuplikata = 0;
+                (data).forEach(element => {
+                    var tmp = parseInt(element.username.replace( /^\D+/g, ''));
+                    if(tmp > brojDuplikata) brojDuplikata = tmp;
+                });
+
+                userName += ++brojDuplikata;
+                var password = generator.generate({
+                length: 8,
+                numbers: true
+                });
+            
+                db.Korisnik.max('indeks', {
+                    where: {
+                        indeks: {
+                            [Op.regexp]: '^[0-9]'
+                        }
+                    }
+                })
+                .then(data => {
+                    var indeks = parseInt(data) + 1;
+                    return res.end(JSON.stringify({
+                        username: userName,
+                        password: password,
+                        indeks: indeks
+                    }));
+                })
+                .catch(err => {
+                    res.end(err);
+                });        
             })
             .catch(err => {
+                console.log("GRESKA: " + err);
                 res.end(err);
-            });        
-        })
-        .catch(err => {
-            console.log("GRESKA: " + err);
-            res.end(err);
-        });
+            });
+        }
     }
+    else return res.send("Nemate privilegije");
 })
 
 korisnikRouter.post('/AddNewStudent', async function(req,res) {
@@ -447,7 +456,7 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
 
 korisnikRouter.post('/AddNewAssistant', async function(req,res) {
     let body = req.body;
-
+    
     // Prilagodjavanje imenovanja
     if(!body.datumRodjenja && body.datum) body.datumRodjenja = body.datum;
     if(!body.JMBG && body.jmbg) body.JMBG = body.jmbg;
@@ -481,6 +490,7 @@ korisnikRouter.post('/AddNewAssistant', async function(req,res) {
     ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
+    
     
 });
 
