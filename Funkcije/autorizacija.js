@@ -1,7 +1,7 @@
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 module.exports = function(){
-    autorizacijaAdmin = async function(id) {
+    autorizacijaAdmin = async function(username) {
 		let promise = new Promise((res, rej) => {
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function() {
@@ -16,7 +16,7 @@ module.exports = function(){
                     res(false);
                 }
             }
-            ajax.open('GET', 'https://si2019oscar.herokuapp.com/pretragaId/imaUlogu/' + id + '/admin', true);
+            ajax.open('GET', 'https://si2019oscar.herokuapp.com/pretragaUsername/imaUlogu/' + username + '/admin', true);
             ajax.setRequestHeader('Content-Type','application/json');
             ajax.send(); 
         })

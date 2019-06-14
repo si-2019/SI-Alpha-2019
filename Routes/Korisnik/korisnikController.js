@@ -340,11 +340,11 @@ korisnikRouter.get('/GetNewPassword',function(req,res){
 
 korisnikRouter.get('/GetLoginData',async function(req,res) {
     res.contentType('application/json');
-    var id = req.query.id;
+    var currentUser = req.query.currentUser;
 
-    if(!id) return res.status(400).end(JSON.stringify({message: "Nije poslan id korisnika"}));
+    if(!currentUser) return res.status(400).end(JSON.stringify({message: "Nije poslan username korisnika"}));
 
-    var auth = await autorizacijaAdmin(id);
+    var auth = await autorizacijaAdmin(currentUser);
     console.log(auth);
     if(auth == true) {
         var ime = req.query.ime;
