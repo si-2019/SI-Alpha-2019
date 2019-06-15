@@ -286,7 +286,10 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
             body.username = data.username;
             body.password = md5(data.password);
             await db.Korisnik.create(body).then( () => {              
-                return res.status(200).send({message: "Uspješno dodan profesor"});
+                return res.status(200).end(JSON.stringify({
+                    username: data.username,
+                    password: data.password,
+                }));     
             }).catch( err => {
                 console.log(err);
             })           
@@ -346,70 +349,69 @@ korisnikRouter.get('/GetLoginData',async function(req,res) {
 
     var auth = await autorizacijaAdmin(currentUser);
     console.log(auth);
-    if(auth == true) {
-        var ime = req.query.ime;
-        var prezime = req.query.prezime;
-        res.contentType('application/json');  
+    if(!auth) return res.send("Nemate privilegije");
+    var ime = req.query.ime;
+    var prezime = req.query.prezime;
+    res.contentType('application/json');  
 
-        if(!ime || !prezime) {
-            return res.status(400).end(JSON.stringify({message: "Unesite ime/prezime"}));
-        }
-        else {     
-            var userName = ime[0] + prezime;
-            userName = userName.toLowerCase();
-            db.Korisnik.findAll({
-                where:{
-                    username: {
-                        [Op.like]: `${userName}%`
-                    }
-                },
-                attributes:['username']
+    if(!ime || !prezime) {
+        return res.status(400).end(JSON.stringify({message: "Unesite ime/prezime"}));
+    }
+    else {     
+        var userName = ime[0] + prezime;
+        userName = userName.toLowerCase();
+        db.Korisnik.findAll({
+            where:{
+                username: {
+                    [Op.like]: `${userName}%`
+                }
+            },
+            attributes:['username']
                 
+        })
+        .then(data => {
+            var brojDuplikata = 0;
+            (data).forEach(element => {
+                var tmp = parseInt(element.username.replace( /^\D+/g, ''));
+                if(tmp > brojDuplikata) brojDuplikata = tmp;
+            });
+
+            userName += ++brojDuplikata;
+            var password = generator.generate({
+            length: 8,
+            numbers: true
+            });
+            
+            db.Korisnik.max('indeks', {
+                where: {
+                    indeks: {
+                        [Op.regexp]: '^[0-9]'
+                    }
+                }
             })
             .then(data => {
-                var brojDuplikata = 0;
-                (data).forEach(element => {
-                    var tmp = parseInt(element.username.replace( /^\D+/g, ''));
-                    if(tmp > brojDuplikata) brojDuplikata = tmp;
-                });
-
-                userName += ++brojDuplikata;
-                var password = generator.generate({
-                length: 8,
-                numbers: true
-                });
-            
-                db.Korisnik.max('indeks', {
-                    where: {
-                        indeks: {
-                            [Op.regexp]: '^[0-9]'
-                        }
-                    }
-                })
-                .then(data => {
-                    var indeks = parseInt(data) + 1;
-                    return res.end(JSON.stringify({
-                        username: userName,
-                        password: password,
-                        indeks: indeks
-                    }));
-                })
-                .catch(err => {
-                    res.end(err);
-                });        
+                var indeks = parseInt(data) + 1;
+                return res.end(JSON.stringify({
+                    username: userName,
+                    password: password,
+                    indeks: indeks
+                }));
             })
             .catch(err => {
-                console.log("GRESKA: " + err);
                 res.end(err);
-            });
-        }
+            });        
+        })
+        .catch(err => {
+            console.log("GRESKA: " + err);
+            res.end(err);
+        });
     }
-    else return res.send("Nemate privilegije");
+    
 })
 
 korisnikRouter.post('/AddNewStudent', async function(req,res) {
     let body = req.body;
-
+    console.log('Ok');
     // Prilagodjavanje imenovanja
     if(!body.datumRodjenja && body.datum) body.datumRodjenja = body.datum;
     if(!body.JMBG && body.jmbg) body.JMBG = body.jmbg;
@@ -445,7 +447,11 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
             body.password = md5(data.password);
             body.indeks = data.indeks;
             db.Korisnik.create(body);      
-            res.end("Uspješno dodan korisnik " + body.username);        
+            return res.status(200).end(JSON.stringify({
+                username: data.username,
+                password: data.password,
+                indeks: data.indeksindeks
+            }));        
         }
     }
     ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
@@ -484,7 +490,11 @@ korisnikRouter.post('/AddNewAssistant', async function(req,res) {
             body.password = md5(data.password);
             body.indeks = data.indeks;
             db.Korisnik.create(body);      
-            res.end("Uspješno dodan korisnik " + body.username);        
+            return res.status(200).end(JSON.stringify({
+                username: data.username,
+                password: data.password,
+                indeks: data.indeksindeks
+            }));            
         }
     }
     ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
