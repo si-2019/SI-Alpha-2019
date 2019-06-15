@@ -29,6 +29,7 @@ module.exports = function(){
                 if(ajax.readyState == 4 && ajax.status == 200) {
                     console.log(ajax.status);
                     if(ajax.status == 200) {
+						console.log("tu")
                         return autorizacijaAdmin(username);
                     } 
                     else res(false);

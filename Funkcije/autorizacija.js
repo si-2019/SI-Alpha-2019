@@ -16,6 +16,7 @@ module.exports = function(){
                     res(false);
                 }
             }
+            console.log(username)
             ajax.open('GET', 'https://si2019oscar.herokuapp.com/pretragaUsername/imaUlogu/' + username + '/admin', true);
             ajax.setRequestHeader('Content-Type','application/json');
             ajax.send(); 

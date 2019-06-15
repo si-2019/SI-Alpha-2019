@@ -18,7 +18,8 @@ odsjekRouter.post('/AddNewOdsjek', async function(req, res){
 
     var auth = await autentifikacijaAdmin(currentUser,currentToken);
     console.log(auth);
-    if(!auth) return res.send("Nemate privilegije");
+	if(!auth) return res.send("Nemate privilegije");
+	
 	console.log("Provjera validnosti imena") ;
 	let body = req.body;
 	//U slučaju da je uneseno prazno ime, vraca gresku
@@ -48,6 +49,7 @@ odsjekRouter.post('/AddNewOdsjek', async function(req, res){
 			}
 		});
 	}
+
 });
 
 module.exports = odsjekRouter;
