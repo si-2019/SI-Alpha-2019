@@ -4,8 +4,19 @@ const odsjekRouter = express.Router();
 const db = require('../../models/db.js');
 db.sequelize.sync();
 
-odsjekRouter.post('/AddNewOdsjek', function(req, res){
+require('../../Funkcije/validacija.js')();
+require('../../Funkcije/autorizacija.js')();
+require('../../Funkcije/validateToken.js')();
+
+odsjekRouter.post('/AddNewOdsjek', async function(req, res){
 	res.contentType('application/json');
+	var currentUser = req.query.currentUser;
+
+    if(!currentUser) return res.status(400).end(JSON.stringify({message: "Nije poslan username korisnika"}));
+
+    var auth = await autorizacijaAdmin(currentUser);
+    console.log(auth);
+    if(!auth) return res.send("Nemate privilegije");
 	console.log("Provjera validnosti imena") ;
 	let body = req.body;
 	//U slučaju da je uneseno prazno ime, vraca gresku
@@ -15,7 +26,7 @@ odsjekRouter.post('/AddNewOdsjek', function(req, res){
 	else{
 		console.log("Pretražuje bazu podataka");
 	//Pretrazuje da li ima vec isto ime u bazi
-		db.Odsjek.findAll({
+		await db.Odsjek.findAll({
 			where:{
 				naziv: String(body.naziv)
 			}
@@ -23,7 +34,7 @@ odsjekRouter.post('/AddNewOdsjek', function(req, res){
 		.then(data => {
 			console.log("Pokusaj dodavanja odsjeka");
 			if(data.length!=0){
-				res.status(400).end(JSON.stringify({message: "Odsjek je vec u bazi"}));
+				return res.status(400).end(JSON.stringify({message: "Odsjek je vec u bazi"}));
 			}
 	//Dodaje u bazi odsjek
 			else{

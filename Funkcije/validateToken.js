@@ -1,6 +1,6 @@
-require('autorizacija.js')();
+require('./autorizacija.js')();
 
-/*module.exports = function(){
+module.exports = function(){
 	autentifikacijaAdmin = function(username, token) {
 		$.ajax({
 			url: 'https://si2019romeo.herokuapp.com/users/validate',
@@ -18,8 +18,8 @@ require('autorizacija.js')();
 			}
 		});
 	}
-};*/
-	
+};
+/*
 module.exports = function(){
 	autentifikacijaAdmin = function(username, token) {
 		let promise = new Promise((res, rej) => {
@@ -44,3 +44,4 @@ module.exports = function(){
         return result;        
 	}
 };
+*/
