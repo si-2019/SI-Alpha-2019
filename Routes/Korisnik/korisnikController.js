@@ -8,10 +8,9 @@ const db = require('../../models/db.js');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 db.sequelize.sync();
 
-
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
-
+require('../../Funkcije/autorizacija.js')();
 
 korisnikRouter.delete('/deleteStudent', function(req,res) {
     res.contentType('application/json');
@@ -287,7 +286,10 @@ korisnikRouter.post('/AddNewProfessor', async function(req,res) {
             body.username = data.username;
             body.password = md5(data.password);
             await db.Korisnik.create(body).then( () => {              
-                return res.status(200).send({message: "Uspješno dodan profesor"});
+                return res.status(200).end(JSON.stringify({
+                    username: data.username,
+                    password: data.password,
+                }));     
             }).catch( err => {
                 console.log(err);
             })           
@@ -339,13 +341,21 @@ korisnikRouter.get('/GetNewPassword',function(req,res){
 
 
 
-korisnikRouter.get('/GetLoginData',function(req,res) {
+korisnikRouter.get('/GetLoginData',async function(req,res) {
+    res.contentType('application/json');
+    var currentUser = req.query.currentUser;
+
+    if(!currentUser) return res.status(400).end(JSON.stringify({message: "Nije poslan username korisnika"}));
+
+    var auth = await autorizacijaAdmin(currentUser);
+    console.log(auth);
+    if(!auth) return res.send("Nemate privilegije");
     var ime = req.query.ime;
     var prezime = req.query.prezime;
     res.contentType('application/json');  
 
     if(!ime || !prezime) {
-        res.status(400).end(JSON.stringify({message: "Unesite ime/prezime"}));
+        return res.status(400).end(JSON.stringify({message: "Unesite ime/prezime"}));
     }
     else {     
         var userName = ime[0] + prezime;
@@ -357,7 +367,7 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
                 }
             },
             attributes:['username']
-            
+                
         })
         .then(data => {
             var brojDuplikata = 0;
@@ -371,7 +381,7 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
             length: 8,
             numbers: true
             });
-        
+            
             db.Korisnik.max('indeks', {
                 where: {
                     indeks: {
@@ -396,11 +406,12 @@ korisnikRouter.get('/GetLoginData',function(req,res) {
             res.end(err);
         });
     }
+    
 })
 
 korisnikRouter.post('/AddNewStudent', async function(req,res) {
     let body = req.body;
-
+    console.log('Ok');
     // Prilagodjavanje imenovanja
     if(!body.datumRodjenja && body.datum) body.datumRodjenja = body.datum;
     if(!body.JMBG && body.jmbg) body.JMBG = body.jmbg;
@@ -436,7 +447,11 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
             body.password = md5(data.password);
             body.indeks = data.indeks;
             db.Korisnik.create(body);      
-            res.end("Uspješno dodan korisnik " + body.username);        
+            return res.status(200).end(JSON.stringify({
+                username: data.username,
+                password: data.password,
+                indeks: data.indeks
+            }));        
         }
     }
     ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
@@ -447,7 +462,7 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
 
 korisnikRouter.post('/AddNewAssistant', async function(req,res) {
     let body = req.body;
-
+    
     // Prilagodjavanje imenovanja
     if(!body.datumRodjenja && body.datum) body.datumRodjenja = body.datum;
     if(!body.JMBG && body.jmbg) body.JMBG = body.jmbg;
@@ -475,12 +490,17 @@ korisnikRouter.post('/AddNewAssistant', async function(req,res) {
             body.password = md5(data.password);
             body.indeks = data.indeks;
             db.Korisnik.create(body);      
-            res.end("Uspješno dodan korisnik " + body.username);        
+            return res.status(200).end(JSON.stringify({
+                username: data.username,
+                password: data.password,
+                indeks: data.indeks
+            }));            
         }
     }
     ajax.open('GET', 'http://si2019alpha.herokuapp.com/api/korisnik/GetLoginData?ime=' + body.ime + '&prezime=' + body.prezime, true);
     ajax.setRequestHeader('Content-Type','application/json');
     ajax.send();  
+    
     
 });
 
