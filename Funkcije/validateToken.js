@@ -1,5 +1,6 @@
 require('./autorizacija.js')();
-
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+/*
 module.exports = function(){
 	autentifikacijaAdmin = function(username, token) {
 		$.ajax({
@@ -18,10 +19,10 @@ module.exports = function(){
 			}
 		});
 	}
-};
-/*
+};*/
+
 module.exports = function(){
-	autentifikacijaAdmin = function(username, token) {
+	autentifikacijaAdmin = async function(username, token) {
 		let promise = new Promise((res, rej) => {
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function() {
@@ -44,4 +45,3 @@ module.exports = function(){
         return result;        
 	}
 };
-*/
