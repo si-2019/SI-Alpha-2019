@@ -450,7 +450,7 @@ korisnikRouter.post('/AddNewStudent', async function(req,res) {
             return res.status(200).end(JSON.stringify({
                 username: data.username,
                 password: data.password,
-                indeks: data.indeksindeks
+                indeks: data.indeks
             }));        
         }
     }
@@ -493,7 +493,7 @@ korisnikRouter.post('/AddNewAssistant', async function(req,res) {
             return res.status(200).end(JSON.stringify({
                 username: data.username,
                 password: data.password,
-                indeks: data.indeksindeks
+                indeks: data.indeks
             }));            
         }
     }
