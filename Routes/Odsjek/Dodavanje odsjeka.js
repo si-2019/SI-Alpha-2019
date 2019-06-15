@@ -10,11 +10,13 @@ require('../../Funkcije/validateToken.js')();
 
 odsjekRouter.post('/AddNewOdsjek', async function(req, res){
 	res.contentType('application/json');
-	var currentUser = req.query.currentUser;
+	var currentUser = req.query.currentUsername;
+	var currentToken = req.query.token;
+	console.log(currentUser);
 
     if(!currentUser) return res.status(400).end(JSON.stringify({message: "Nije poslan username korisnika"}));
 
-    var auth = await autorizacijaAdmin(currentUser);
+    var auth = await autentifikacijaAdmin(currentUser,currentToken);
     console.log(auth);
     if(!auth) return res.send("Nemate privilegije");
 	console.log("Provjera validnosti imena") ;
