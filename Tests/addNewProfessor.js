@@ -29,18 +29,6 @@ describe('/POST AddNewProfessor', () => {
             "titula": "red"
         }
         let ruta = '/api/korisnik/AddNewProfessor';
-    
-
-    it('Uspjesno dodavanje profesora, treba vratiti status 200', function(done) {        
-        chai.request(app)
-            .post(ruta)
-            .send(profesor)
-            .end((err, res) => {
-                res.should.have.status(200)
-                expect(res.body.message).to.equal("Uspješno dodan profesor")
-                done();
-            })
-    })
 
     it('Nedostaje parametar prezime, treba vratiti status 400 i tekst o gresci', function(done) {        
         profesor.prezime = '';
@@ -67,19 +55,6 @@ describe('/POST AddNewProfessor', () => {
                 done();
             })
     })
-
-    it('JMBG vec postoji, treba vratiti status 400 i tekst o gresci', function(done) {
-       
-        chai.request(app)
-            .post(ruta)
-            .send(profesor)
-            .end((err, res) => {
-                res.should.have.status(400)
-                expect(res.body.message).to.equal('Postoji korisnik sa istim JMBG!')
-                done();
-            })
-    })
-
    
 
     it('Podaci izvan opsega, treba vratiti status 400 i tekst o gresci', function(done) {

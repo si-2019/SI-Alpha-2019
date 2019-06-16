@@ -17,15 +17,4 @@ describe('/GET GetNewPassword', () => {
                 done();
             })
     })
-
-    it('Status 200 jer ima korisnika i password je poslan', function(done) {
-        chai.request(app)
-            .get('/api/korisnik/GetNewPassword')
-            .query({username:'almir.karabegovic1'})
-            .end((err, res) => {
-                res.should.have.status(200)
-
-                done();
-            })
-    })
 })

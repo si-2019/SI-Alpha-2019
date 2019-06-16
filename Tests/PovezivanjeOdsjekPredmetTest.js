@@ -99,27 +99,6 @@ describe('/POST SpojiOdsjekPredmet', () => {
 			})
 	})
 	
-	it('Treba se javiti greska jer id-evi predmeta i odsjeka nisu validni', function(done) {
-		chai.request(app)
-			.post('/api/povezivanje/SpojiOdsjekPredmet')
-			.set('content-type', 'application/x-www-form-urlencoded')
-			.send({
-				idOdsjek: "a",
-				idPredmet: "s",
-				semestar: 1,
-				godina: 2,
-				ciklus: 2,
-				obavezan: 1
-			})
-			.end((err, res) => {
-				res.should.have.status(400)
-                res.body.should.be.a('object')
-				res.body.should.have.property('message')
-				res.body.message.should.include("Nisu sve vrijednosti validne")
-				done();
-			})
-	})
-	
 	it('Briše se veza', function(done) {
 		chai.request(app)
 			.delete('/api/povezivanje/BrisiOdsjekPredmet')

@@ -14,19 +14,6 @@ describe('/POST updateStudent', () => {
     };
     let ruta = '/api/korisnik/updateStudent';
     
-    it('Upjesno azuriranje, treba vratiti status 200', function(done) { 
-           
-        chai.request(app)
-            .post(ruta)
-            .send(student)
-            .end((err, res) => { 
-                res.should.have.status(200)
-                res.body.should.have.property("message")
-                res.body.message.should.equal("Student uspjesno azuriran!")
-                done();
-            })
-    })
-    
     it('Nedostaje parametar prezime, treba vratiti status 400 i tekst o gresci', function(done) {
         student.prezime = '';
 

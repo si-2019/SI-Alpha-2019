@@ -66,14 +66,4 @@ describe('POST /linkProfessorSubject', () => {
             done();
         })
     })
-
-    it('Uspjesno povezan predmet-profesor', function(done) {
-        chai.request(app)
-        .post('/api/povezivanje/linkProfessorSubject')
-        .send(idevi)
-        .end((err, res) => {
-            res.should.have.status(200)
-            done();
-        })
-    })
 })

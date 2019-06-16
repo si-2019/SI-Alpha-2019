@@ -12,19 +12,7 @@ describe('/POST UpdateAssistant', () => {
         ime: 'Sabina',
         prezime: 'Dacic'        
     };
-    
-    it('Basic case - uspjesno azuriranje, treba vratiti status 200', function(done) {        
-        chai.request(app)
-            .post('/api/korisnik/updateAssistant')
-            .send(asistent)
-            .end((err, res) => {
-                res.should.have.status(200)
-                res.body.should.have.property("message")
-                res.body.message.should.equal("Asistent uspjesno azuriran!")
-                done();
-            })
-    })
-    
+        
     it('Nedostaje parametar prezime, treba vratiti status 400 i tekst o gresci', function(done) {
         asistent.prezime = '';
 

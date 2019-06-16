@@ -45,19 +45,5 @@ describe('/POST PromoteStudentToAssistant', () => {
                 res.body.message.should.equal('Student sa unesenim Id-em ne postoji u sistemu!')
                 done();
             })
-    })
-
-    it('Unesen nevalidan id tj ima slova u sebi - treba vratiti status 400 i poruku o gresci', function(done) {        
-        chai.request(app)
-            .post('/api/korisnik/promoteStudentToAssistant')
-            .send({id: '132abc'})
-            .end((err, res) => {
-                res.should.have.status(400)
-                res.body.should.be.a('object')
-                res.body.should.have.property('message')
-                res.body.message.should.equal('Uneseni id nije validan!')
-                done();
-            })
-    })
-    
+    })    
 })

@@ -93,16 +93,7 @@ describe('/GET getPredmetiAsisProf', () => {
             done();
         })
     })
-	
-	it('Dobije se lista predmeta', function(done) {
-        chai.request(app)
-        .get('/api/korisnik/getPredmetiAsisProf?idKorisnik=' + Profesor[0].id.toString() + '&Uloga=3')
-        .end((err, res) => {
-            res.should.have.status(200)
-            done();
-        })
-    })
-	
+		
 	it('Treba vratit status 200 i obirsati unesenog profesora', function(done) {
         chai.request(app)
         .delete('/api/unos/izbrisatProfesora')
