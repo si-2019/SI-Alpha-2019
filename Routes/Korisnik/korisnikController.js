@@ -10,7 +10,6 @@ db.sequelize.sync();
 
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
-require('../../Funkcije/autorizacija.js')();
 
 korisnikRouter.delete('/deleteStudent', function(req,res) {
     res.contentType('application/json');
@@ -342,14 +341,6 @@ korisnikRouter.get('/GetNewPassword',function(req,res){
 
 
 korisnikRouter.get('/GetLoginData',async function(req,res) {
-    res.contentType('application/json');
-    var currentUser = req.query.currentUser;
-
-    if(!currentUser) return res.status(400).end(JSON.stringify({message: "Nije poslan username korisnika"}));
-
-    var auth = await autorizacijaAdmin(currentUser);
-    console.log(auth);
-    if(!auth) return res.send("Nemate privilegije");
     var ime = req.query.ime;
     var prezime = req.query.prezime;
     res.contentType('application/json');  
