@@ -44,6 +44,8 @@
     "mocha": "^6.1.4",
     "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
+    "jquery": "^3.4.1",
+    "jsdom": "^15.1.1",
     "sequelize": "^5.8.1",
     "sequelize-mock": "^0.10.2",
     "swagger-jsdoc": "^3.2.9",
