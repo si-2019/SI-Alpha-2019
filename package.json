@@ -1,0 +1,53 @@
+{
+  "name": "si-alpha-2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./Tests --exit",
+    "baza": "sequelize-auto -o \"./models\" -d TYQcLL35gV -h 37.59.55.185 -p 3306 -u TYQcLL35gV -x BLysSj9ZrP -e mysql -t AkademskaGodina",
+    "test-povezivanje-assistantsubject": "mocha ./Tests/linkAssistantSubjectTest.js --exit",
+    "test-deleteSubject": "mocha ./Tests/deleteSubject.js --exit",
+    "test-deleteStudent": "mocha ./Tests/deleteStudentTest.js --exit",
+    "test-promoteAssistantToProfessor": "mocha ./Tests/promoteAssistantToProfessorTest.js --exit",
+    "test-promoteStudentToAssistant": "mocha ./Tests/promoteStudentToAssistantTest.js --exit",
+    "test-searchUser": "mocha ./Tests/searchUserTest.js --exit",
+    "test-searchAssistant": "mocha ./Tests/searcrhAssistantTest.js --exit",
+    "test-searchStudent": "mocha ./Tests/searchStudentTest.js --exit",
+    "test-updateAssistant": "mocha ./Tests/updateAssistantTest.js --exit",
+    "test1": "mocha ./Tests/addNewProfessor.js --exit",
+    "test-updateStudent": "mocha ./Tests/updateStudent.js --exit",
+    "test-updateProfessor": "mocha ./Tests/updateProfessor.js --exit",
+    "test2": "mocha ./Tests/getLoginDataForProfessor.js --exit",
+    "test-get": "mocha ./Tests/getAllStudents_Professors_Assistants.js --exit",
+    "test-enrollStudentToSemester": "mocha ./Tests/enrollStudentToSemesterTest.js --exit",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/si-2019/SI-Alpha-2019.git"
+  },
+  "author": "SI-Alpha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/si-2019/SI-Alpha-2019/issues"
+  },
+  "homepage": "https://github.com/si-2019/SI-Alpha-2019#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "generate-password": "^1.4.1",
+    "md5": "^2.2.1",
+    "mocha": "^6.1.4",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.8.1",
+    "sequelize-mock": "^0.10.2",
+    "swagger-jsdoc": "^3.2.9",
+    "swagger-ui-express": "^4.0.4",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

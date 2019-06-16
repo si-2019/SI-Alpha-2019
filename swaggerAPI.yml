@@ -1,0 +1,1090 @@
+ /api/odsjek/AddNewOdsjek:
+   post:
+     tags:
+       - Odsjek
+     name: User Story 269 - Administrator dodaje novi odsjek u bazi podataka
+     summary: User Story 269 - Administrator dodaje novi odsjek u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             naziv:
+               type: string
+     responses:
+       200:
+         description: Odsjek je dodan u bazi
+       400:
+         description: Došlo je do greške
+         
+ /api/odsjek/DeleteOdsjek:
+   delete:
+     tags:
+       - Odsjek
+     name: User Story 397 - Administrator briše odsjek iz baze zbog vanjskih zahtjeva
+     summary: User Story 397 - Administrator briše odsjek iz baze zbog vanjskih zahtjeva
+     consumes:
+       - application/json
+     parameters:
+       - name: naziv
+         in: query
+         schema:
+           type: object
+           properties:
+             naziv:
+               type: string
+     responses:
+       200:
+         description: Odsjek nije više u bazi
+       400:
+         description: Došlo je do greške
+
+ /api/odsjek/GetOdsjeci:
+   get:
+     tags:
+       - Odsjek
+     name: User Story 252 - Administrator kreira listu svih odsjeka iz baze podataka
+     summary: User Story 252 - Administrator kreira listu svih odsjeka iz baze podataka
+     consumes:
+       - application/json
+     responses:
+       200:
+         description: Dobivena je lista odsjeka
+
+ /api/odsjek/GetOdsjek:
+   get:
+     tags:
+       - Odsjek
+     name: User Story 383 - Administrator mora imati mogućnost ažuriranja podataka o odsjeku u bazi podataka
+     summary: User Story 383 - Administrator mora imati mogućnost ažuriranja podataka o odsjeku u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: naziv
+         in: query
+         schema:
+           type: object
+           properties:
+             naziv:
+               type: string
+     responses:
+       200:
+         description: Vraca se odsjek
+       400:
+         description: Odsjek nije u bazi
+
+ /api/odsjek/PromijeniOdsjek:
+   post:
+     tags:
+       - Odsjek
+     name: User Story 383 - Administrator mora imati mogućnost ažuriranja podataka o odsjeku u bazi podataka
+     summary: User Story 383 - Administrator mora imati mogućnost ažuriranja podataka o odsjeku u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idOdsjek:
+               type: string
+             naziv:
+               type: string
+     responses:
+       200:
+         description: Odsjek je promjenjen
+       400:
+         description: Došlo je do greške
+
+ /api/odsjek/PretraziOdsjekPredmet:
+   get:
+     tags:
+       - Odsjek
+     name: User Story 274 - Administrator filtrira listu odsjeka i predmeta iz baze podataka na osnovu unesenih vrijednosti
+     summary: User Story 274 - Administrator filtrira listu odsjeka i predmeta iz baze podataka na osnovu unesenih vrijednosti
+     consumes:
+       - application/json
+     parameters:
+       - name: idOdsjek
+         in: query
+         schema:
+           type: object
+           properties:
+             idOdsjek:
+               type: string
+       - name: godina
+         in: query
+         schema:
+           type: object
+           properties:
+             godina:
+               type: string
+       - name: ciklus
+         in: query
+         schema:
+           type: object
+           properties:
+             ciklus:
+               type: string
+       - name: semestar
+         in: query
+         schema:
+           type: object
+           properties:
+             semestar:
+               type: string
+       - name: obavezan
+         in: query
+         schema:
+           type: object
+           properties:
+             obavezan:
+               type: string
+     responses:
+       200:
+         description: Vraca se lista predmeta
+       400:
+         description: Došlo je do greške
+
+ /api/predmet/GetPredmeti:
+   get:
+     tags:
+       - Predmet
+     name: User Story 253 - Administrator kreira listu svih predmeta na fakultetu iz baze podataka
+     summary: User Story 253 - Administrator kreira listu svih predmeta na fakultetu iz baze podataka
+     consumes:
+       - application/json
+     responses:
+       200:
+         description: Dobivena je lista predmeta
+
+ /api/predmet/AddNewPredmet:
+   post:
+     tags:
+       - Predmet
+     name: User Story 268 - Administrator dodaje novi predmet u bazi podataka
+     summary: User Story 268 - Administrator dodaje novi predmet u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             naziv:
+               type: string
+             ects:
+               type: string
+             brojPredavanja:
+               type: string
+             brojVjezbi:
+               type: string
+             opis:
+               type: string
+     responses:
+       200:
+         description: Predmet je dodan u bazi
+       400:
+         description: Došlo je do greške
+
+ /api/predmet/GetPredmet:
+   get:
+     tags:
+       - Predmet
+     name: User Story 382 - Administrator mora imati mogućnost ažuriranja podataka o predmetu u bazi podataka
+     summary: User Story 382 - Administrator mora imati mogućnost ažuriranja podataka o predmetu u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: naziv
+         in: query
+         schema:
+           type: object
+           properties:
+             naziv:
+               type: string
+     responses:
+       200:
+         description: Vraca se predmet
+       400:
+         description: Predmet nije u bazi
+
+ /api/predmet/PromijeniPredmet:
+   post:
+     tags:
+       - Predmet
+     name: User Story 382 - Administrator mora imati mogućnost ažuriranja podataka o predmetu u bazi podataka
+     summary: User Story 382 - Administrator mora imati mogućnost ažuriranja podataka o predmetu u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             Id:
+               type: string
+             naziv:
+               type: string
+             ects:
+               type: string
+             brojPredavanja:
+               type: string
+             brojVjezbi:
+               type: string
+             opis:
+               type: string
+     responses:
+       200:
+         description: Predmet je promjenjen
+       400:
+         description: Došlo je do greške
+
+ /api/korisnik/AddNewStudent:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 264 - Administrator treba imati mogućnost da doda novog studenta u bazu podataka
+     summary: User Story 264 - Administrator treba imati mogućnost da doda novog studenta u bazu podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idOdsjek:
+               type: string
+             idUloga:
+               type: string
+             ime:
+               type: string
+             prezime:
+               type: string
+             datumRodjenja:
+               type: string
+               format: date
+             JMBG:
+               type: string
+             email:
+               type: string
+             mjestoRodjenja:
+               type: string
+             kanton:
+               type: string
+             drzavljanstvo:
+               type: string
+             telefon:
+               type: string
+             spol:
+               type: string
+             imePrezimeMajke:
+               type: string
+             imePrezimeOca:
+               type: string
+             adresa:
+               type: string
+             linkedin:
+               type: string
+             website:
+               type: string
+     responses:
+       200:
+         description: Student je dodan u bazi
+       400:
+         description: Došlo je do greške
+         
+ /api/korisnik/GetLoginDataForProfessor:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 255 - Administrator generiše username i password za profesora radi spašavanja u bazu podataka(Alpha-US-372)
+     summary: User Story 255 - Administrator generiše username i password za profesora radi spašavanja u bazu podataka(Alpha-US-372)
+     consumes:
+       - application/json
+     parameters:
+       - name: ime
+         in: query
+         schema:
+           type: object
+           properties:
+             ime:
+               type: string
+       - name: prezime
+         in: query
+         schema:
+           type: object
+           properties:
+             prezime:
+               type: string
+     responses:
+       200:
+         description: Vraća se username i password profesora
+       400:
+         description: Profesor nije u bazi
+         
+ /api/korisnik/AddNewProfessor:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 266 - Administrator treba imati mogućnost dodavanja novog profesora u bazu podataka (Alpha-US-372)
+     summary: User Story 266 - Administrator treba imati mogućnost dodavanja novog profesora u bazu podataka (Alpha-US-372)
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idOdsjek:
+               type: string
+             idUloga:
+               type: string
+             ime:
+               type: string
+             prezime:
+               type: string
+             datumRodjenja:
+               type: string
+             JMBG:
+               type: string
+             email:
+               type: string
+             mjestoRodjenja:
+               type: string
+             kanton:
+               type: string
+             drzavljanstvo:
+               type: string
+             telefon:
+               type: string
+             spol:
+               type: string
+             imePrezimeMajke:
+               type: string
+             imePrezimeOca:
+               type: string
+             adresa:
+               type: string
+             linkedin:
+               type: string
+             website:
+               type: string
+             titula: 
+               type: string
+     responses:
+       200:
+         description: Profesor je dodan u bazi
+       400:
+         description: Došlo je do greške         
+         
+ /api/predmet/deleteSubject:
+   delete:
+     tags:
+       - Predmet
+     name: User Story 236 - Administrator briše predmet sa odsjeka da bi uklonio nepostojeće predmete
+     summary: User Story 236 - Administrator briše predmet sa odsjeka da bi uklonio nepostojeće predmete
+     consumes:
+       - application/json
+     parameters:
+       - name: naziv
+         in: query
+         schema:
+           type: object
+           properties:
+             naziv:
+               type: string
+     responses:
+       200:
+         description: Korisnik je izbrisan
+       400:
+         description: Profesor nije u bazi
+ 
+ /api/korisnik/searchProfessor:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 249 - Administrator kreira listu svih profesora iz baze prema zadanom tekstu pretrage radi prikaza
+     summary: User Story 249 - Administrator kreira listu svih profesora iz baze prema zadanom tekstu pretrage radi prikaza
+     consumes:
+       - application/json
+     parameters:
+       - name: ime
+         in: query
+         schema:
+           type: object
+           properties:
+             ime:
+               type: string
+       - name: prezime
+         in: query
+         schema:
+           type: object
+           properties:
+             prezime:
+               type: string
+       - name: username
+         in: query
+         schema:
+           type: object
+           properties:
+             username:
+               type: string
+     responses:
+       200:
+         description: Vraca se profesor
+       400:
+         description: Profesor nije u bazi
+         
+ /api/korisnik/searchAssistant:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 250 - Administrator kreira listu svih asistenata iz baze prema zadanom tekstu pretrage radi prikaza
+     summary: User Story 250 - Administrator kreira listu svih asistenata iz baze prema zadanom tekstu pretrage radi prikaza
+     consumes:
+       - application/json
+     parameters:
+       - name: ime
+         in: query
+         schema:
+           type: object
+           properties:
+             ime:
+               type: string
+       - name: prezime
+         in: query
+         schema:
+           type: object
+           properties:
+             prezime:
+               type: string
+       - name: username
+         in: query
+         schema:
+           type: object
+           properties:
+             username:
+               type: string
+     responses:
+       200:
+         description: Vraća se asistent
+       400:
+         description: Došlo je do greške
+         
+ /api/korisnik/searchStudent:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 251 - Administrator kreira listu svih studenata iz baze prema zadanom tekstu pretrage radi prikaza
+     summary: User Story 251 - Administrator kreira listu svih studenata iz baze prema zadanom tekstu pretrage radi prikaza
+     consumes:
+       - application/json
+     parameters:
+       - name: ime
+         in: query
+         schema:
+           type: object
+           properties:
+             ime:
+               type: string
+       - name: prezime
+         in: query
+         schema:
+           type: object
+           properties:
+             prezime:
+               type: string
+       - name: username
+         in: query
+         schema:
+           type: object
+           properties:
+             username:
+               type: string
+     responses:
+       200:
+         description: Vraća se asistent
+       400:
+         description: Došlo je do greške
+         
+
+ /api/korisnik/updateStudent:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 259 - Administrator mora imati mogućnost ažuriranja podataka o studentu u bazi podatak
+     summary: User Story 259 - Administrator mora imati mogućnost ažuriranja podataka o studentu u bazi podatak
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             id:
+               type: string
+             ime:
+               type: string
+             prezime:
+               type: string
+             email:
+               type: string
+             telefon:
+               type: string
+             adresa:
+               type: string
+             indeks: 
+               type: string
+     responses:
+       200:
+         description: Student je azuriran
+       400:
+         description: Došlo je do greške
+         
+ /api/korisnik/updateAssistant:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 258 - Administrator mora da ima mogućnost ažuriranje podataka o asistentu u bazi podataka
+     summary: User Story 258 - Administrator mora da ima mogućnost ažuriranje podataka o asistentu u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             id:
+               type: string
+             ime:
+               type: string
+             prezime:
+               type: string
+             email:
+               type: string
+             telefon:
+               type: string
+             adresa:
+               type: string
+     responses:
+       200:
+         description: Asistent je azuriran
+       400:
+         description: Došlo je do greške
+
+ /api/korisnik/updateProfessor:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 257 - Administrator mora da ima mogućnost ažuriranje podataka o profesoru u bazi podataka 
+     summary: User Story 257 - Administrator mora da ima mogućnost ažuriranje podataka o profesoru u bazi podataka 
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             odsjek:
+               type: string
+             ime:
+               type: string
+             prezime:
+               type: string
+             datumRodjenja:
+               type: string
+               format: date
+             JMBG:
+               type: string
+             email:
+               type: string
+             mjestoRodjenja:
+               type: string
+             kanton:
+               type: string
+             drzavljanstvo:
+               type: string
+             telefon:
+               type: string
+             spol: 
+               type: string
+             imePrezimeMajke:
+               type: string
+             imePrezimeOca:
+               type: string
+             adresa:
+               type: string
+             username: 
+               type: string
+             linkedin:
+               type: string
+             website:
+               type: string
+             titula:
+               type: string
+     responses:
+       200:
+         description: Profesor je azuriran
+       400:
+         description: Došlo je do greške         
+ 
+ /api/korisnik/GetLoginData:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 254 - Administrator generiše indeks, username i password za studenta/asistenta radi spašavanja u bazu podataka
+     summary: User Story 254 - Administrator generiše indeks, username i password za studenta/asistenta radi spašavanja u bazu podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: ime
+         in: query
+         schema:
+           type: object
+           properties:
+             ime:
+               type: string
+       - name: prezime
+         in: query
+         schema:
+           type: object
+           properties:
+             prezime:
+               type: string
+     responses:
+       200:
+         description: Vraca se username, password i indeks studenta
+       400:
+         description: Profesor nije u bazi
+ 
+ /api/korisnik/AddNewAssistant:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 265 - Administrator treba imati mogućnost dodavanja novog asistenta u bazu podataka
+     summary: User Story 265 - Administrator treba imati mogućnost dodavanja novog asistenta u bazu podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idOdsjek:
+               type: string
+             idUloga:
+               type: string
+             ime:
+               type: string
+             prezime:
+               type: string
+             datumRodjenja:
+               type: string
+               format: date
+             JMBG:
+               type: string
+             email:
+               type: string
+             mjestoRodjenja:
+               type: string
+             kanton:
+               type: string
+             drzavljanstvo:
+               type: string
+             telefon:
+               type: string
+             spol:
+               type: string
+             imePrezimeMajke:
+               type: string
+             imePrezimeOca:
+               type: string
+             adresa:
+               type: string
+             linkedin:
+               type: string
+             website:
+               type: string
+     responses:
+       200:
+         description: Asistent je dodan u bazi
+       400:
+         description: Došlo je do greške         
+ 
+ /api/korisnik/GetNewPassword:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 263 - Administrator treba moći da izmjeni šifre i generiše nove po potrebi 
+     summary: User Story 263 - Administrator treba moći da izmjeni šifre i generiše nove po potrebi 
+     consumes:
+       - application/json
+     parameters:
+       - name: username
+         in: query
+         schema:
+           type: object
+           properties:
+             username:
+               type: string
+     responses:
+       200:
+         description: Vraca se novi password korisnika
+       400:
+         description: Profesor nije u bazi 
+      
+ /api/korisnik/searchUser:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 332 - Administrator pretražuje osobe po imenu i prezimenu iz baze
+     summary: User Story 332 - Administrator pretražuje osobe po imenu i prezimenu iz baze
+     consumes:
+       - application/json
+     parameters:
+       - name: ime
+         in: query
+         schema:
+           type: object
+           properties:
+             ime:
+               type: string
+       - name: prezime
+         in: query
+         schema:
+           type: object
+           properties:
+             prezime:
+               type: string
+       - name: username
+         in: query
+         schema:
+           type: object
+           properties:
+             username:
+               type: string
+     responses:
+       200:
+         description: Vraca se lista korisnika
+       400:
+         description: Doslo je do greske      
+      
+ /api/korisnik/promoteStudentToAssistant:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 262 - Administrator salje zahtjev sa stranice za unaprijeđenje studenta u asistenta 
+     summary: User Story 262 - Administrator salje zahtjev sa stranice za unaprijeđenje studenta u asistenta 
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             id:
+               type: string
+     responses:
+       200:
+         description: Student je sad asistent
+       400:
+         description: Doslo je do greske 
+         
+ /api/korisnik/promoteAssistantToProfessor:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 261 - Administrator šalje zahtjev sa stranice za unaprijeđenje asistenta u profesora
+     summary: User Story 261 - Administrator šalje zahtjev sa stranice za unaprijeđenje asistenta u profesora 
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             id:
+               type: string
+     responses:
+       200:
+         description: Asistent je sad profesor
+       400:
+         description: Doslo je do greske 
+         
+ /api/korisnik/enrollStudentToSemester:
+   post:
+     tags:
+       - Korisnik
+     name: User Story 271 - Administrator povezuje predmet-student i stavlja vezu u bazi podataka te upisuje studenta u semestar
+     summary: User Story 271 - Administrator povezuje predmet-student i stavlja vezu u bazi podataka te upisuje studenta u semestar
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             ciklus:
+               type: string
+             semestar:
+               type: string
+             username:
+               type: string
+             odsjek: 
+               type: string
+     responses:
+       200:
+         description: Student je upisan
+       400:
+         description: Doslo je do greske 
+ 
+ /api/povezivanje/SpojiOdsjekPredmet:
+   post:
+     tags:
+       - Povezivanje
+     name: User Story 270 - Administrator povezuje predmet-odsjek-semestar-ciklus-tip i stavlja vezu u bazi podataka
+     summary: User Story 270 - Administrator povezuje predmet-odsjek-semestar-ciklus-tip i stavlja vezu u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idOdsjek:
+               type: string
+             idPredmet:
+               type: string
+             godina:
+               type: string
+             ciklus:
+               type: string
+             semestar:
+               type: string
+             obavezan:
+               type: string
+     responses:
+       200:
+         description: Predmet i odsjek su povezani
+       400:
+         description: Došlo je do greške
+         
+ /api/korisnik/getAllStudents:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 436 - Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora 
+     summary: User Story 436 - Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora 
+     consumes:
+       - application/json
+     responses:
+       200:
+         description: Dobivena je lista studenata
+         
+ /api/korisnik/deleteStudent:
+   delete:
+     tags:
+       - Korisnik
+     name: User Story 402 - Administrator ima mogućnost brisanja studenta zbog vanjskih zahtjeva
+     summary: User Story 402 - Administrator ima mogućnost brisanja studenta zbog vanjskih zahtjeva
+     consumes:
+       - application/json
+     parameters:
+       - name: id
+         in: query
+         schema:
+           type: object
+           properties:
+             id:
+               type: string
+     responses:
+       200:
+         description: Student obrisan
+       400:
+         description: Došlo je do greške
+   
+ /api/korisnik/getAllProfessors:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 436 - Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora 
+     summary: User Story 436 - Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora 
+     consumes:
+       - application/json
+     responses:
+       200:
+         description: Dobivena je lista profesora
+         
+ /api/korisnik/getAllAssistants:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 436 - Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora 
+     summary: User Story 436 - Administrator treba imati mogućnost vraćanja liste svih studenata/asistenata/profesora 
+     consumes:
+       - application/json
+     responses:
+       200:
+         description: Dobivena je lista asistenata
+         
+ /api/korisnik/deleteProfessor:
+   delete:
+     tags:
+       - Korisnik
+     name: User Story 397 - Administrator briše odsjek iz baze zbog vanjskih zahtjeva
+     summary: User Story 397 - Administrator briše odsjek iz baze zbog vanjskih zahtjeva
+     consumes:
+       - application/json
+     parameters:
+       - name: id
+         in: query
+         schema:
+           type: object
+           properties:
+             id:
+               type: string
+     responses:
+       200:
+         description: Profesor nije više u bazi
+       400:
+         description: Došlo je do greške
+         
+ /api/korisnik/deleteAssistant:
+   delete:
+     tags:
+       - Korisnik
+     name: User Story 404 - Administrator ima mogućnost brisanja asistenta zbog vanjskih zahtjeva
+     summary: User Story 404 - Administrator ima mogućnost brisanja asistenta zbog vanjskih zahtjeva
+     consumes:
+       - application/json
+     parameters:
+       - name: id
+         in: query
+         schema:
+           type: object
+           properties:
+             id:
+               type: string
+     responses:
+       200:
+         description: Asistent nije više u bazi
+       400:
+         description: Došlo je do greške
+         
+ /api/korisnik/getPredmetiAsisProf:
+   get:
+     tags:
+       - Korisnik
+     name: User Story 443 - Administrator treba imati mogućnost dobivanja listu predmeta iz baze podataka na koje asistent/profesor drži
+     summary: User Story 443 - Administrator treba imati mogućnost dobivanja listu predmeta iz baze podataka na koje asistent/profesor drži
+     consumes:
+       - application/json
+     parameters:
+       - name: idKorisnik
+         in: query
+         schema:
+           type: object
+           properties:
+             idKorisnik:
+               type: string
+       - name: Uloga
+         in: query
+         schema:
+           type: object
+           properties:
+             Uloga:
+               type: string
+     responses:
+       200:
+         description: Vraćena je lista predmeta
+       400:
+         description: Došlo je do greške
+         
+ /api/povezivanje/BrisiOdsjekPredmet:
+   delete:
+     tags:
+       - Povezivanje
+     name: User Story 394 - Administrator raskida vezu između predmeta i odsjeka u bazi
+     summary: User Story 394 - Administrator raskida vezu između predmeta i odsjeka u bazi
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idOdsjek:
+               type: string
+             idPredmet:
+               type: string
+     responses:
+       200:
+         description: Predmet nije vise u odsjeku
+       400:
+         description: Došlo je do greške
+         
+ /api/povezivanje/linkProfessorSubject:
+   post:
+     tags:
+       - Povezivanje
+     name: User Story 272 - Administrator povezuje profesor-predmet i stavlja vezu u bazi podataka 
+     summary: User Story 272 - Administrator povezuje profesor-predmet i stavlja vezu u bazi podataka 
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idProfesor:
+               type: string
+             idPredmet:
+               type: string
+     responses:
+       200:
+         description: Predmet i profesor su sad povezani
+       400:
+         description: Došlo je do greške
+         
+ /api/povezivanje/linkAssistantSubject:
+   post:
+     tags:
+       - Povezivanje
+     name: User Story 273 - Administrator povezuje asistent-predmet i stavlja vezu u bazi podataka
+     summary: User Story 273 - Administrator povezuje asistent-predmet i stavlja vezu u bazi podataka
+     consumes:
+       - application/json
+     parameters:
+       - name: body
+         in: body
+         schema:
+           type: object
+           properties:
+             idAsistent:
+               type: string
+             idPredmet:
+               type: string
+     responses:
+       200:
+         description: Predmet i asistent su sad povezani
+       400:
+         description: Došlo je do greške
