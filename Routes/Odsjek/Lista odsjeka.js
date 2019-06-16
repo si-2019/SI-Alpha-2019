@@ -6,6 +6,7 @@ db.sequelize.sync();
 
 
 odsjekRouter.get('/GetOdsjeci', async function(req, res){
+	validateToken(req.query.currentUsername, req.query.token, req, res, (req, res) => {
 	res.contentType('application/json');
 	console.log("Pretražuje bazu podataka");
 	db.Odsjek.findAll({
@@ -15,6 +16,7 @@ odsjekRouter.get('/GetOdsjeci', async function(req, res){
 		console.log("Vraća se lista odsjeka\n");
 		return res.status(200).end(JSON.stringify(data));
 	});
+})
 });
 
 module.exports = odsjekRouter;
