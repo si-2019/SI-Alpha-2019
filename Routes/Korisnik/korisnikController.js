@@ -10,8 +10,6 @@ db.sequelize.sync();
 
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
-require('../../Funkcije/autorizacija.js')();
-require('../../Funkcije/validateToken.js')();
 
 korisnikRouter.delete('/deleteStudent', function(req,res) {
     res.contentType('application/json');
