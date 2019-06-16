@@ -11,6 +11,9 @@ db.sequelize.sync();
 const Op = db.Sequelize.Op;
 require('../../Funkcije/validacija.js')();
 
+const validateToken = require("../../Funkcije/authorizeRequest");
+
+
 korisnikRouter.delete('/deleteStudent', function(req,res) {
     res.contentType('application/json');
     var idStudenta = req.query.id;
@@ -341,6 +344,7 @@ korisnikRouter.get('/GetNewPassword',function(req,res){
 
 
 korisnikRouter.get('/GetLoginData',async function(req,res) {
+    validateToken(req.query.currentUsername, req.query.token, req, res, (req, res) => {
     var ime = req.query.ime;
     var prezime = req.query.prezime;
     res.contentType('application/json');  
@@ -397,6 +401,7 @@ korisnikRouter.get('/GetLoginData',async function(req,res) {
             res.end(err);
         });
     }
+})
     
 })
 
