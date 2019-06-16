@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(KOVRhEJump, KOVRhEJump, miRyMtJS2r, {
+const sequelize = new Sequelize('KOVRhEJump', 'KOVRhEJump', 'miRyMtJS2r', {
     host: process.env.DB_HOST_IP,
     dialect: "mysql",
     logging: false,
