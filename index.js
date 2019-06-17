@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv'); 
 const fs = require('fs');
+const cors = require('cors');
 dotenv.config();        
 const swaggerDoc = require('./swaggerDoc.js');             
 
